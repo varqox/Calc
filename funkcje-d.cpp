@@ -431,7 +431,7 @@ void operator/=(dn &a, dn b)
 dn operator%(dn a, dn b)
 {
 	dn w;
-	if(b.l.size()==1 && b.l[0]==0){Error0=1;return a;} 
+	if(b.l.size()==1 && b.l[0]==0){Error0=1;return a;}
 	else if(!(a.m.size()==1 && a.m[0]==1) || !(b.m.size()==1 && b.m[0]==1))
 	{Error1=1;return w;}
 	w.z=1;
