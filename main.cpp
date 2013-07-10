@@ -570,7 +570,7 @@ int main(int avg, char **arg)
 	for(int i=1; i<avg; i++)
 	{
 		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Dispaly Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files\n";return 0;}
-		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){cout << "Calc version 2.4.1\n";return 0;}
+		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){cout << "Calc version 2.5.0\n";return 0;}
 		else if(arg1[0] && arg[i][0]=='-' && arg[i][1]=='c' && arg[i][2]=='\0'){_color=0;arg1[0]=0;}
 		else if(arg1[1] && arg[i][0]=='-' && arg[i][1]=='w' && arg[i][2]=='\0')
 		{
