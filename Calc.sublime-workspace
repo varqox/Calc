@@ -3,6 +3,10 @@
 	{
 		"selected_items":
 		[
+			[
+				"A",
+				"ARCHITECTURE"
+			]
 		]
 	},
 	"buffers":
@@ -11,8 +15,72 @@
 			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 66,
+				"buffer_size": 70,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "funkcje-d.cpp",
+			"settings":
+			{
+				"buffer_size": 9018,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1043,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "funkcje-k.cpp",
+			"settings":
+			{
+				"buffer_size": 6625,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "spis.hpp",
+			"settings":
+			{
+				"buffer_size": 4067,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 16054,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "funkcje-v.cpp",
+			"settings":
+			{
+				"buffer_size": 20062,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "var_base.cpp",
+			"settings":
+			{
+				"buffer_size": 1509,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "var_base.hpp",
+			"settings":
+			{
+				"buffer_size": 441,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -43,6 +111,7 @@
 	},
 	"file_history":
 	[
+		"/home/kwazar/.kde/share/apps/kdevelop/sessions/{d886f093-6801-4ab6-8486-8cd32ecd45a6}/lock",
 		"/home/kwazar/src/reinstall-kdevelop",
 		"/home/kwazar/lol",
 		"/home/kwazar/Calc2.4/obj/Linux/32bit/funkcje-k.rpo",
@@ -75,6 +144,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".o",
+			"Linux/",
+			"trol_mix",
+			"2.",
+			"fft_fast",
+			"m;/",
+			"m",
+			"fft_fast",
 			"gedit",
 			"wine",
 			"cout",
@@ -96,7 +173,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -105,20 +182,242 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 66,
+						"buffer_size": 70,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								66,
-								66
+								70,
+								70
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "funkcje-d.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9018,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8527,
+								8527
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9010.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1043,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								246,
+								246
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "funkcje-k.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6625,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2097,
+								2097
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2244.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "spis.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4067,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2906,
+								2906
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1093.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16054,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14432,
+								14432
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9690.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "funkcje-v.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10084,
+								10084
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10511.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "var_base.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "var_base.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20,
+								20
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
