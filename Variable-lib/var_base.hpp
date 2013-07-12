@@ -1,7 +1,7 @@
 #ifndef var_base_hpp
 #define var_base_hpp
 
-#include "spis.hpp"
+#include "../Main/spis.hpp"
 #include <vector>
 #include <queue>
 #include <string>

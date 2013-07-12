@@ -1,4 +1,4 @@
-#include "spis.hpp"
+#include "../Main/spis.hpp"
 #include <complex>
 #include <stack>
 

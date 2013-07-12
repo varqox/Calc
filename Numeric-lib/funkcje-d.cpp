@@ -1,4 +1,4 @@
-#include "spis.hpp"
+#include "../Main/spis.hpp"
 
 bool Error0=0, Error1=0, Error2=0, Error3=0;
 

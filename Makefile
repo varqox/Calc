@@ -1,30 +1,25 @@
-CPP=g++
-ARCHITECTURE=64
-OBJ=obj/var_base_$(ARCHITECTURE).o obj/main_$(ARCHITECTURE).o obj/funkcje-v_$(ARCHITECTURE).o obj/funkcje-k_$(ARCHITECTURE).o obj/funkcje-d_$(ARCHITECTURE).o
-CXXFLAGS=-s -O3 -Wall -m$(ARCHITECTURE)
-TARG=Calc$(ARCHITECTURE)
-header1=spis.hpp
-header2=var_base.hpp
+include makefile-var
+OBJECTS = Main.o Variable-lib.o Numeric-lib.o Calckit.o
+#MFLAGS += --no-print-directory
 
-all: obj $(TARG)
+all: Calc
 
-obj:
-	mkdir -p obj/
+Calc: $(OBJECTS)
+	$(CXX) $^ $(LDFLAGS) -o $@
 
-$(TARG): $(OBJ)
-	$(CPP) $(OBJ) -o $(TARG) $(CXXFLAGS)
+Main.o:
+	make $(MFLAGS) -C Main
+Variable-lib.o:
+	make $(MFLAGS) -C Variable-lib
+Numeric-lib.o:
+	make $(MFLAGS) -C Numeric-lib
+Calckit.o:
+	make $(MFLAGS) -C Calckit
 
-obj/var_base_$(ARCHITECTURE).o: var_base.cpp $(header1) $(header2)
-	$(CPP) -c var_base.cpp -o obj/var_base_$(ARCHITECTURE).o $(CXXFLAGS)
+.PHONY: clean
+clean:
+	$(RM) $(OBJECTS)
 
-obj/main_$(ARCHITECTURE).o: main.cpp $(header1) $(header2)
-	$(CPP) -c main.cpp -o obj/main_$(ARCHITECTURE).o $(CXXFLAGS)
-
-obj/funkcje-v_$(ARCHITECTURE).o: funkcje-v.cpp $(header1)
-	$(CPP) -c funkcje-v.cpp -o obj/funkcje-v_$(ARCHITECTURE).o $(CXXFLAGS)
-
-obj/funkcje-k_$(ARCHITECTURE).o: funkcje-k.cpp $(header1) $(header2)
-	$(CPP) -c funkcje-k.cpp -o obj/funkcje-k_$(ARCHITECTURE).o $(CXXFLAGS)
-
-obj/funkcje-d_$(ARCHITECTURE).o: funkcje-d.cpp $(header1)
-	$(CPP) -c funkcje-d.cpp -o obj/funkcje-d_$(ARCHITECTURE).o $(CXXFLAGS)
+.PHONY: clean-all
+clean-all:
+	$(RM) Calc* $(OBJECTS)

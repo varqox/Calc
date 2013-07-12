@@ -1,5 +1,5 @@
-#include "spis.hpp"
-#include "var_base.hpp"
+#include "../Main/spis.hpp"
+#include "../Variable-lib/var_base.hpp"
 
 bool przek=false;
 

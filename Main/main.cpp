@@ -1,6 +1,6 @@
 #include <fstream>
 #include "spis.hpp"
-#include "var_base.hpp"
+#include "../Variable-lib/var_base.hpp"
 
 bool _color=1, output[]={0,0,1,1};
 
