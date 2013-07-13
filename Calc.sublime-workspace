@@ -1,0 +1,329 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Ca",
+				"Calckit"
+			],
+			[
+				"A",
+				"ARCHITECTURE"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 918,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "makefile-var",
+			"settings":
+			{
+				"buffer_size": 86,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Numeric-lib/Makefile",
+			"settings":
+			{
+				"buffer_size": 532,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/kwazar/SFML/Makefile",
+		"/home/kwazar/k/Makefile",
+		"/home/kwazar/Pulpit/test.cpp",
+		"/home/kwazar/Calc/Variable-lib/Makefile",
+		"/home/kwazar/Calc/Numeric-lib/Makefile",
+		"/home/kwazar/Calc/Main/Makefile",
+		"/home/kwazar/Calc/Calckit/Makefile",
+		"/home/kwazar/Calc/Calckit/funkcje-k.cpp",
+		"/home/kwazar/Calc/Numeric-lib/funkcje-v.cpp",
+		"/home/kwazar/Calc/Numeric-lib/funkcje-d.cpp",
+		"/home/kwazar/Calc/Main/spis.hpp",
+		"/home/kwazar/Calc/Main/main.cpp",
+		"/home/kwazar/Calc/Variable-lib/var_base.hpp",
+		"/home/kwazar/Calc/Variable-lib/var_base.cpp",
+		"/home/kwazar/SFML/src/SFML/Makefile",
+		"/home/kwazar/Calc/clean",
+		"/home/kwazar/k/kit.c",
+		"/home/kwazar/Calc/main/lol/Makefile",
+		"/home/kwazar/src/codeblocks/Makefile.am",
+		"/home/kwazar/SFML/src/SFML/Audio/Makefile",
+		"/home/kwazar/SFML/CMakeLists.txt",
+		"/home/kwazar/Calc/README.md",
+		"/home/kwazar/Calc/funkcje-d.cpp",
+		"/home/kwazar/Calc/Makefile",
+		"/home/kwazar/Calc/funkcje-k.cpp",
+		"/home/kwazar/Calc/calckit/funkcje-k.cpp",
+		"/home/kwazar/Calc/spis.hpp",
+		"/home/kwazar/Calc/main.cpp",
+		"/home/kwazar/Calc/funkcje-v.cpp",
+		"/home/kwazar/Calc/var_base.cpp",
+		"/home/kwazar/Calc/var_base.hpp",
+		"/home/kwazar/Calc/.git/logs/HEAD",
+		"/usr/bin/kdevelop",
+		"/home/kwazar/src/reinstall-kdevelop",
+		"/home/kwazar/src/update-kdevelop",
+		"/home/kwazar/.kde/share/apps/kdevelop/sessions/{d886f093-6801-4ab6-8486-8cd32ecd45a6}/lock",
+		"/home/kwazar/lol",
+		"/home/kwazar/Calc2.4/obj/Linux/32bit/funkcje-k.rpo",
+		"/etc/gnome/menus.blacklist",
+		"/usr/share/applications/mimeinfo.cache",
+		"/usr/include/c++/4.7.3/iostream",
+		"/usr/include/c++/4.7.3/ostream",
+		"/usr/include/c++/4.7.3/ios",
+		"/usr/include/c++/4.7.3/iosfwd",
+		"/usr/include/c++/4.7.3/bits/basic_ios.h",
+		"/usr/include/c++/4.7.3/bits/basic_ios.tcc",
+		"/usr/include/c++/4.7.3/bits/ios_base.h",
+		"/home/kwazar/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/kwazar/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"cmake_check_build_system",
+			"lib",
+			"spis",
+			"include",
+			".o",
+			"Linux/",
+			"trol_mix",
+			"2.",
+			"fft_fast",
+			"m;/",
+			"m",
+			"fft_fast",
+			"gedit",
+			"wine",
+			"cout",
+			"err"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 918,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								118,
+								118
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "makefile-var",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								64,
+								64
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Numeric-lib/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 532,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								79,
+								79
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"project": "Calc.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
