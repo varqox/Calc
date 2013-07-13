@@ -33,10 +33,13 @@ struct my_it
 	}
 };
 
+unsigned int max_depth=0;
+
 void DFS(vector<bool> k, const node* x)
 {
 	if(x->left==NULL)
 	{
+		if(k.size()>max_depth) max_depth=k.size();
 		//cout << x->c << " " << k.size() << endl;
 		pref[static_cast<int>(x->c)].swap(k);
 	}
@@ -52,15 +55,16 @@ void DFS(vector<bool> k, const node* x)
 void output(fstream& file, const vector<bool>& vb)
 {
 	static int out=0, l=0;
+	cout << max_depth << endl;
 	if(vb.empty() && l>0)
 	{
-		while(l<8)
+		for(int i=0; l<8; ++i)
 		{
-			++l;
 			out<<=1;
-			++out;
+			++l;
+			if(pref[max_depth][i]) ++out;
 		}
-		file << out;
+		file << static_cast<unsigned char>(out);
 		out=l=0;
 	}
 	for(int s=vb.size(), i=0; i<s; ++i)
