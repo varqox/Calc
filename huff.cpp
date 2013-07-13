@@ -28,16 +28,25 @@ struct my_it
 	~my_it(){}
 	bool operator<(const my_it& _it) const
 	{
-		if(this->wsk->val==_it.wsk->val) return this->wsk->c<_it.wsk->c;
+		if(this->wsk->val==_it.wsk->val) return this->wsk->get()<_it.wsk->get();
 	return this->wsk->val<_it.wsk->val;
 	}
 };
 
 unsigned int max_depth=0;
 
+/*void gh(const vector<bool>& a)
+{
+	cout << ':';
+	for(vector<bool>::const_iterator i=a.begin(); i!=a.end(); ++i)
+		cout << *i;
+	cout << endl;
+}*/
+
 void DFS(vector<bool> k, const node* x)
 {
-	if(x->left==NULL)
+	//gh(k);
+	if(x->left==NULL && x->right==NULL)
 	{
 		if(k.size()>max_depth) max_depth=k.size();
 		//cout << x->c << " " << k.size() << endl;
@@ -45,17 +54,24 @@ void DFS(vector<bool> k, const node* x)
 	}
 	else
 	{
-		k.push_back(false);
-		DFS(k,x->left);
-		*(--k.end())=true;
-		DFS(k,x->right);
+		if(x->left!=NULL)
+		{
+			k.push_back(false);
+			DFS(k,x->left);
+			k.pop_back();
+		}
+		if(x->left!=NULL)
+		{
+			k.push_back(true);
+			DFS(k,x->right);
+		}
 	}
 }
 
 void output(fstream& file, const vector<bool>& vb)
 {
 	static int out=0, l=0;
-	cout << max_depth << endl;
+	//cout << max_depth << endl;
 	if(vb.empty() && l>0)
 	{
 		for(int i=0; l<8; ++i)
@@ -107,11 +123,11 @@ int main(int argc, char *argv[])
 			set<my_it> my_set;
 			set<my_it>::iterator it;
 			for(int i=0; i<256; ++i)
-				if(arr[i]>0) my_set.insert(my_it(new node(static_cast<char>(i), arr[i])));
+				my_set.insert(my_it(new node(static_cast<char>(i), arr[i])));
 			it=my_set.begin();
 			/*while(it!=my_set.end())
 			{
-				cout << it->wsk->val << endl;
+				cout << it->wsk->val << " " << int(it->wsk->c) << endl;
 				++it;
 			}*/
 			while(my_set.size()>1)
@@ -126,6 +142,7 @@ int main(int argc, char *argv[])
 			}
 			root=my_set.begin()->wsk;
 			DFS(vector<bool>(),root);
+			//cout << max_depth << endl;
 			if(root->left==NULL) vector<bool>(1,false).swap(pref[root->c]);
 			//cout << int(root->left->c) << endl;
 			file.seekg(0,file.beg);
