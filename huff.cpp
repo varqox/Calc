@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 	if(argv[1][0]=='a' && argv[1][1]=='\0')
 	{
 		file.open(file_name.c_str(), ios_base::in);
-		out.open((file_name+".hoff").c_str(), ios_base::out);
+		out.open((file_name+".huff").c_str(), ios_base::out);
 		if(!file.good()) cout << "Cannot open file!";
 		else
 		{
