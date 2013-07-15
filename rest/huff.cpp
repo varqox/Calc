@@ -28,59 +28,46 @@ struct my_it
 	~my_it(){}
 	bool operator<(const my_it& _it) const
 	{
-		if(this->wsk->val==_it.wsk->val) return this->wsk->get()<_it.wsk->get();
+		// if(this->wsk->val==_it.wsk->val) return this->wsk->get()<_it.wsk->get();
 	return this->wsk->val<_it.wsk->val;
 	}
 };
 
-unsigned int max_depth=0;
-
-/*void gh(const vector<bool>& a)
-{
-	cout << ':';
-	for(vector<bool>::const_iterator i=a.begin(); i!=a.end(); ++i)
-		cout << *i;
-	cout << endl;
-}*/
+unsigned int max_depth_id;
 
 void DFS(vector<bool> k, const node* x)
 {
-	//gh(k);
-	if(x->left==NULL && x->right==NULL)
+	if(x->left==NULL)
 	{
-		if(k.size()>max_depth) max_depth=k.size();
-		//cout << x->c << " " << k.size() << endl;
+		static unsigned int max_depth=0;
+		if(k.size()>max_depth)
+		{
+			max_depth=k.size();
+			max_depth_id=x->c;
+		}
 		pref[static_cast<int>(x->c)].swap(k);
 	}
 	else
 	{
-		if(x->left!=NULL)
-		{
-			k.push_back(false);
-			DFS(k,x->left);
-			k.pop_back();
-		}
-		if(x->left!=NULL)
-		{
-			k.push_back(true);
-			DFS(k,x->right);
-		}
+		k.push_back(false);
+		DFS(k,x->left);
+		*(--k.end())=true;
+		DFS(k,x->right);
 	}
 }
 
 void output(fstream& file, const vector<bool>& vb)
 {
 	static int out=0, l=0;
-	//cout << max_depth << endl;
 	if(vb.empty() && l>0)
 	{
 		for(int i=0; l<8; ++i)
 		{
 			out<<=1;
 			++l;
-			if(pref[max_depth][i]) ++out;
+			if(pref[max_depth_id][i]) ++out;
 		}
-		file << static_cast<unsigned char>(out);
+		file.put(static_cast<unsigned char>(out));
 		out=l=0;
 	}
 	for(int s=vb.size(), i=0; i<s; ++i)
@@ -90,7 +77,7 @@ void output(fstream& file, const vector<bool>& vb)
 		if(vb[i]) ++out;
 		if(l==8)
 		{
-			file << static_cast<unsigned char>(out);
+			file.put(static_cast<unsigned char>(out));
 			out=l=0;
 		}
 	}
@@ -106,7 +93,7 @@ int main(int argc, char *argv[])
 	{
 		file.open(file_name.c_str(), ios_base::in);
 		out.open((file_name+".huff").c_str(), ios_base::out);
-		if(!file.good()) cout << "Cannot open file!";
+		if(!file.good()) cout << "Cannot open file!\n";
 		else
 		{
 			file.seekg(0,file.end);
@@ -118,41 +105,30 @@ int main(int argc, char *argv[])
 			{
 				int x=arr[i];
 				out << static_cast<unsigned char>(x>>24) << static_cast<unsigned char>(x>>16) << static_cast<unsigned char>(x>>8) << static_cast<unsigned char>(x);
-				//cout << x << " " << (int(Stack[3])+(int(Stack[2])<<8)+(int(Stack[1])<<16)+(int(Stack[0])<<24)) << endl;
 			}
-			set<my_it> my_set;
-			set<my_it>::iterator it;
+			multiset<my_it> my_multiset;
+			multiset<my_it>::iterator it;
 			for(int i=0; i<256; ++i)
-				my_set.insert(my_it(new node(static_cast<char>(i), arr[i])));
-			it=my_set.begin();
-			/*while(it!=my_set.end())
+				my_multiset.insert(my_it(new node(static_cast<char>(i), arr[i])));
+			it=my_multiset.begin();
+			while(my_multiset.size()>1)
 			{
-				cout << it->wsk->val << " " << int(it->wsk->c) << endl;
-				++it;
-			}*/
-			while(my_set.size()>1)
-			{
-				it=my_set.begin();
+				it=my_multiset.begin();
 				root=it->wsk;
 				actual=(++it)->wsk;
-				//cout << my_set.size() << " " << actual->val << " " << root->val << endl;
-				my_set.insert(my_it(new node(root,actual,actual->val+root->val)));
-				my_set.erase(my_set.begin());
-				my_set.erase(my_set.begin());
+
+				my_multiset.insert(my_it(new node(root,actual,actual->val+root->val)));
+				my_multiset.erase(my_multiset.begin());
+				my_multiset.erase(my_multiset.begin());
 			}
-			root=my_set.begin()->wsk;
+			root=my_multiset.begin()->wsk;
 			DFS(vector<bool>(),root);
-			//cout << max_depth << endl;
-			if(root->left==NULL) vector<bool>(1,false).swap(pref[root->c]);
-			//cout << int(root->left->c) << endl;
 			file.seekg(0,file.beg);
 			for(int i=0; i<file_size; ++i)
 			{
 				unsigned char z=file.get();
-				//cout << z;
 				output(out,pref[static_cast<int>(z)]);
 			}
-			//cout << endl;
 			file.close();
 			output(out,vector<bool>()); // flush output
 			out.close();
@@ -165,10 +141,59 @@ int main(int argc, char *argv[])
 		cin >> out_name;
 		file.open(file_name.c_str(), ios_base::in);
 		out.open(out_name.c_str(), ios_base::out);
-		if(!file.good()) cout << "Cannot open file!";
+		if(!file.good()) cout << "Cannot open file!\n";
 		else
 		{
-
+			file.seekg(0,file.end);
+			int arr[256]={}, file_size=file.tellg();
+			if(file_size<1024)
+			{
+				cout << "File is not compressed with this program!\n";
+				return 1;
+			}
+			file.seekg(0,file.beg);
+			for(int i=0; i<256; ++i)
+			{
+				int Stack[4]={file.get(),file.get(),file.get(),file.get()};
+				arr[i]=Stack[3]+(Stack[2]<<8)+(Stack[1]<<16)+(Stack[0]<<24);
+			}
+			multiset<my_it> my_multiset;
+			multiset<my_it>::iterator it;
+			for(int i=0; i<256; ++i)
+				my_multiset.insert(my_it(new node(static_cast<char>(i), arr[i])));
+			it=my_multiset.begin();
+			while(my_multiset.size()>1)
+			{
+				it=my_multiset.begin();
+				root=it->wsk;
+				actual=(++it)->wsk;
+				my_multiset.insert(my_it(new node(root,actual,actual->val+root->val)));
+				my_multiset.erase(my_multiset.begin());
+				my_multiset.erase(my_multiset.begin());
+			}
+			root=my_multiset.begin()->wsk;
+			unsigned char c=0;
+			char l=-1;
+			actual=root;
+			for(int i=file.tellg();;l--)
+			{
+				if(l<0)
+				{
+					if(i==file_size) break;
+					l=7;
+					c=file.get();
+					++i;
+				}
+				if(!__builtin_ctz(2+(c>>l))) // l bit is 0, +2 because if c>>7==0 then __builtin_ctz(c>>7) will be 0 (not 8)
+					actual=actual->right;
+				else
+					actual=actual->left;
+				if(actual->left==NULL)
+				{
+					out.put(actual->c);
+					actual=root;
+				}
+			}
 			file.close();
 			out.close();
 		}
