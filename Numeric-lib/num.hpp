@@ -18,24 +18,23 @@ namespace numeric_lib
 		*/
 		class nat;
 		bool z; // znak
-		nat* w; // wartość
+		nat *l, *m; // wartość
+		void spwd(const num&, nat&);
+		void cut();
 	public:
 		num();
 		~num();
-		num(const long long int&);
+		num(long long int);
 		num(const char*);
 		num(const std::string&);
 		num(const num&);
 		num& operator=(const num&);
 		template<typename type>
 		num& operator=(const type&);
-		long long int size() const;
 		void swap(num&);
 		std::string str() const;
-		num& operator++();
-		num& operator--();
-		num operator++(int);
-		num operator--(int);
+		num& opp()
+		{this->z=!this->z;return *this;}
 		friend num operator+(const num&);
 		friend num operator-(const num&);
 		num operator+(const num&);
@@ -56,7 +55,6 @@ namespace numeric_lib
 		bool operator!=(const num&) const;
 		num& pow(const num&);
 		num& factorial();
-		friend num nwd(const num&, const num&);
 		/* output num with ostream */
 		friend std::ostream& operator<<(std::ostream&, const num&);
 		/* input num with istream */

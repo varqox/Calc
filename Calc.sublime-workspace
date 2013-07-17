@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"num",
+				"numeric_lib"
+			],
+			[
 				"C",
 				"Calc"
 			],
@@ -59,7 +63,7 @@
 			"file": "Numeric-lib/unlint.cpp",
 			"settings":
 			{
-				"buffer_size": 20677,
+				"buffer_size": 20736,
 				"line_ending": "Unix"
 			}
 		},
@@ -68,6 +72,22 @@
 			"settings":
 			{
 				"buffer_size": 1930,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Numeric-lib/num.hpp",
+			"settings":
+			{
+				"buffer_size": 1725,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Numeric-lib/num.cpp",
+			"settings":
+			{
+				"buffer_size": 20314,
 				"line_ending": "Unix"
 			}
 		}
@@ -99,6 +119,8 @@
 	},
 	"file_history":
 	[
+		"/home/kwazar/unlint/unlint.cpp",
+		"/home/kwazar/unlint/unlint.hpp",
 		"/usr/bin/X11/codeblocks",
 		"/home/kwazar/Calc/huff.cpp",
 		"/home/kwazar/Calc/rest/jjj.hsx",
@@ -194,6 +216,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"unlint",
+			"num",
+			"numeric_lib",
+			"unlimited_int",
+			"unlint",
+			"num",
+			"unlint",
 			"__wur",
 			"system",
 			"out_name",
@@ -238,7 +267,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -274,15 +303,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20677,
+						"buffer_size": 20736,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								78,
+								78
 							]
 						],
 						"settings":
@@ -309,8 +338,8 @@
 						"selection":
 						[
 							[
-								129,
-								129
+								1930,
+								1930
 							]
 						],
 						"settings":
@@ -320,6 +349,63 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Numeric-lib/num.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1725,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								119,
+								119
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Numeric-lib/num.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20314,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								97,
+								97
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 34.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

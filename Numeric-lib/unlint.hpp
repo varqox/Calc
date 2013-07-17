@@ -22,7 +22,7 @@ namespace unlimited_int
 	public:
 		unlint();
 		~unlint();
-		unlint(const long long int&);
+		unlint(long long int);
 		unlint(const char*);
 		unlint(const std::string&);
 		unlint(const unlint&);

@@ -22,16 +22,6 @@ Calckit.o:
 	@make $(MFLAGS) -C Calckit
 	@echo "\033[01;34mBuild target Calckit\033[00m"
 
-.PHONY install
-install:
-	mkdir -p /opt/Calc
-	cp Calc /opt/Calc
-	printf "" > /usr/bin/Calc
-
-.PHONY uninstall
-uninstall:
-	rm -r -f /opt/Calc /usr/bin/Calc
-
 .PHONY: clean
 clean:
 	@echo "\033[01;33mCleaning root directory...\033[00m"

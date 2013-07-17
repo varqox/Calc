@@ -646,9 +646,13 @@ namespace unlimited_int
 	unlint::~unlint()
 	{delete w;}
 
-	unlint::unlint(const lli& k): z(true), w(new num)
+	unlint::unlint(lli k): z(true), w(new num)
 	{
-		if(k<0) this->z=false;
+		if(k<0)
+		{
+			this->z=false;
+			k=-k;
+		}
 		lli f=k/BASE;
 		if(f>0) this->w->w.push_back(f);
 		this->w->w[0]=k-f*BASE;
@@ -1044,12 +1048,24 @@ namespace unlimited_int
 	unlint& unlint::factorial()
 	{
 		num mx(1), i(2);
+		vector<num> lst;
 		this->w->swap(mx);
 		while(i<=mx)
 		{
-			this->w->operator*=(i);
+			lst.push_back(i);
+			while(lst.size()>1 && (--lst.end())->w.size()>=(lst.end()-2)->w.size())
+			{
+				(lst.end()-2)->operator*=(*(--lst.end()));
+				lst.pop_back();
+			}
 			++i;
 		}
+		while(lst.size()>1)
+		{
+			(lst.end()-2)->operator*=(*(--lst.end()));
+			lst.pop_back();
+		}
+		this->w->swap(lst[0]);
 		this->z=true;
 	return *this;
 	}
