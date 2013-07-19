@@ -9,18 +9,28 @@ Calc: $(OBJECTS)
 	@$(CXX) $^ $(LDFLAGS) -o $@
 	@echo "\033[01;34mBuild target Calc\033[00m"
 
-Main.o:
+Main.o: Main/*.cpp
 	@make $(MFLAGS) -C Main
 	@echo "\033[01;34mBuild target Main\033[00m"
-Variable-lib.o:
+Variable-lib.o: Variable-lib/*.cpp
 	@make $(MFLAGS) -C Variable-lib
 	@echo "\033[01;34mBuild target Variable-lib\033[00m"
-Numeric-lib.o:
+Numeric-lib.o: Numeric-lib/*.cpp
 	@make $(MFLAGS) -C Numeric-lib
 	@echo "\033[01;34mBuild target Numeric-lib\033[00m"
-Calckit.o:
+Calckit.o: Calckit/*.cpp
 	@make $(MFLAGS) -C Calckit
 	@echo "\033[01;34mBuild target Calckit\033[00m"
+
+.PHONY: install
+install:
+	mkdir -p /opt/Calc
+	cp Calc /opt/Calc
+	printf "" > /usr/bin/Calc
+
+.PHONY: uninstall
+uninstall:
+	rm -r -f /opt/Calc /usr/bin/Calc
 
 .PHONY: clean
 clean:

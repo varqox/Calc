@@ -26,15 +26,16 @@ namespace numeric_lib
 		~num();
 		num(long long int);
 		num(const char*);
+		num(const char*, unsigned int, unsigned int);
 		num(const std::string&);
+		num(const std::string&, unsigned int, unsigned int);
 		num(const num&);
 		num& operator=(const num&);
 		template<typename type>
 		num& operator=(const type&);
 		void swap(num&);
 		std::string str() const;
-		num& opp()
-		{this->z=!this->z;return *this;}
+		num& opp();
 		friend num operator+(const num&);
 		friend num operator-(const num&);
 		num operator+(const num&);
@@ -55,10 +56,8 @@ namespace numeric_lib
 		bool operator!=(const num&) const;
 		num& pow(const num&);
 		num& factorial();
-		/* output num with ostream */
-		friend std::ostream& operator<<(std::ostream&, const num&);
-		/* input num with istream */
-		friend std::istream& operator>>(std::istream&, num&);
+		void output(const bool*);
+		friend std::ostream& operator<<(std::ostream&, const nat*);
 	};
 
 	num pow(const num&, const num&);

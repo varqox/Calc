@@ -1,8 +1,10 @@
-#include <fstream>
 #include "spis.hpp"
 #include "../Variable-lib/var_base.hpp"
+#include "../Numeric-lib/num.hpp"
+#include "../Calckit/calckit.hpp"
+#include <fstream>
 
-bool _color=1, output[]={0,0,1,1};
+bool _color=true, output[]={false,false,true,true};
 
 string to_string(int a)
 {
@@ -39,7 +41,7 @@ void scol()
 {
 	fstream kalk_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".kalk_config.cfg", ios::out);
+	kalk_conf_file.open(".kalk_config.cfg", ios_base::out);
 	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	kalk_conf_file.close();
 	hide_file();
@@ -70,13 +72,13 @@ void settings()
 			char o=getch();
 			if(o=='y' || o=='Y')
 			{
-				if(z=='5') _color=1;
-				else output[z-49]=1;
+				if(z=='5') _color=true;
+				else output[z-49]=true;
 			}
 			else if(o=='n' || o=='N')
 			{
-				if(z=='5') _color=0;
-				else output[z-49]=0;
+				if(z=='5') _color=false;
+				else output[z-49]=false;
 			}
 		}
 		cout << "\n----------------------------------------------\n";
@@ -136,13 +138,13 @@ void settings()
 			char o=getch();
 			if(o=='y' || o=='Y')
 			{
-				if(z=='5') _color=1;
-				else output[z-49]=1;
+				if(z=='5') _color=true;
+				else output[z-49]=true;
 			}
 			else if(o=='n' || o=='N')
 			{
-				if(z=='5') _color=0;
-				else output[z-49]=0;
+				if(z=='5') _color=false;
+				else output[z-49]=false;
 			}
 		}
 		cout << "\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F";
@@ -158,7 +160,7 @@ void settings()
 	cout << "\033[G\033[2K----------------------------------------------\n";
 	fstream kalk_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".kalk_config.cfg", ios::out);
+	kalk_conf_file.open(".kalk_config.cfg", ios_base::out);
 	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	kalk_conf_file.close();
 	hide_file();
@@ -236,7 +238,7 @@ void buffer(string &w)
 	char KEY_UP[]={27,91,65,'\0'}, KEY_DOWN[]={27,91,66,'\0'}, KEY_LEFT[]={27,91,68,'\0'}, KEY_RIGHT[]={27,91,67,'\0'}, DELETE[]={27,91,51,126,'\0'}, BACKSPACE[]={127,'\0'};
 	int width=getmaxx();
 	char z=getch();
-	while(1)
+	while(true)
 	{
 		k="";
 		k+=z;
@@ -499,7 +501,7 @@ void convert(string &w)
 
 bool identyfity(string &s)
 {
-	if(s.size()==0) return 0;
+	if(s.size()==0) return false;
 	string k;
 	for(int i=0; i<static_cast<int>(s.size()); i++)
 	{
@@ -513,50 +515,42 @@ bool identyfity(string &s)
 			if(var[static_cast<int>(s[i])] || s[i]=='.' || s[i]==',')
 			{
 				cout << "Wrong variable name!\n";
-				return 0;
+				return false;
 			}
 	}
-	if(!don(s,(k.size()==0 ? 0:k.size()+1),s.size())) return 0;
-	if(!oper(s,(k.size()==0 ? 0:k.size()+1),s.size())) return 0;
-	bool erro=isnERR();
+	if(!Calckit::parser(s,(k.size()==0 ? 0:k.size()+1),s.size())) return false;
+	if(!Calckit::core(s,(k.size()==0 ? 0:k.size()+1),s.size())) return false;
+	bool erro=errors::are_not_errors();
 	if(k.size()>0 && erro)
 	{
-		dn var;
+		num var;
 		var_base::read_var("A", var);
 		var_base::add_var(k, var);
 		mcol(_blue);
 		cout << k;
 		mcol(_yellow);
 		cout << " = ";
-		return 1;
+		return true;
 	}
 return erro;
 }
 
 int main(int avg, char **arg)
 {
-	/*vector<int> a, b;
-	czytaj(a);
-	czytaj(b);
-	a*=b;
-	wypisz(a);
-	cout << endl;
-	return 0;*/
-	//ios::sync_with_stdio(0);
 	fstream kalk_conf_file;
-	kalk_conf_file.open(".kalk_config.cfg", ios::in);
+	kalk_conf_file.open(".kalk_config.cfg", ios_base::in);
 	char buff[]={'0','0','1','1','1','\0'};
-	bool ey=0;
+	bool ey=false;
 	if(kalk_conf_file.good())
 	{
 		kalk_conf_file.read(buff, 5);
 		kalk_conf_file.close();
 	}
-	else ey=1;
+	else ey=true;
 	if(ey || kalk_conf_file.gcount()<5)
 	{
 		if(!ey) nhide_file();
-		kalk_conf_file.open(".kalk_config.cfg", ios::out);
+		kalk_conf_file.open(".kalk_config.cfg", ios_base::out);
 		if(kalk_conf_file.good()) kalk_conf_file << "00111";
 		kalk_conf_file.close();
 		hide_file();
@@ -566,12 +560,13 @@ int main(int avg, char **arg)
 	output[2]=buff[2]-48;
 	output[3]=buff[3]-48;
 	_color=buff[4]-48;
-	bool arg1[]={1,1};
+	bool arg1[]={true,true};
+	num Answer;
 	for(int i=1; i<avg; i++)
 	{
 		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Dispaly Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files\n";return 0;}
 		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){cout << "Calc version 2.5.0\n";return 0;}
-		else if(arg1[0] && arg[i][0]=='-' && arg[i][1]=='c' && arg[i][2]=='\0'){_color=0;arg1[0]=0;}
+		else if(arg1[0] && arg[i][0]=='-' && arg[i][1]=='c' && arg[i][2]=='\0'){_color=false;arg1[0]=false;}
 		else if(arg1[1] && arg[i][0]=='-' && arg[i][1]=='w' && arg[i][2]=='\0')
 		{
 			arg[0]=0;
@@ -589,8 +584,8 @@ int main(int avg, char **arg)
 					znak=cin.get();
 				}
 				if(s=="exit"){mcol(_default);return 0;}
-				else if(s=="col-on"){_color=1;scol();}
-				else if(s=="col-off"){_color=0;scol();color_default;}
+				else if(s=="col-on"){_color=true;scol();}
+				else if(s=="col-off"){_color=false;scol();color_default;}
 				else if(s=="help") help();
 				else if(s=="settings") settings();
 				else
@@ -598,9 +593,8 @@ int main(int avg, char **arg)
 					convert(s);
 					if(identyfity(s))
 					{
-						dn a;
-						var_base::read_var("A", a);
-						wypisz(a, output);
+						var_base::read_var("A", Answer);
+						Answer.output(output);
 						cout << "\n";
 					}
 				}
@@ -615,19 +609,17 @@ int main(int avg, char **arg)
 	mcol(_green);
 	/******* ADD 'A' TO VARIaBLES *******/
 	var_base::_v.resize(2);
-	var_base::_v[0].t['A']=1;
-	var_base::_v[1].is=1;
-	var_base::_v[1].w.l.push_back(0);
-	var_base::_v[1].w.m.push_back(1);
-	var_base::_v[1].w.z=1;
+	var_base::_v[0].t['A']=true;
+	var_base::_v[1].is=true;
+	var_base::_v[1].w=0;
 	/******* END *******/
-	while(1)
+	while(true)
 	{
 		string s;
 		buffer(s);
 		if(s=="exit"){mcol(_default);return 0;}
-		else if(s=="col-on"){_color=1;scol();}
-		else if(s=="col-off"){_color=0;scol();color_default;}
+		else if(s=="col-on"){_color=true;scol();}
+		else if(s=="col-off"){_color=false;scol();color_default;}
 		else if(s=="help") help();
 		else if(s=="settings") settings();
 		else
@@ -636,10 +628,9 @@ int main(int avg, char **arg)
 			mcol(_red);
 			if(identyfity(s))
 			{
-				dn a;
-				var_base::read_var("A", a);
+				var_base::read_var("A", Answer);
 				mcol(_blue);
-				wypisz(a, output);
+				Answer.output(output);
 				cout << "\n";
 			}
 		}

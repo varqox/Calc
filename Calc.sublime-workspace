@@ -4,10 +4,6 @@
 		"selected_items":
 		[
 			[
-				"push",
-				"push_back"
-			],
-			[
 				"num",
 				"numeric_lib"
 			],
@@ -55,6 +51,46 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1136,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Numeric-lib/unlint.cpp",
+			"settings":
+			{
+				"buffer_size": 21034,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Numeric-lib/unlint.hpp",
+			"settings":
+			{
+				"buffer_size": 1923,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Numeric-lib/num.hpp",
+			"settings":
+			{
+				"buffer_size": 1655,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Numeric-lib/num.cpp",
+			"settings":
+			{
+				"buffer_size": 21037,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -83,34 +119,11 @@
 	},
 	"file_history":
 	[
-		"/home/kwazar/Calc/Makefile",
-		"/home/kwazar/Calc/Numeric-lib/spr.cpp",
-		"/home/kwazar/Calc/Numeric-lib/gen.cpp",
-		"/home/kwazar/Calc/Numeric-lib/lol.cpp",
-		"/home/kwazar/Calc/Main/main.cpp",
-		"/home/kwazar/Calc/Variable-lib/var_base.cpp",
-		"/home/kwazar/Calc/Variable-lib/var_base.hpp",
 		"/home/kwazar/Calc/Main/spis.hpp",
 		"/home/kwazar/Calc/Numeric-lib/num.cpp",
 		"/home/kwazar/Calc/Numeric-lib/num.hpp",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/8.out",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/8.in",
-		"/home/kwazar/Calc2.4/spis.hpp",
 		"/home/kwazar/unlint/unlint.cpp",
-		"/home/kwazar/Calc/Numeric-lib/unlint.cpp",
 		"/home/kwazar/unlint/unlint.hpp",
-		"/home/kwazar/Calc/Numeric-lib/unlint.hpp",
-		"/home/kwazar/Calc/Numeric-lib/funkcje-d.cpp",
-		"/home/kwazar/Calc/Numeric-lib/Makefile",
-		"/home/kwazar/Calc/Main/Makefile",
-		"/home/kwazar/Calc/Calckit/funkcje-k.cpp",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/2.out",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/2.in",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/1.out",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/1.in",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/3.out",
-		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/3.in",
-		"/media/kwazar/Dysk 215GB/kwazar/database/unlint/unlint.h",
 		"/usr/bin/X11/codeblocks",
 		"/home/kwazar/Calc/huff.cpp",
 		"/home/kwazar/Calc/rest/jjj.hsx",
@@ -138,14 +151,21 @@
 		"/home/kwazar/Calc/Calc.hoff",
 		"/home/kwazar/Calc/kit.cpp",
 		"/home/kwazar/Calc/lol.cpp.hoff",
+		"/home/kwazar/Calc/Numeric-lib/Makefile",
 		"/home/kwazar/Calc/makefile-var",
 		"/home/kwazar/Pulpit/kdevelop",
 		"/home/kwazar/SFML/Makefile",
 		"/home/kwazar/k/Makefile",
 		"/home/kwazar/Pulpit/test.cpp",
 		"/home/kwazar/Calc/Variable-lib/Makefile",
+		"/home/kwazar/Calc/Main/Makefile",
 		"/home/kwazar/Calc/Calckit/Makefile",
+		"/home/kwazar/Calc/Calckit/funkcje-k.cpp",
 		"/home/kwazar/Calc/Numeric-lib/funkcje-v.cpp",
+		"/home/kwazar/Calc/Numeric-lib/funkcje-d.cpp",
+		"/home/kwazar/Calc/Main/main.cpp",
+		"/home/kwazar/Calc/Variable-lib/var_base.hpp",
+		"/home/kwazar/Calc/Variable-lib/var_base.cpp",
 		"/home/kwazar/SFML/src/SFML/Makefile",
 		"/home/kwazar/Calc/clean",
 		"/home/kwazar/k/kit.c",
@@ -155,6 +175,7 @@
 		"/home/kwazar/SFML/CMakeLists.txt",
 		"/home/kwazar/Calc/README.md",
 		"/home/kwazar/Calc/funkcje-d.cpp",
+		"/home/kwazar/Calc/Makefile",
 		"/home/kwazar/Calc/funkcje-k.cpp",
 		"/home/kwazar/Calc/calckit/funkcje-k.cpp",
 		"/home/kwazar/Calc/spis.hpp",
@@ -197,31 +218,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"isnERR",
-			"ERR",
-			"insERR",
-			"dn",
-			"L",
-			"opp",
-			"dn",
-			"spwd",
-			"k.w",
-			"*_n.w",
-			"this->w",
-			"->w",
-			"stack",
-			"string",
-			"vector",
-			"std",
-			"m2",
-			"m1",
-			"l1",
-			");\n",
-			"nwd",
-			"num",
-			"(--lst.end())",
-			"(lst.end()-2)",
-			"factorial",
 			"unlint",
 			"num",
 			"numeric_lib",
@@ -273,14 +269,155 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								89,
+								89
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Numeric-lib/unlint.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								100,
+								100
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Numeric-lib/unlint.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1923,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Numeric-lib/num.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1655,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Numeric-lib/num.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21037,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 34.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 34.0
 	},
 	"input":
 	{

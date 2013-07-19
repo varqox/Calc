@@ -2,6 +2,7 @@
 #define var_base_hpp
 
 #include "../Main/spis.hpp"
+#include "../Numeric-lib/num.hpp"
 #include <vector>
 #include <queue>
 #include <string>
@@ -14,7 +15,7 @@ namespace var_base
 	struct ver
 	{
 		int t[256];
-		dn w;
+		num w;
 		bool is;
 		ver();
 		~ver(){};
@@ -22,9 +23,9 @@ namespace var_base
 	extern vector<ver> _v;
 	extern queue<int> _free;
 	extern bool is_there;
-	void add_var(string s, dn w);
-	bool remove_var(string s);
-	bool read_var(string s, dn &w);
+	void add_var(const string&, num);
+	bool remove_var(string);
+	bool read_var(const string&, num&);
 }
 
 #endif // var_base_hpp

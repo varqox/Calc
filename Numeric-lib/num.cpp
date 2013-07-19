@@ -1,7 +1,30 @@
+#include "num.hpp"
+#include "../Main/spis.hpp"
 #include <cstring>
 #include <stack>
-#include "num.hpp"
 #include <iostream>
+
+namespace errors
+{
+	bool division_by_0=false,
+	no_integer_modulo=false,
+	no_integer_power=false,
+	no_integer_factorial=false;
+	bool are_not_errors()
+	{
+		bool ret=division_by_0|no_integer_modulo|no_integer_power|no_integer_factorial;
+		if(division_by_0)
+			cout << "Cannot divide by zero!\n";
+		if(no_integer_modulo)
+			cout << "Modulus division is only defined for integers!\n";
+		if(no_integer_power)
+			cout << "In this version (2.5.0) power is only defined for integers!\n";
+		if(no_integer_factorial)
+			cout << "Factorial is only defined for natural numbers!\n";
+		division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
+	return !ret;
+	}
+}
 
 namespace numeric_lib
 {
@@ -47,6 +70,19 @@ namespace numeric_lib
 		bool operator==(const nat&) const;
 		bool operator!=(const nat&) const;
 	};
+
+	std::ostream& operator<<(std::ostream& os, const num::nat* _n)
+	{
+		int nl=_n->w.size();
+		os << _n->w[--nl];
+		for(int i=--nl; i>=0; --i)
+		{
+			os.width(LEN);
+			os.fill('0');
+			os << _n->w[i];
+		}
+	return os;
+	}
 
 	lli num::nat::size() const
 	{
@@ -736,44 +772,86 @@ namespace numeric_lib
 		this->l->w[0]=k-f*BASE;
 	}
 
-	num::num(const char* cstr): z(true), l(new nat), m(new nat(1))
+	num::num(const char* cstr): l(new nat), m(new nat)
+	{num(cstr,0,strlen(cstr)).swap(*this);}
+
+	num::num(const char* cstr, unsigned int first, unsigned int least): z(true), l(new nat), m(new nat(1))
 	{
-		int lenght=strlen(cstr), begin=0, idx=0;
+		int begin=first, idx=0, point_idx=least;
 		lli k;
-		if(cstr[0]=='-'){z=false;begin=1;}
-		this->l->w.resize(1+(lenght-begin)/LEN);
-		for(int i=lenght-1; i>=begin; i-=LEN, ++idx)
+		if(cstr[first]=='-'){this->z=false;++begin;}
+		this->l->w.resize(1+(least-begin)/LEN);
+		for(int i=least-1; i>=begin; i-=LEN, ++idx)
 		{
 			k=0;
 			for(int j=std::max(i-LEN+1,begin); j<=i; ++j)
 			{
-				k*=10;
-				k+=cstr[j]-'0';
+				if(cstr[j]=='.')
+				{
+					point_idx=++j;
+					k=0;
+					for(int q=std::max(i-LEN,begin); q<=i; ++q)
+						if(cstr[q]!='.')
+						{
+							k*=10;
+							k+=cstr[q]-'0';
+						}
+					j=--i;
+				}
+				else
+				{
+					k*=10;
+					k+=cstr[j]-'0';
+				}
 			}
 			this->l->w[idx]=k;
 		}
 		this->l->kas0();
 		if(this->l->w.size()==1 && this->l->w[0]==0) this->z=true;
+		std::vector<lli>(1,10).swap(this->m->w);
+		this->m->pow(least-point_idx);
+		this->cut();
 	}
 
-	num::num(const std::string& str): z(true), l(new nat), m(new nat(1))
+	num::num(const std::string& _str): l(new nat), m(new nat)
+	{num(_str,0,_str.size()).swap(*this);}
+
+	num::num(const std::string& _str, unsigned int first, unsigned int least): z(true), l(new nat), m(new nat(1))
 	{
-		int lenght=str.size(), begin=0, idx=0;
+		int begin=first, idx=0, point_idx=least;
 		lli k;
-		if(str[0]=='-'){z=false;begin=1;}
-		this->l->w.resize(1+(lenght-begin)/LEN);
-		for(int i=lenght-1; i>=begin; i-=LEN, ++idx)
+		if(_str[first]=='-'){this->z=false;++begin;}
+		this->l->w.resize(1+(least-begin)/LEN);
+		for(int i=least-1; i>=begin; i-=LEN, ++idx)
 		{
 			k=0;
 			for(int j=std::max(i-LEN+1,begin); j<=i; ++j)
 			{
-				k*=10;
-				k+=str[j]-'0';
+				if(_str[j]=='.')
+				{
+					point_idx=++j;
+					k=0;
+					for(int q=std::max(i-LEN,begin); q<=i; ++q)
+						if(_str[q]!='.')
+						{
+							k*=10;
+							k+=_str[q]-'0';
+						}
+					j=--i;
+				}
+				else
+				{
+					k*=10;
+					k+=_str[j]-'0';
+				}
 			}
 			this->l->w[idx]=k;
 		}
 		this->l->kas0();
 		if(this->l->w.size()==1 && this->l->w[0]==0) this->z=true;
+		std::vector<lli>(1,10).swap(this->m->w);
+		this->m->pow(least-point_idx);
+		this->cut();
 	}
 
 	num::num(const num& uli): z(uli.z), l(new nat(*uli.l)), m(new nat(*uli.m))
@@ -781,7 +859,11 @@ namespace numeric_lib
 
 	num& num::operator=(const num& a)
 	{
-		num(a).swap(*this);
+		this->z=a.z;
+		delete this->l;
+		delete this->m;
+		this->l=new nat(*a.l);
+		this->m=new nat(*a.m);
 	return *this;
 	}
 
@@ -813,6 +895,12 @@ namespace numeric_lib
 			}
 		}
 	return str;
+	}
+
+	num& num::opp()
+	{
+		if(!(this->l->w.size()==1 && this->l->w[0]==0)) this->z=!this->z;
+	return *this;
 	}
 
 	void num::spwd(const num& _n2, nat& l3)
@@ -957,7 +1045,7 @@ namespace numeric_lib
 
 	num num::operator/(const num& _n)
 	{
-		//if(*_n.l==0) ;
+		if(*_n.l==0) errors::division_by_0=true;
 		num k(*this);
 		if(k.z==_n.z) k.z=true;
 		else k.z=false;
@@ -970,7 +1058,7 @@ namespace numeric_lib
 
 	num& num::operator/=(const num& _n)
 	{
-		//if(*_n.l==0) ;
+		if(*_n.l==0) errors::division_by_0=true;
 		if(this->z==_n.z) this->z=true;
 		else this->z=false;
 		this->l->operator*=(*_n.m);
@@ -982,8 +1070,8 @@ namespace numeric_lib
 
 	num num::operator%(const num& _n)
 	{
-		//if(*_n.l==0) ;
-		//else if(*_n.m!=1) ;
+		if(*_n.l==0) errors::division_by_0=true;
+		else if(*_n.m!=1) errors::no_integer_modulo=true;
 		num k(*this);
 		k.l->operator%=(*_n.l);
 		if(!k.z && !(k.l->w.size()==1 && k.l->w[0]==0)) k+=(_n<0LL ? -_n:_n);
@@ -992,8 +1080,8 @@ namespace numeric_lib
 
 	num& num::operator%=(const num& _n)
 	{
-		//if(*_n.l==0) ;
-		//else if(*_n.m!=1) ;
+		if(*_n.l==0) errors::division_by_0=true;
+		else if(*_n.m!=1) errors::no_integer_modulo=true;
 		this->l->operator%=(*_n.l);
 		if(!this->z && !(this->l->w.size()==1 && this->l->w[0]==0)) this->operator+=(_n<0LL ? -_n:_n);
 	return *this;
@@ -1032,7 +1120,7 @@ namespace numeric_lib
 
 	num& num::pow(const num& _n)
 	{
-		//if(*_n.m!=1) ;
+		if(*_n.m!=1) errors::no_integer_power=true;
 		if(*_n.l==0)
 		{
 			this->operator=(1);
@@ -1052,7 +1140,7 @@ namespace numeric_lib
 
 	num& num::factorial()
 	{
-		//if(*this->m!=1) ;
+		if(*this->m!=1) errors::no_integer_factorial=true;
 		nat mx(1), i(2);
 		std::vector<nat> lst;
 		this->l->swap(mx);
@@ -1074,6 +1162,241 @@ namespace numeric_lib
 		this->l->swap(lst[0]);
 		this->z=true;
 	return *this;
+	}
+
+	void num::output(const bool* output)
+	{
+		nat g, wyk(*this->l);
+		// vector<int> g(1), wyk=this->l;
+		if(output[0])
+		{
+			if(!this->z)
+			{
+				mcol(_yellow);
+				cout << "-";
+				mcol(_blue);
+			}
+			cout << this->l;
+			if(*this->m!=1)
+			{
+				mcol(_red);
+				cout << "/";
+				mcol(_blue);
+				cout << this->m;
+			}
+		}
+		if(output[1])
+		{
+			if(this->l->operator>(*this->m))
+			{
+				g=*this->l;
+				g/=*this->m;
+				this->l->operator-=(nat(g)*=*this->m);
+				if(output[0] && *this->l!=0)
+				{
+					mcol(_yellow);
+					cout << " = ";
+					if(!this->z) cout << "-(";
+					mcol(_blue);
+					cout << &g;
+					mcol(_yellow);
+					cout << " + ";
+					mcol(_blue);
+					cout << this->l;
+					mcol(_red);
+					cout << "/";
+					mcol(_blue);
+					cout << this->m;
+					if(!this->z)
+					{
+						mcol(_yellow);
+						cout << ")";
+						mcol(_blue);
+					}
+				}
+				else if(!output[0])
+				{
+					mcol(_yellow);
+					if(*this->l==0)
+					{
+						if(!this->z) cout << "-";
+						mcol(_blue);
+						cout << &g;
+					}
+					else
+					{
+						if(!this->z) cout << "-(";
+						mcol(_blue);
+						cout << &g;
+						mcol(_yellow);
+						cout << " + ";
+						mcol(_blue);
+						cout << this->l;
+						mcol(_red);
+						cout << "/";
+						mcol(_blue);
+						cout << this->m;
+						if(!this->z)
+						{
+							mcol(_yellow);
+							cout << ")";
+							mcol(_blue);
+						}
+					}
+				}
+
+			}
+			else if(!output[0])
+			{
+				if(!this->z)
+				{
+					mcol(_yellow);
+					cout << "-";
+					mcol(_blue);
+				}
+				cout << this->l;
+				if(*this->m!=1)
+				{
+					mcol(_red);
+					cout << "/";
+					mcol(_blue);
+					cout << this->m;
+				}
+				g=*this->l;
+				g/=*this->m;
+				this->l->operator-=(nat(g)*=*this->m);
+			}
+			else
+			{
+				g=*this->l;
+				g/=*this->m;
+				this->l->operator-=(nat(g)*=*this->m);
+			}
+		}
+		if(output[2])
+		{
+			if(!output[1])
+			{
+				if(*this->m==1)
+				{
+					g.swap(*this->l);
+					vector<lli>(1,0).swap(this->l->w);
+				}
+				else
+				{
+					g=*this->l;
+					g/=*this->m;
+					this->l->operator-=(nat(g)*=*this->m);
+				}
+			}
+			if((output[0] || output[1]) && *this->l!=0)
+			{
+				mcol(_yellow);
+				cout << " = ";
+				if(!this->z) cout << "-";
+				mcol(_blue);
+				cout << &g;
+			}
+			else if(!output[0] && !output[1])
+			{
+				mcol(_yellow);
+				if(!this->z) cout << "-";
+				mcol(_blue);
+				cout << &g;
+			}
+			if(*this->l!=0)
+			{
+				this->l->w.insert(this->l->w.begin(), 3, 0);
+				this->l->operator/=(*this->m);
+				string s, tos;
+				for(int i=54-this->l->size(); i>0; i--)
+					s+="0";
+				s+=to_string(this->l->w[this->l->w.size()-1]);
+				for(int i=this->l->w.size()-2; i>0; i--)
+				{
+					tos=to_string(this->l->w[i]);
+					for(int j=tos.size(); j<LEN; j++)
+						s+="0";
+					s+=tos;
+				}
+				//zaokrąglanie
+				if(this->l->w[0]>(BASE>>1)-1)
+				{
+					for(int i=s.size()-1; i>=0; i++)
+					{
+						s[i]++;
+						if(s[i]>58){s[i]-=10;}
+						else break;
+					}
+				}
+				//usuwanie końcowych zer
+				for(int i=s.size()-1; i>=0 && s[i]=='0'; i--)
+					s.erase(i, 1);
+				if(!s.empty())
+				{
+					mcol(_red);
+					cout << ".";
+					mcol(_blue);
+					cout << s;
+				}
+			}
+		}
+		if(output[3])
+		{
+			if(output[0] || output[1] || output[2])
+			{
+				mcol(_yellow);
+				cout << " = ";
+				mcol(_blue);
+			}
+			if(wyk.w.size()==0 || (wyk==0))
+				cout << "0";
+			else
+			{
+				if(!this->z)
+				{
+					mcol(_yellow);
+					cout << "-";
+					mcol(_blue);
+				}
+				int lg=wyk.w.size()-this->m->w.size()-3;
+				string s, k;
+				if(lg>0) wyk.w.erase(wyk.w.begin(), wyk.w.begin()+lg);
+				else wyk.w.insert(wyk.w.begin(), -lg, 0);
+				lg*=LEN;
+				wyk/=*this->m;
+				s+=to_string(wyk.w[wyk.w.size()-1]);
+				for(int i=wyk.w.size()-2; i>=0; i--)
+				{
+					k=to_string(wyk.w[i]);
+					for(int j=LEN-k.size(); j>0; j--)
+						s+='0';
+					s+=k;
+				}
+				lg+=s.size()-1;
+				s.erase(11,s.size()-11);
+				for(int i=s.size()-1; i>0 && s[i]=='0'; i--)
+					s.erase(i, 1);
+				cout << s[0];
+				if(s.size()>1)
+				{
+					mcol(_red);
+					cout << ".";
+					mcol(_blue);
+				}
+				for(unsigned int i=1; i<s.size(); i++)
+					cout << s[i];
+				mcol(_yellow);
+				cout << "*";
+				mcol(_blue);
+				cout << "10";
+				mcol(_red);
+				cout << "^";
+				if(lg<0){cout << "-";lg=-lg;}
+				mcol(_blue);
+				cout << lg;
+			}
+		}
 	}
 
 	num operator+(const num& a)
@@ -1098,42 +1421,5 @@ namespace numeric_lib
 		num w(a);
 		w.factorial();
 	return w;
-	}
-
-
-	/* output num with ostream */
-	std::ostream& operator<<(std::ostream& os, const num& uli)
-	{
-		int ul=uli.l->w.size();
-		if(!uli.z) os << '-';
-		os << uli.l->w[--ul];
-		for(int i=--ul; i>=0; --i)
-		{
-			os.width(LEN);
-			os.fill('0');
-			os << uli.l->w[i];
-		}
-		if(*uli.m!=1)
-		{
-			os << '/';
-			ul=uli.m->w.size();
-			os << uli.m->w[--ul];
-			for(int i=--ul; i>=0; --i)
-			{
-				os.width(LEN);
-				os.fill('0');
-				os << uli.m->w[i];
-			}
-		}
-	return os;
-	}
-
-	/* input num with istream */
-	std::istream& operator>>(std::istream& is, num& uli)
-	{
-		std::string str;
-		is >> str;
-		uli=str;
-	return is;
 	}
 }
