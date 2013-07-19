@@ -533,7 +533,7 @@ void factorial(dn &a)
 bool isnERR()
 {
 	if(Error0){cout << "Cannot divide by zero!\n";Error0=0;Error1=0;Error2=0;Error3=0;return 0;}
-	if(Error1){cout << "Modulus division is only defined for integers\n";Error0=0;Error1=0;Error2=0;Error3=0;return 0;}
+	if(Error1){cout << "Modulus division is only defined for integers!\n";Error0=0;Error1=0;Error2=0;Error3=0;return 0;}
 	if(Error2){cout << "In this version (2.4.1) power is only defined for integers!\n";Error0=0;Error1=0;Error2=0;Error3=0;return 0;}
 	if(Error3){cout << "Factorial is only defined for natural numbers!\n";Error0=0;Error1=0;Error2=0;Error3=0;return 0;}
 return 1;
