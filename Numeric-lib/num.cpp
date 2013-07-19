@@ -1071,7 +1071,7 @@ namespace numeric_lib
 	num num::operator%(const num& _n)
 	{
 		if(*_n.l==0) errors::division_by_0=true;
-		else if(*_n.m!=1) errors::no_integer_modulo=true;
+		else if(*_n.m!=1 || *this->m!=1) errors::no_integer_modulo=true;
 		num k(*this);
 		k.l->operator%=(*_n.l);
 		if(!k.z && !(k.l->w.size()==1 && k.l->w[0]==0)) k+=(_n<0LL ? -_n:_n);
@@ -1081,7 +1081,7 @@ namespace numeric_lib
 	num& num::operator%=(const num& _n)
 	{
 		if(*_n.l==0) errors::division_by_0=true;
-		else if(*_n.m!=1) errors::no_integer_modulo=true;
+		else if(*_n.m!=1 || *this->m!=1) errors::no_integer_modulo=true;
 		this->l->operator%=(*_n.l);
 		if(!this->z && !(this->l->w.size()==1 && this->l->w[0]==0)) this->operator+=(_n<0LL ? -_n:_n);
 	return *this;
@@ -1309,28 +1309,28 @@ namespace numeric_lib
 				this->l->w.insert(this->l->w.begin(), 3, 0);
 				this->l->operator/=(*this->m);
 				string s, tos;
-				for(int i=54-this->l->size(); i>0; i--)
+				for(int i=54-this->l->size(); i>0; --i)
 					s+="0";
 				s+=to_string(this->l->w[this->l->w.size()-1]);
-				for(int i=this->l->w.size()-2; i>0; i--)
+				for(int i=this->l->w.size()-2; i>0; --i)
 				{
 					tos=to_string(this->l->w[i]);
-					for(int j=tos.size(); j<LEN; j++)
+					for(int j=tos.size(); j<LEN; ++j)
 						s+="0";
 					s+=tos;
 				}
 				//zaokrąglanie
 				if(this->l->w[0]>(BASE>>1)-1)
 				{
-					for(int i=s.size()-1; i>=0; i++)
+					for(int i=s.size()-1; i>=0; ++i)
 					{
-						s[i]++;
+						++s[i];
 						if(s[i]>58){s[i]-=10;}
 						else break;
 					}
 				}
 				//usuwanie końcowych zer
-				for(int i=s.size()-1; i>=0 && s[i]=='0'; i--)
+				for(int i=s.size()-1; i>=0 && s[i]=='0'; --i)
 					s.erase(i, 1);
 				if(!s.empty())
 				{
@@ -1366,16 +1366,16 @@ namespace numeric_lib
 				lg*=LEN;
 				wyk/=*this->m;
 				s+=to_string(wyk.w[wyk.w.size()-1]);
-				for(int i=wyk.w.size()-2; i>=0; i--)
+				for(int i=wyk.w.size()-2; i>=0; --i)
 				{
 					k=to_string(wyk.w[i]);
-					for(int j=LEN-k.size(); j>0; j--)
+					for(int j=LEN-k.size(); j>0; --j)
 						s+='0';
 					s+=k;
 				}
 				lg+=s.size()-1;
 				s.erase(11,s.size()-11);
-				for(int i=s.size()-1; i>0 && s[i]=='0'; i--)
+				for(int i=s.size()-1; i>0 && s[i]=='0'; --i)
 					s.erase(i, 1);
 				cout << s[0];
 				if(s.size()>1)
@@ -1384,7 +1384,7 @@ namespace numeric_lib
 					cout << ".";
 					mcol(_blue);
 				}
-				for(unsigned int i=1; i<s.size(); i++)
+				for(unsigned int i=1; i<s.size(); ++i)
 					cout << s[i];
 				mcol(_yellow);
 				cout << "*";

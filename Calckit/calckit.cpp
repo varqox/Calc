@@ -6,7 +6,7 @@ namespace Calckit
 {
 	bool parser(const string& _str, int begin, int end)
 	{
-		end--;
+		--end;
 		int br=0, z=0, number=0, krp=0, m=0;
 		bool var=false;
 		if(_str[begin]=='!')
@@ -19,11 +19,11 @@ namespace Calckit
 			cout << "Wrong argument: '" << _str[begin+1] << "'!\n";
 			return false;
 		}
-		for(int i=begin; i<=end; i++)
+		for(int i=begin; i<=end; ++i)
 		{
 			if(_str[i]=='(')
 			{
-				br++;
+				++br;
 				number=0;
 				var=false;
 				m=0;
@@ -32,7 +32,7 @@ namespace Calckit
 			}
 			else if(_str[i]==')')
 			{
-				br--;
+				--br;
 				if(br<0 || number==0)
 				{
 					cout << "Wrong parentheses layout!\n";
@@ -47,14 +47,14 @@ namespace Calckit
 					cout << "Wrong number writing!\n";
 					return false;
 				}
-				krp++;
+				++krp;
 			}
 			else if(_str[i]=='+' || _str[i]=='-')
 			{
 				if(m==0 && !(i==end || _str[i+1]==')'))
 				{
-					if(z==0) z++;
-					else m++;
+					if(z==0) ++z;
+					else ++m;
 				}
 				else
 				{
@@ -67,7 +67,7 @@ namespace Calckit
 			}
 			else if(_str[i]=='*' || _str[i]=='/' || _str[i]=='%' || _str[i]=='^')
 			{
-				z++;
+				++z;
 				if(z>1 || number==0 || i==end || _str[i+1]==')')
 				{
 					cout << "Wrong argument: '" << _str[i] << "'!\n";
@@ -92,13 +92,13 @@ namespace Calckit
 			}
 			else if(_str[i]>='0' && _str[i]<='9')
 			{
-				number++;
+				++number;
 				z=0;
 				m=0;
 			}
 			else
 			{
-				number++;
+				++number;
 				z=0;
 				m=0;
 				var=true;
@@ -161,7 +161,7 @@ namespace Calckit
 			base.pop_back();
 			operators.pop_back();
 			sign.pop_back();
-			bs--;
+			--bs;
 		}
 		if(bs>0 && prior!=1 && prior==pri(operators[bs-1+parenth_depth]))
 		{
@@ -191,14 +191,14 @@ namespace Calckit
 			base.pop_back();
 			operators.pop_back();
 			sign.pop_back();
-			bs--;
+			--bs;
 		}
 	}
 
 	string f_pos_to_str(int begin, int end, const string& _str)
 	{
 		string w;
-		for(int i=begin; i<end; i++)
+		for(int i=begin; i<end; ++i)
 			w+=_str[i];
 	return w;
 	}
@@ -211,7 +211,7 @@ namespace Calckit
 		vector<bool> sign;
 		bool minus=false, var=false;
 		int num_beg=begin, parenth_depth=0;
-		for(int i=begin; i<end; i++)
+		for(int i=begin; i<end; ++i)
 		{
 			if(_str[i]=='!')
 			{
@@ -310,7 +310,7 @@ namespace Calckit
 					operators.push_back('(');
 					sign.push_back(minus);
 					minus=false;
-					parenth_depth++;
+					++parenth_depth;
 					num_beg=i+1;
 				}
 				else
@@ -339,13 +339,13 @@ namespace Calckit
 					operators.pop_back();
 					if(sign[sign.size()-1]) base[base.size()-1].opp();
 					sign.pop_back();
-					parenth_depth--;
+					--parenth_depth;
 					if(i<end-1 && _str[i+1]!=')' && _str[i+1]!='!')
 					{
 						work(base, sign, operators, parenth_depth, pri(_str[i+1]));
 						operators.push_back(_str[i+1]);
-						i++;
-						num_beg++;
+						++i;
+						++num_beg;
 					}
 				}
 			}

@@ -15,7 +15,7 @@ string to_string(int a)
 		c+=a%10+48;
 		a/=10;
 	}
-	for(int i=c.size()-1; i>=0; i--)
+	for(int i=c.size()-1; i>=0; --i)
 		b+=c[i];
 	if(b.size()==0) b="0";
 return b;
@@ -256,26 +256,26 @@ void buffer(string &w)
 				if(poz%width==0)
 				{
 					cout << KEY_UP;
-					for(int i=0; i<width; i++)
+					for(int i=0; i<width; ++i)
 					{
 						cout << KEY_RIGHT;
 					}
 				}
 				else cout << KEY_LEFT;
-				poz--;
+				--poz;
 				/******* END *******/
 				int r=poz;
-				for(; r<signed(name_base[qy].size()); r++)
+				for(; r<signed(name_base[qy].size()); ++r)
 					cout << name_base[qy][r];
-				r++;
+				++r;
 				cout << " ";
 				if(r%width==0) cout << "\033[E";
-				for(; r>poz; r--)
+				for(; r>poz; --r)
 				{
 					if(r%width==0)
 					{
 						cout << KEY_UP;
-						for(int i=0; i<width; i++)
+						for(int i=0; i<width; ++i)
 						{
 							cout << KEY_RIGHT;
 						}
@@ -290,17 +290,17 @@ void buffer(string &w)
 			{
 				name_base[qy].erase(poz,1);
 				int r=poz;
-				for(; r<signed(name_base[qy].size()); r++)
+				for(; r<signed(name_base[qy].size()); ++r)
 					cout << name_base[qy][r];
-				r++;
+				++r;
 				cout << " ";
 				if(r%width==0) cout << "\033[E";
-				for(; r>poz; r--)
+				for(; r>poz; --r)
 				{
 					if(r%width==0)
 					{
 						cout << KEY_UP;
-						for(int i=0; i<width; i++)
+						for(int i=0; i<width; ++i)
 						{
 							cout << KEY_RIGHT;
 						}
@@ -313,7 +313,7 @@ void buffer(string &w)
 		{
 			if(qy>0)
 			{
-				qy--;
+				--qy;
 				while(poz>0)
 				{
 					cout << " ";
@@ -321,7 +321,7 @@ void buffer(string &w)
 					{
 						cout << " \033[D";
 						cout << KEY_UP;
-						for(int i=0; i<width; i++)
+						for(int i=0; i<width; ++i)
 						{
 							cout << KEY_RIGHT;
 						}
@@ -330,13 +330,13 @@ void buffer(string &w)
 					if(poz%width==0)
 					{
 						cout << KEY_UP;
-						for(int i=0; i<width; i++)
+						for(int i=0; i<width; ++i)
 						{
 							cout << KEY_RIGHT;
 						}
 					}
 					else cout << KEY_LEFT;
-					poz--;
+					--poz;
 				}
 				poz=name_base[qy].size();
 				cout << name_base[qy];
@@ -347,7 +347,7 @@ void buffer(string &w)
 		{
 			if(qy<signed(name_base.size())-1)
 			{
-				qy++;
+				++qy;
 				while(poz>0)
 				{
 					cout << " ";
@@ -355,7 +355,7 @@ void buffer(string &w)
 					{
 						cout << " \033[D";
 						cout << KEY_UP;
-						for(int i=0; i<width; i++)
+						for(int i=0; i<width; ++i)
 						{
 							cout << KEY_RIGHT;
 						}
@@ -364,13 +364,13 @@ void buffer(string &w)
 					if(poz%width==0)
 					{
 						cout << KEY_UP;
-						for(int i=0; i<width; i++)
+						for(int i=0; i<width; ++i)
 						{
 							cout << KEY_RIGHT;
 						}
 					}
 					else cout << KEY_LEFT;
-					poz--;
+					--poz;
 				}
 				poz=name_base[qy].size();
 				cout << name_base[qy];
@@ -384,13 +384,13 @@ void buffer(string &w)
 				if(poz%width==0)
 				{
 					cout << KEY_UP;
-					for(int i=0; i<width; i++)
+					for(int i=0; i<width; ++i)
 					{
 						cout << KEY_RIGHT;
 					}
 				}
 				else cout << KEY_LEFT;
-				poz--;
+				--poz;
 			}
 		}
 		else if(k==KEY_RIGHT)
@@ -399,7 +399,7 @@ void buffer(string &w)
 			{
 				if(poz%width-width==-1) cout << "\033[E";
 				else cout << KEY_RIGHT;
-				poz++;
+				++poz;
 			}
 		}
 		else
@@ -412,15 +412,15 @@ void buffer(string &w)
 			}
 			int r=poz;
 			name_base[qy].insert(poz,k);
-			for(; r<signed(name_base[qy].size()); r++)
+			for(; r<signed(name_base[qy].size()); ++r)
 				cout << name_base[qy][r];
 			if(r%width==0) cout << " \033[D";
-			for(; r>signed(k.size())+poz; r--)
+			for(; r>signed(k.size())+poz; --r)
 			{
 				if(r%width==0)
 				{
 					cout << KEY_UP;
-					for(int i=0; i<width; i++)
+					for(int i=0; i<width; ++i)
 					{
 						cout << KEY_RIGHT;
 					}
@@ -436,7 +436,7 @@ void buffer(string &w)
 	{
 		if(poz%width-width==-1) cout << "\033[E";
 		else cout << KEY_RIGHT;
-		poz++;
+		++poz;
 	}
 	cout << endl;
 	if(qy<signed(name_base.size())-1) name_base.pop_back();
@@ -479,12 +479,12 @@ void convert(string &w)
 		else if(w[0]==' ')
 		{
 			while(k[beg]==' ' && beg<k.size())
-				beg++;
+				++beg;
 			if(beg<k.size()) w[0]=k[beg];
 			else w="";
-			beg++;
+			++beg;
 		}
-		for(unsigned int i=beg; i<k.size(); i++)
+		for(unsigned int i=beg; i<k.size(); ++i)
 		{
 			if(k[i]==' ') continue;
 			if(k[i]==',') k[i]='.';
@@ -503,7 +503,7 @@ bool identyfity(string &s)
 {
 	if(s.size()==0) return false;
 	string k;
-	for(int i=0; i<static_cast<int>(s.size()); i++)
+	for(int i=0; i<static_cast<int>(s.size()); ++i)
 	{
 		if(s[i]=='=') break;
 		else k+=s[i];
@@ -511,7 +511,7 @@ bool identyfity(string &s)
 	if(k.size()==s.size()) k="";
 	else
 	{
-		for(int i=0; i<static_cast<int>(k.size()); i++)
+		for(int i=0; i<static_cast<int>(k.size()); ++i)
 			if(var[static_cast<int>(s[i])] || s[i]=='.' || s[i]==',')
 			{
 				cout << "Wrong variable name!\n";
@@ -562,7 +562,7 @@ int main(int avg, char **arg)
 	_color=buff[4]-48;
 	bool arg1[]={true,true};
 	num Answer;
-	for(int i=1; i<avg; i++)
+	for(int i=1; i<avg; ++i)
 	{
 		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Dispaly Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files\n";return 0;}
 		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){cout << "Calc version 2.5.0\n";return 0;}

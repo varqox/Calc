@@ -4,7 +4,7 @@ namespace var_base
 {
 	ver::ver(): is(false)
 	{
-		for(short int i=0; i<256; i++)
+		for(short int i=0; i<256; ++i)
 			t[i]=0;
 	}
 	vector<ver> _v(1);
@@ -15,7 +15,7 @@ namespace var_base
 	{
 		ver x;
 		int k=0, sl=s.size();
-		for(int i=0; i<sl; i++)
+		for(int i=0; i<sl; ++i)
 		{
 			if(_v[k].t[static_cast<int>(s[i])]==0)
 			{
@@ -44,7 +44,7 @@ namespace var_base
 		int k=0, sl=s.size();
 		stack<int> grt;
 		grt.push(0);
-		for(int i=0; i<sl; i++)
+		for(int i=0; i<sl; ++i)
 		{
 			if(_v[k].t[static_cast<int>(s[i])]==0) return false;
 			else
@@ -57,8 +57,8 @@ namespace var_base
 		_v[k].is=false;
 		while(grt.size()>1)
 		{
-			sl--;
-			for(short int i=0; i<256; i++)
+			--sl;
+			for(short int i=0; i<256; ++i)
 				if(_v[k].t[i]!=0) return true;
 			grt.pop();
 			_free.push(k);
@@ -71,7 +71,7 @@ namespace var_base
 	bool read_var(const string& s, num &w)
 	{
 		int k=0, sl=s.size();
-		for(int i=0; i<sl; i++)
+		for(int i=0; i<sl; ++i)
 		{
 			if(_v[k].t[static_cast<int>(s[i])]==0) return false;
 			else k=_v[k].t[static_cast<int>(s[i])];
