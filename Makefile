@@ -26,7 +26,9 @@ Calckit.o: Calckit/*.cpp
 install:
 	mkdir -p /opt/Calc
 	cp Calc /opt/Calc
-	printf "" > /usr/bin/Calc
+	printf "sh -c 'cd /opt/Calc && /opt/Calc/./Calc' $$*" > /usr/bin/Calc
+	chmod 777 /opt/Calc
+	chmod 755 /usr/bin/Calc
 
 .PHONY: uninstall
 uninstall:

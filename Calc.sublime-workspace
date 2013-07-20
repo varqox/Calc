@@ -55,14 +55,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/media/kwazar/PATRIOT/Calc/Calc2.4/funkcje-d.cpp",
-			"settings":
-			{
-				"buffer_size": 8694,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -91,6 +83,13 @@
 	},
 	"file_history":
 	[
+		"/home/kwazar/trol/README.md",
+		"/home/kwazar/Calc/README.md",
+		"/home/kwazar/Calc/funkcje-v.cpp",
+		"/home/kwazar/Calc/funkcje-k.cpp",
+		"/home/kwazar/Calc/funkcje-d.cpp",
+		"/home/kwazar/Calc/main.cpp",
+		"/media/kwazar/PATRIOT/Calc/Calc2.4/funkcje-d.cpp",
 		"/home/kwazar/Calc/rest/gen.cpp",
 		"/home/kwazar/Calc/Numeric-lib/num.cpp",
 		"/home/kwazar/Calc/Variable-lib/var_base.hpp",
@@ -102,7 +101,6 @@
 		"/home/kwazar/Calc/rest/tests/Calc/44.in",
 		"/home/kwazar/Calc/Numeric-lib/lol.cpp",
 		"/home/kwazar/Calc/Numeric-lib/spr.cpp",
-		"/home/kwazar/Calc/funkcje-d.cpp",
 		"/home/kwazar/Calc/makefile-var",
 		"/home/kwazar/Calc/Main/spis.hpp",
 		"/home/kwazar/Calc/Numeric-lib/funkcje-d.cpp",
@@ -167,12 +165,8 @@
 		"/home/kwazar/src/codeblocks/Makefile.am",
 		"/home/kwazar/SFML/src/SFML/Audio/Makefile",
 		"/home/kwazar/SFML/CMakeLists.txt",
-		"/home/kwazar/Calc/README.md",
-		"/home/kwazar/Calc/funkcje-k.cpp",
 		"/home/kwazar/Calc/calckit/funkcje-k.cpp",
 		"/home/kwazar/Calc/spis.hpp",
-		"/home/kwazar/Calc/main.cpp",
-		"/home/kwazar/Calc/funkcje-v.cpp",
 		"/home/kwazar/Calc/var_base.cpp",
 		"/home/kwazar/Calc/var_base.hpp",
 		"/home/kwazar/Calc/.git/logs/HEAD",
@@ -210,6 +204,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"2.4.1",
 			"='^';",
 			"--",
 			"-",
@@ -309,42 +304,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/media/kwazar/PATRIOT/Calc/Calc2.4/funkcje-d.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8694,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 4845.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 34.0
 	},
 	"input":
 	{
