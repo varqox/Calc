@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+#rest
+*.sublime-project
+*.sublime-workspace
+Calc.cfg

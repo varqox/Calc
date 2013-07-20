@@ -41,7 +41,7 @@ void scol()
 {
 	fstream kalk_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".kalk_config.cfg", ios_base::out);
+	kalk_conf_file.open(".Calc.cfg", ios_base::out);
 	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	kalk_conf_file.close();
 	hide_file();
@@ -93,7 +93,7 @@ void settings()
 	cout << "\n----------------------------------------------\n";
 	fstream kalk_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".kalk_config.cfg", ios::out);
+	kalk_conf_file.open(".Calc.cfg", ios::out);
 	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	kalk_conf_file.close();
 	hide_file();
@@ -160,7 +160,7 @@ void settings()
 	cout << "\033[G\033[2K----------------------------------------------\n";
 	fstream kalk_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".kalk_config.cfg", ios_base::out);
+	kalk_conf_file.open(".Calc.cfg", ios_base::out);
 	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	kalk_conf_file.close();
 	hide_file();
@@ -538,7 +538,7 @@ return erro;
 int main(int avg, char **arg)
 {
 	fstream kalk_conf_file;
-	kalk_conf_file.open(".kalk_config.cfg", ios_base::in);
+	kalk_conf_file.open(".Calc.cfg", ios_base::in);
 	char buff[]={'0','0','1','1','1','\0'};
 	bool ey=false;
 	if(kalk_conf_file.good())
@@ -550,7 +550,7 @@ int main(int avg, char **arg)
 	if(ey || kalk_conf_file.gcount()<5)
 	{
 		if(!ey) nhide_file();
-		kalk_conf_file.open(".kalk_config.cfg", ios_base::out);
+		kalk_conf_file.open(".Calc.cfg", ios_base::out);
 		if(kalk_conf_file.good()) kalk_conf_file << "00111";
 		kalk_conf_file.close();
 		hide_file();
