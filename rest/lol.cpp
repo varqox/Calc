@@ -3075,4 +3075,3 @@ bool isnERR()
 	if(Error3){cout << "Factorial is only defined for natural numbers!\n";Error0=0;Error1=0;Error2=0;Error3=0;return 0;}
 return 1;
 }
-

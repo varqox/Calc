@@ -1,30 +1,46 @@
-CPP=g++
-ARCHITECTURE=64
-OBJ=obj/var_base_$(ARCHITECTURE).o obj/main_$(ARCHITECTURE).o obj/funkcje-v_$(ARCHITECTURE).o obj/funkcje-k_$(ARCHITECTURE).o obj/funkcje-d_$(ARCHITECTURE).o
-CXXFLAGS=-s -O3 -Wall -m$(ARCHITECTURE)
-TARG=Calc$(ARCHITECTURE)
-header1=spis.hpp
-header2=var_base.hpp
+include makefile-var
+OBJECTS = Main.o Variable-lib.o Numeric-lib.o Calckit.o
+MFLAGS += --no-print-directory
 
-all: obj $(TARG)
+all: Calc
 
-obj:
-	mkdir -p obj/
+Calc: $(OBJECTS)
+	@echo "\033[01;31mLinking execute Calc\033[00m"
+	@$(CXX) $^ $(LDFLAGS) -o $@
+	@echo "\033[01;34mBuild target Calc\033[00m"
 
-$(TARG): $(OBJ)
-	$(CPP) $(OBJ) -o $(TARG) $(CXXFLAGS)
+Main.o: Main/*.cpp
+	@make $(MFLAGS) -C Main
+	@echo "\033[01;34mBuild target Main\033[00m"
+Variable-lib.o: Variable-lib/*.cpp
+	@make $(MFLAGS) -C Variable-lib
+	@echo "\033[01;34mBuild target Variable-lib\033[00m"
+Numeric-lib.o: Numeric-lib/*.cpp
+	@make $(MFLAGS) -C Numeric-lib
+	@echo "\033[01;34mBuild target Numeric-lib\033[00m"
+Calckit.o: Calckit/*.cpp
+	@make $(MFLAGS) -C Calckit
+	@echo "\033[01;34mBuild target Calckit\033[00m"
 
-obj/var_base_$(ARCHITECTURE).o: var_base.cpp $(header1) $(header2)
-	$(CPP) -c var_base.cpp -o obj/var_base_$(ARCHITECTURE).o $(CXXFLAGS)
+.PHONY: install
+install:
+	mkdir -p /opt/Calc
+	cp Calc /opt/Calc
+	printf "" > /usr/bin/Calc
 
-obj/main_$(ARCHITECTURE).o: main.cpp $(header1) $(header2)
-	$(CPP) -c main.cpp -o obj/main_$(ARCHITECTURE).o $(CXXFLAGS)
+.PHONY: uninstall
+uninstall:
+	rm -r -f /opt/Calc /usr/bin/Calc
 
-obj/funkcje-v_$(ARCHITECTURE).o: funkcje-v.cpp $(header1)
-	$(CPP) -c funkcje-v.cpp -o obj/funkcje-v_$(ARCHITECTURE).o $(CXXFLAGS)
+.PHONY: clean
+clean:
+	@echo "\033[01;33mCleaning root directory...\033[00m"
+	@$(RM) $(OBJECTS)
+	@make $(MFLAGS) -C Main clean
+	@make $(MFLAGS) -C Variable-lib clean
+	@make $(MFLAGS) -C Numeric-lib clean
+	@make $(MFLAGS) -C Calckit clean
 
-obj/funkcje-k_$(ARCHITECTURE).o: funkcje-k.cpp $(header1) $(header2)
-	$(CPP) -c funkcje-k.cpp -o obj/funkcje-k_$(ARCHITECTURE).o $(CXXFLAGS)
-
-obj/funkcje-d_$(ARCHITECTURE).o: funkcje-d.cpp $(header1)
-	$(CPP) -c funkcje-d.cpp -o obj/funkcje-d_$(ARCHITECTURE).o $(CXXFLAGS)
+.PHONY: clean-all
+clean-all: clean
+	@$(RM) Calc

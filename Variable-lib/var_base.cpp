@@ -4,18 +4,18 @@ namespace var_base
 {
 	ver::ver(): is(false)
 	{
-		for(short int i=0; i<256; i++)
+		for(short int i=0; i<256; ++i)
 			t[i]=0;
 	}
 	vector<ver> _v(1);
 	queue<int> _free;
 	bool is_there;
 
-	void add_var(string s, dn w)
+	void add_var(const string& s, num w)
 	{
 		ver x;
 		int k=0, sl=s.size();
-		for(int i=0; i<sl; i++)
+		for(int i=0; i<sl; ++i)
 		{
 			if(_v[k].t[static_cast<int>(s[i])]==0)
 			{
@@ -36,52 +36,48 @@ namespace var_base
 			else k=_v[k].t[static_cast<int>(s[i])];
 		}
 		_v[k].is=true;
-		vector<int>().swap(_v[k].w.l);
-		vector<int>().swap(_v[k].w.m);
-		_v[k].w.l.swap(w.l);
-		_v[k].w.m.swap(w.m);
-		_v[k].w.z=w.z;
+		_v[k].w.swap(w);
 	}
 
-	bool remove_var(string s)
+	bool remove_var(const string& s)
 	{
 		int k=0, sl=s.size();
 		stack<int> grt;
 		grt.push(0);
-		for(int i=0; i<sl; i++)
+		for(int i=0; i<sl; ++i)
 		{
-			if(_v[k].t[static_cast<int>(s[i])]==0) return 0;
+			if(_v[k].t[static_cast<int>(s[i])]==0) return false;
 			else
 			{
 				k=_v[k].t[static_cast<int>(s[i])];
 				grt.push(k);
 			}
 		}
-		if(!_v[k].is) return 0;
+		if(!_v[k].is) return false;
 		_v[k].is=false;
 		while(grt.size()>1)
 		{
-			sl--;
-			for(short int i=0; i<256; i++)
-				if(_v[k].t[i]!=0) return 1;
+			--sl;
+			for(short int i=0; i<256; ++i)
+				if(_v[k].t[i]!=0) return true;
 			grt.pop();
 			_free.push(k);
 			k=grt.top();
 			_v[k].t[static_cast<int>(s[sl])]=0;
 		}
-	return 1;
+	return true;
 	}
 
-	bool read_var(string s, dn &w)
+	bool read_var(const string& s, num &w)
 	{
 		int k=0, sl=s.size();
-		for(int i=0; i<sl; i++)
+		for(int i=0; i<sl; ++i)
 		{
-			if(_v[k].t[static_cast<int>(s[i])]==0) return 0;
+			if(_v[k].t[static_cast<int>(s[i])]==0) return false;
 			else k=_v[k].t[static_cast<int>(s[i])];
 		}
-		if(!_v[k].is) return 0;
+		if(!_v[k].is) return false;
 		w=_v[k].w;
-	return 1;
+	return true;
 	}
 }
