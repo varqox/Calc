@@ -55,14 +55,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 1226,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -91,6 +83,25 @@
 	},
 	"file_history":
 	[
+		"/home/kwazar/unlint/testing/gen.cpp",
+		"/home/kwazar/unlint/testing/trol.cpp",
+		"/home/kwazar/unlint/unlint.hpp",
+		"/home/kwazar/unlint/unlint.cpp",
+		"/home/kwazar/unlint/testing/tests/unlint/26.in",
+		"/home/kwazar/unlint/testing/test.cpp",
+		"/home/kwazar/Calc/Main/main.cpp",
+		"/home/kwazar/Calc/Numeric-lib/num.cpp",
+		"/home/kwazar/Calc/rest/trol.cpp",
+		"/home/kwazar/Calc/lol.txt",
+		"/home/kwazar/src/update-kdevelop",
+		"/home/kwazar/src/kdevelop/languages/cpp/tests/test_cppfiles.cpp",
+		"/home/kwazar/src/kdevelop/INSTALL",
+		"/home/kwazar/src/kdevelop/build/languages/cpp/tests/CMakeFiles/cppfilestest_automoc.dir/depend.make.tmp",
+		"/media/kwazar/Dysk 215GB/Programs/Dev-Cpp/MinGW64/bin/Calc/makefile-var",
+		"/media/kwazar/Dysk 215GB/Programs/Dev-Cpp/MinGW64/bin/Calc/Makefile",
+		"/home/kwazar/Calc/Makefile",
+		"/home/kwazar/Calc/.gitignore",
+		"/home/kwazar/Calc/Main/spis.hpp",
 		"/home/kwazar/trol/README.md",
 		"/home/kwazar/Calc/README.md",
 		"/home/kwazar/Calc/funkcje-v.cpp",
@@ -99,10 +110,8 @@
 		"/home/kwazar/Calc/main.cpp",
 		"/media/kwazar/PATRIOT/Calc/Calc2.4/funkcje-d.cpp",
 		"/home/kwazar/Calc/rest/gen.cpp",
-		"/home/kwazar/Calc/Numeric-lib/num.cpp",
 		"/home/kwazar/Calc/Variable-lib/var_base.hpp",
 		"/home/kwazar/Calc/Variable-lib/var_base.cpp",
-		"/home/kwazar/Calc/Main/main.cpp",
 		"/home/kwazar/Calc/Calckit/calckit.cpp",
 		"/home/kwazar/Calc/rest/tests/Calc/480.in",
 		"/home/kwazar/Calc/rest/tests/Calc/44.out",
@@ -110,17 +119,13 @@
 		"/home/kwazar/Calc/Numeric-lib/lol.cpp",
 		"/home/kwazar/Calc/Numeric-lib/spr.cpp",
 		"/home/kwazar/Calc/makefile-var",
-		"/home/kwazar/Calc/Main/spis.hpp",
 		"/home/kwazar/Calc/Numeric-lib/funkcje-d.cpp",
-		"/home/kwazar/Calc/Makefile",
 		"/home/kwazar/Calc/Numeric-lib/gen.cpp",
 		"/home/kwazar/Calc/Numeric-lib/num.hpp",
 		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/8.out",
 		"/home/kwazar/Calc/Numeric-lib/tests/num-lib/8.in",
 		"/home/kwazar/Calc2.4/spis.hpp",
-		"/home/kwazar/unlint/unlint.cpp",
 		"/home/kwazar/Calc/Numeric-lib/unlint.cpp",
-		"/home/kwazar/unlint/unlint.hpp",
 		"/home/kwazar/Calc/Numeric-lib/unlint.hpp",
 		"/home/kwazar/Calc/Numeric-lib/Makefile",
 		"/home/kwazar/Calc/Main/Makefile",
@@ -180,7 +185,6 @@
 		"/home/kwazar/Calc/.git/logs/HEAD",
 		"/usr/bin/kdevelop",
 		"/home/kwazar/src/reinstall-kdevelop",
-		"/home/kwazar/src/update-kdevelop",
 		"/home/kwazar/.kde/share/apps/kdevelop/sessions/{d886f093-6801-4ab6-8486-8cd32ecd45a6}/lock",
 		"/home/kwazar/lol",
 		"/home/kwazar/Calc2.4/obj/Linux/32bit/funkcje-k.rpo",
@@ -198,7 +202,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 84.0
 	},
 	"find_in_files":
 	{
@@ -212,6 +216,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n				lli inter1=a[bl+iws-1], inter2=b[bl-1];\n				if(al-iws>bl) inter1+=static_cast<lli>(BS2)*a[bl+iws];\n				int down=std::max(1LL,inter1/(inter2+1)), up=std::min(BS2-1,(inter1+1)/inter2), mean;",
+			"mod",
+			"\n",
+			"\\n",
+			"2.5.",
+			"2.5.0",
+			".kalk_config.cfg",
 			"2.4.1",
 			"='^';",
 			"--",
@@ -312,42 +323,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "Makefile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1226,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								861,
-								861
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Makefile/Makefile.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 255.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 34.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -383,7 +366,7 @@
 	"project": "Calc.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":

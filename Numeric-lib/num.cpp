@@ -18,7 +18,7 @@ namespace errors
 		if(no_integer_modulo)
 			cout << "Modulus division is only defined for integers!\n";
 		if(no_integer_power)
-			cout << "In this version (2.5.0) power is only defined for integers!\n";
+			cout << "In this version (2.6.0) power is only defined for integers!\n";
 		if(no_integer_factorial)
 			cout << "Factorial is only defined for natural numbers!\n";
 		division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
@@ -428,7 +428,9 @@ namespace numeric_lib
 			}
 			if(is_grader)
 			{
-				int down=1, up=BS2-1, mean;
+				lli inter1=a[bl+iws-1], inter2=b[bl-1];
+				if(al-iws>bl) inter1+=static_cast<lli>(BS2)*a[bl+iws];
+				int down=std::max(1LL,inter1/(inter2+1)), up=std::min(BS2-1,(inter1+1)/inter2), mean;
 				while(down<up)
 				{
 					mean=1+((down+up)>>1);
@@ -466,7 +468,7 @@ namespace numeric_lib
 					g.resize(bl);
 					int gl=bl;
 					lli tmp, add=0;
-					for (int i=0; i<gl; ++i)
+					for(int i=0; i<gl; ++i)
 					{
 						tmp=static_cast<lli>(b[i])*down+add;
 						add=tmp/BS2;
@@ -542,7 +544,9 @@ namespace numeric_lib
 			}
 			if(is_grader)
 			{
-				int down=1, up=BS2-1, mean;
+				lli inter1=a[bl+iws-1], inter2=b[bl-1];
+				if(al-iws>bl) inter1+=static_cast<lli>(BS2)*a[bl+iws];
+				int down=std::max(1LL,inter1/(inter2+1)), up=std::min(BS2-1,(inter1+1)/inter2), mean;
 				while(down<up)
 				{
 					mean=1+((down+up)>>1);
@@ -551,7 +555,7 @@ namespace numeric_lib
 						g.resize(bl);
 						int gl=bl;
 						lli tmp, add=0;
-						for (int i=0; i<gl; ++i)
+						for(int i=0; i<gl; ++i)
 						{
 							tmp=static_cast<lli>(b[i])*mean+add;
 							add=tmp/BS2;
