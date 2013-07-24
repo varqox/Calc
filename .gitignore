@@ -15,4 +15,4 @@
 #rest
 *.sublime-project
 *.sublime-workspace
-Calc.cfg
+.Calc.cfg
