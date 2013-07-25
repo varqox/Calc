@@ -26,7 +26,7 @@ Calckit.o: Calckit/*.cpp
 install:
 	mkdir -p /opt/Calc
 	cp Calc /opt/Calc
-	printf "sh -c 'cd /opt/Calc && /opt/Calc/./Calc' $$*" > /usr/bin/Calc
+	printf "#!/bin/sh\n(cd /opt/Calc && ./Calc $$*)" > /usr/bin/Calc
 	chmod 777 /opt/Calc
 	chmod 755 /usr/bin/Calc
 
