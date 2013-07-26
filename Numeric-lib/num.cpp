@@ -428,20 +428,22 @@ namespace numeric_lib
 			}
 			if(is_grader)
 			{
-				lli inter1=a[bl+iws-1], inter2=b[bl-1];
-				if(al-iws>bl) inter1+=static_cast<lli>(BS2)*a[bl+iws];
-				int down=std::max(1LL,inter1/(inter2+1)), up=std::min(BS2-1,(inter1+1)/inter2), mean;
-				while(down<up)
+				lli inter;
+				int down, up=0;
+				while(is_grader)
 				{
-					mean=1+((down+up)>>1);
-					//g=b*mean;
+					inter=a[bl+iws-1];
+					if(al-iws>bl) inter+=static_cast<lli>(BS2)*a[bl+iws];
+					down=std::max(1LL,inter/(b[bl-1]+1));
+					up+=down;
+					//g=b*down;
 					{
 						g.resize(bl);
 						int gl=bl;
 						lli tmp, add=0;
 						for (int i=0; i<gl; ++i)
 						{
-							tmp=static_cast<lli>(b[i])*mean+add;
+							tmp=static_cast<lli>(b[i])*down+add;
 							add=tmp/BS2;
 							g[i]=tmp-add*BS2;
 						}
@@ -449,55 +451,38 @@ namespace numeric_lib
 						old_kas0(g);
 					}
 					int gl=g.size();
-					if(al-iws<gl) is_grader=true;
-					else if(al-iws>gl) is_grader=false;
-					else
-					{
-						int i=gl-1;
-						while(i>=0 && a[i+iws]==g[i])
-							--i;
-						if(i<0) is_grader=false;
-						else if(g[i]>a[i+iws]) is_grader=true;
-						else is_grader=false;
-					}
-					if(is_grader) up=--mean;
-					else down=mean;
-				}
-				//g=b*down;
-				{
-					g.resize(bl);
-					int gl=bl;
-					lli tmp, add=0;
+					bool add=false;
 					for(int i=0; i<gl; ++i)
 					{
-						tmp=static_cast<lli>(b[i])*down+add;
-						add=tmp/BS2;
-						g[i]=tmp-add*BS2;
+						a[i+iws]-=g[i]+add;
+						if(a[i+iws]<0)
+						{
+							a[i+iws]+=BS2;
+							add=true;
+						}
+						else add=false;
 					}
-					if(add>0) g.push_back(add);
-					old_kas0(g);
-				}
-				int gl=g.size();
-				bool add=false;
-				for(int i=0; i<gl; ++i)
-				{
-					a[i+iws]-=g[i]+add;
-					if(a[i+iws]<0)
+					for(int i=gl+iws; i<al; ++i)
 					{
-						a[i+iws]+=BS2;
-						add=true;
+						--a[i];
+						if(a[i]<0) a[i]+=BS2;
+						else break;
 					}
-					else add=false;
+					old_kas0(a);
+					al=a.size();
+					//Is a>b?
+					if(al-iws<bl) is_grader=false;
+					else if(al-iws>bl) is_grader=true;
+					else
+					{
+						int i=bl-1;
+						while(i>=0 && a[i+iws]==b[i])
+							--i;
+						if(i<0 || a[i+iws]>b[i]) is_grader=true;
+						else is_grader=false;
+					}
 				}
-				for(int i=gl+iws; i<al; ++i)
-				{
-					--a[i];
-					if(a[i]<0) a[i]+=BS2;
-					else break;
-				}
-				old_kas0(a);
-				al=a.size();
-				w[iws]=down;
+				w[iws]=up;
 			}
 			--iws;
 		}
@@ -544,20 +529,21 @@ namespace numeric_lib
 			}
 			if(is_grader)
 			{
-				lli inter1=a[bl+iws-1], inter2=b[bl-1];
-				if(al-iws>bl) inter1+=static_cast<lli>(BS2)*a[bl+iws];
-				int down=std::max(1LL,inter1/(inter2+1)), up=std::min(BS2-1,(inter1+1)/inter2), mean;
-				while(down<up)
+				lli inter;
+				int down;
+				while(is_grader)
 				{
-					mean=1+((down+up)>>1);
-					//g=b*mean;
+					inter=a[bl+iws-1];
+					if(al-iws>bl) inter+=static_cast<lli>(BS2)*a[bl+iws];
+					down=std::max(1LL,inter/(b[bl-1]+1));
+					//g=b*down;
 					{
 						g.resize(bl);
 						int gl=bl;
 						lli tmp, add=0;
-						for(int i=0; i<gl; ++i)
+						for (int i=0; i<gl; ++i)
 						{
-							tmp=static_cast<lli>(b[i])*mean+add;
+							tmp=static_cast<lli>(b[i])*down+add;
 							add=tmp/BS2;
 							g[i]=tmp-add*BS2;
 						}
@@ -565,54 +551,37 @@ namespace numeric_lib
 						old_kas0(g);
 					}
 					int gl=g.size();
-					if(al-iws<gl) is_grader=true;
-					else if(al-iws>gl) is_grader=false;
+					bool add=false;
+					for(int i=0; i<gl; ++i)
+					{
+						a[i+iws]-=g[i]+add;
+						if(a[i+iws]<0)
+						{
+							a[i+iws]+=BS2;
+							add=true;
+						}
+						else add=false;
+					}
+					for(int i=gl+iws; i<al; ++i)
+					{
+						--a[i];
+						if(a[i]<0) a[i]+=BS2;
+						else break;
+					}
+					old_kas0(a);
+					al=a.size();
+					//Is a>b?
+					if(al-iws<bl) is_grader=false;
+					else if(al-iws>bl) is_grader=true;
 					else
 					{
-						int i=gl-1;
-						while(i>=0 && a[i+iws]==g[i])
+						int i=bl-1;
+						while(i>=0 && a[i+iws]==b[i])
 							--i;
-						if(i<0) is_grader=false;
-						else if(g[i]>a[i+iws]) is_grader=true;
+						if(i<0 || a[i+iws]>b[i]) is_grader=true;
 						else is_grader=false;
 					}
-					if(is_grader) up=--mean;
-					else down=mean;
 				}
-				//g=b*down;
-				{
-					g.resize(bl);
-					int gl=bl;
-					lli tmp, add=0;
-					for (int i=0; i<gl; ++i)
-					{
-						tmp=static_cast<lli>(b[i])*down+add;
-						add=tmp/BS2;
-						g[i]=tmp-add*BS2;
-					}
-					if(add>0) g.push_back(add);
-					old_kas0(g);
-				}
-				int gl=g.size();
-				bool add=false;
-				for(int i=0; i<gl; ++i)
-				{
-					a[i+iws]-=g[i]+add;
-					if(a[i+iws]<0)
-					{
-						a[i+iws]+=BS2;
-						add=true;
-					}
-					else add=false;
-				}
-				for(int i=gl+iws; i<al; ++i)
-				{
-					--a[i];
-					if(a[i]<0) a[i]+=BS2;
-					else break;
-				}
-				old_kas0(a);
-				al=a.size();
 			}
 			--iws;
 		}
@@ -1125,6 +1094,11 @@ namespace numeric_lib
 	num& num::pow(const num& _n)
 	{
 		if(*_n.m!=1) errors::no_integer_power=true;
+		else if(*this->l==0 && (!_n.z || *_n.l==0))
+		{
+			errors::division_by_0=true;
+			return *this;
+		}
 		if(*_n.l==0)
 		{
 			this->operator=(1);
