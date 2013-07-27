@@ -24,10 +24,6 @@ using namespace std;
 #define color_red SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY)
 #define color_green SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY)
 #define color_default SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED)
-inline void hide_file()
-{system("attrib +h .Calc.cfg");}
-inline void nhide_file()
-{system("attrib -h .Calc.cfg");}
 
 #else
 
@@ -36,10 +32,6 @@ inline void nhide_file()
 #define color_red cout << "\033[01;31m"
 #define color_green cout << "\033[01;32m"
 #define color_default cout << "\033[00m"
-inline void hide_file()
-{;}
-inline void nhide_file()
-{;}
 
 //main.cpp
 int getch();

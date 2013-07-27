@@ -5,6 +5,7 @@
 #include <fstream>
 
 bool _color=true, output[]={false,false,true,true};
+string directory;
 
 string to_string(int a)
 {
@@ -31,24 +32,13 @@ void mcol(color c)
 	else if(c==_default) color_default;
 }
 
-void help()
-{
-	mcol(_default);
-	cout << "----------------------------------------------\nCommand list:\ncol-off - switch off synax highlighting\ncol-on - switch on synax highlighting\nexit - quit\nhelp - this\nsettings - outputing settings\n----------------------------------------------\n";
-}
-
-void scol()
-{
-	fstream kalk_conf_file;
-	nhide_file();
-	kalk_conf_file.open(".Calc.cfg", ios_base::out);
-	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
-	kalk_conf_file.close();
-	hide_file();
-}
-
 //___________________________________________________
 #ifdef WIN32
+
+inline void hide_file()
+{system(("attrib +h "+directory+".Calc.cfg").c_str());}
+inline void nhide_file()
+{system(("attrib -h "+directory+".Calc.cfg").c_str());}
 
 #include <conio.h>
 
@@ -91,11 +81,11 @@ void settings()
 		z=getch();
 	}
 	cout << "\n----------------------------------------------\n";
-	fstream kalk_conf_file;
+	fstream Calc_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".Calc.cfg", ios::out);
-	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
-	kalk_conf_file.close();
+	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios::out);
+	if(Calc_conf_file.good()) Calc_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
+	Calc_conf_file.close();
 	hide_file();
 }
 
@@ -111,6 +101,11 @@ void buffer(string &w)
 }
 
 #else
+
+inline void hide_file()
+{;}
+inline void nhide_file()
+{;}
 
 #include <sys/ioctl.h>
 #include <termios.h>
@@ -158,11 +153,11 @@ void settings()
 		z=getch();
 	}
 	cout << "\033[G\033[2K----------------------------------------------\n";
-	fstream kalk_conf_file;
+	fstream Calc_conf_file;
 	nhide_file();
-	kalk_conf_file.open(".Calc.cfg", ios_base::out);
-	if(kalk_conf_file.good()) kalk_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
-	kalk_conf_file.close();
+	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::out);
+	if(Calc_conf_file.good()) Calc_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
+	Calc_conf_file.close();
 	hide_file();
 }
 
@@ -448,6 +443,22 @@ void buffer(string &w)
 #endif
 //___________________________________________________
 
+void help()
+{
+	mcol(_default);
+	cout << "----------------------------------------------\nCommand list:\ncol-off - switch off synax highlighting\ncol-on - switch on synax highlighting\nexit - quit\nhelp - this\nsettings - outputing settings\n----------------------------------------------\n";
+}
+
+void scol()
+{
+	fstream Calc_conf_file;
+	nhide_file();
+	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::out);
+	if(Calc_conf_file.good()) Calc_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
+	Calc_conf_file.close();
+	hide_file();
+}
+
 const bool zn[]={0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -537,22 +548,33 @@ return erro;
 
 int main(int avg, char **arg)
 {
-	fstream kalk_conf_file;
-	kalk_conf_file.open(".Calc.cfg", ios_base::in);
+	directory=arg[0];
+	{
+		int y=0;
+		for(int i=directory.size()-1; i>=0; --i, ++y)
+		#ifdef WIN32
+			if(directory[i]=='/' || directory[i]=='\\') break;
+		#else
+			if(directory[i]=='/') break;
+		#endif
+		directory.erase(directory.size()-y,y);
+	}
+	fstream Calc_conf_file;
+	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::in);
 	char buff[]={'0','0','1','1','1','\0'};
 	bool ey=false;
-	if(kalk_conf_file.good())
+	if(Calc_conf_file.good())
 	{
-		kalk_conf_file.read(buff, 5);
-		kalk_conf_file.close();
+		Calc_conf_file.read(buff, 5);
+		Calc_conf_file.close();
 	}
 	else ey=true;
-	if(ey || kalk_conf_file.gcount()<5)
+	if(ey || Calc_conf_file.gcount()<5)
 	{
 		if(!ey) nhide_file();
-		kalk_conf_file.open(".Calc.cfg", ios_base::out);
-		if(kalk_conf_file.good()) kalk_conf_file << "00111";
-		kalk_conf_file.close();
+		Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::out);
+		if(Calc_conf_file.good()) Calc_conf_file << "00111";
+		Calc_conf_file.close();
 		hide_file();
 	}
 	output[0]=buff[0]-48;
@@ -575,7 +597,7 @@ int main(int avg, char **arg)
 			while(znak!=EOF)
 			{
 				string s;
-				while(znak!=10)
+				while(znak!=10 && znak!=EOF)
 				{
 					if(znak!=32)
 					{

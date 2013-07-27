@@ -441,7 +441,7 @@ namespace numeric_lib
 						g.resize(bl);
 						int gl=bl;
 						lli tmp, add=0;
-						for (int i=0; i<gl; ++i)
+						for(int i=0; i<gl; ++i)
 						{
 							tmp=static_cast<lli>(b[i])*down+add;
 							add=tmp/BS2;
@@ -541,7 +541,7 @@ namespace numeric_lib
 						g.resize(bl);
 						int gl=bl;
 						lli tmp, add=0;
-						for (int i=0; i<gl; ++i)
+						for(int i=0; i<gl; ++i)
 						{
 							tmp=static_cast<lli>(b[i])*down+add;
 							add=tmp/BS2;
