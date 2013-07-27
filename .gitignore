@@ -13,6 +13,8 @@
 *.a
 
 #rest
-*.sublime-project
+*.in
+*.out
 *.sublime-workspace
+*.sublime-project
 .Calc.cfg
