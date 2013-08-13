@@ -1093,7 +1093,11 @@ namespace numeric_lib
 
 	num& num::pow(const num& _n)
 	{
-		if(*_n.m!=1) errors::no_integer_power=true;
+		if(*_n.m!=1)
+		{
+			errors::no_integer_power=true;
+			return *this;
+		}
 		else if(*this->l==0 && (!_n.z || *_n.l==0))
 		{
 			errors::division_by_0=true;
