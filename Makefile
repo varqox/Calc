@@ -1,10 +1,12 @@
-include makefile-var
-OBJECTS = Main.o Variable-lib.o Numeric-lib.o Calckit.o
+include var.mk
+OBJS = Main.o Variable-lib.o Numeric-lib.o Calckit.o
 MFLAGS += --no-print-directory
+
+.PHONY: all install uninstall clean clean-all
 
 all: Calc
 
-Calc: $(OBJECTS)
+Calc: $(OBJS)
 	@echo "\033[01;31mLinking execute Calc\033[00m"
 	@$(CXX) $^ $(LDFLAGS) -o $@
 	@echo "\033[01;34mBuild target Calc\033[00m"
@@ -22,7 +24,6 @@ Calckit.o: Calckit/*.cpp
 	@make $(MFLAGS) -C Calckit
 	@echo "\033[01;34mBuild target Calckit\033[00m"
 
-.PHONY: install
 install:
 	mkdir -p /opt/Calc
 	cp Calc /opt/Calc
@@ -30,19 +31,16 @@ install:
 	chmod 777 /opt/Calc
 	chmod 755 /usr/bin/Calc
 
-.PHONY: uninstall
 uninstall:
 	rm -r -f /opt/Calc /usr/bin/Calc
 
-.PHONY: clean
 clean:
 	@echo "\033[01;33mCleaning root directory...\033[00m"
-	@$(RM) $(OBJECTS)
+	@$(RM) $(OBJS)
 	@make $(MFLAGS) -C Main clean
 	@make $(MFLAGS) -C Variable-lib clean
 	@make $(MFLAGS) -C Numeric-lib clean
 	@make $(MFLAGS) -C Calckit clean
 
-.PHONY: clean-all
 clean-all: clean
 	@$(RM) Calc
