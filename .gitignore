@@ -12,10 +12,12 @@
 *.la
 *.a
 
-#rest
-*.in
-*.out
+# Program
+Calc
+.Calc.cfg
 *.sublime-workspace
 *.sublime-project
-.Calc.cfg
-Calc
+
+# Testing
+*.in
+*.out
