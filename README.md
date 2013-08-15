@@ -3,4 +3,4 @@ Calc
 
 Calculator that using unlimited numbers
 
-Version: 2.7.0 developed
+Version: 2.6.1
