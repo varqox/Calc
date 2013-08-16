@@ -1,7 +1,6 @@
-#ifndef var_base_hpp
-#define var_base_hpp
+#ifndef __Var_base_hpp
+#define __Var_base_hpp
 
-#include "../Main/spis.hpp"
 #include "../Numeric-lib/num.hpp"
 #include <vector>
 #include <queue>
@@ -28,4 +27,4 @@ namespace var_base
 	bool read_var(const string&, num&);
 }
 
-#endif // var_base_hpp
+#endif // __Var_base_hpp

@@ -1,4 +1,4 @@
-include var.mk
+include settings.mk
 OBJS = Main.o Variable-lib.o Numeric-lib.o Calckit.o
 MFLAGS += --no-print-directory
 
@@ -11,16 +11,23 @@ Calc: $(OBJS)
 	@$(CXX) $^ $(LDFLAGS) -o $@
 	@echo "\033[01;34mBuild target Calc\033[00m"
 
-Main.o: Main/*.cpp
+include Main/relations.mk
+Main.o: Main/*.cpp $(Main-rel)
 	@make $(MFLAGS) -C Main
 	@echo "\033[01;34mBuild target Main\033[00m"
-Variable-lib.o: Variable-lib/*.cpp
+
+include Variable-lib/relations.mk
+Variable-lib.o: Variable-lib/*.cpp $(Variable-lib-rel)
 	@make $(MFLAGS) -C Variable-lib
 	@echo "\033[01;34mBuild target Variable-lib\033[00m"
-Numeric-lib.o: Numeric-lib/*.cpp
+
+include Numeric-lib/relations.mk
+Numeric-lib.o: Numeric-lib/*.cpp $(Numeric-lib-rel)
 	@make $(MFLAGS) -C Numeric-lib
 	@echo "\033[01;34mBuild target Numeric-lib\033[00m"
-Calckit.o: Calckit/*.cpp
+
+include Calckit/relations.mk
+Calckit.o: Calckit/*.cpp $(Calckit-rel)
 	@make $(MFLAGS) -C Calckit
 	@echo "\033[01;34mBuild target Calckit\033[00m"
 

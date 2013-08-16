@@ -1,5 +1,5 @@
-#ifndef __num_H
-#define __num_H
+#ifndef __Num_hpp
+#define __Num_hpp
 
 #include <bits/localefwd.h>
 #include <string>
@@ -73,4 +73,4 @@ namespace numeric_lib
 
 using namespace numeric_lib;
 
-#endif /* __num_H */
+#endif /* __Num_hpp */

@@ -1,4 +1,4 @@
-#include "../Main/spis.hpp"
+#include "../Main/main.hpp"
 #include "../Variable-lib/var_base.hpp"
 #include "../Numeric-lib/num.hpp"
 

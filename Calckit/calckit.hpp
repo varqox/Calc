@@ -1,5 +1,5 @@
-#ifndef calckit_hpp
-#define calckit_hpp
+#ifndef __Calckit_hpp
+#define __Calckit_hpp
 
 namespace Calckit
 {
@@ -10,4 +10,4 @@ namespace Calckit
 	bool core(const string&, int, int);
 }
 
-#endif // calckit_hpp
+#endif // __Calckit_hpp
