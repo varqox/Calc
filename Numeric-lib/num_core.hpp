@@ -33,6 +33,7 @@ namespace numeric_lib
 		nat& mult(const lli&, const std::vector<fmod>&);
 		void to_old_type(std::vector<int>&) const;
 		nat& from_old_type(std::vector<int>&);
+		class FFT;
 		nat& operator*=(const nat&);
 		nat& operator/=(const nat&);
 		nat& operator%=(const nat&);

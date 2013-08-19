@@ -2,6 +2,9 @@
 #include "num_core.hpp"
 #include <iostream>
 #include <stack>
+//for FFT
+#include <cmath>
+#include <complex>
 
 namespace numeric_lib
 {
@@ -280,10 +283,192 @@ namespace numeric_lib
 	return *this;
 	}
 
+	class num::nat::FFT
+	{
+	public:
+		static inline lli div_mod(lli &a, const lli& m)
+		{lli tmp=a;a/=m;return tmp-m*a;}
+		static const int FFT_BASE=10000;
+		typedef double D;
+		static std::complex<D> *w;
+		static int d;
+		 
+		static void omega(const int& n, bool t)
+		{
+			int to=n>>1;
+			if(t) 
+				for(int i=0; i<to; ++i)
+				{ 
+					w[i]=std::complex<D>(cos(2*M_PI*i/n),sin(2*M_PI*i/n));
+					w[i+to]=std::complex<D>(-w[i].real(),-w[i].imag());
+				}
+			else
+				for(int i=0; i<to; ++i)
+				{ 
+					w[i]=std::complex<D>(cos(2*M_PI*i/n),sin(-2*M_PI*i/n));
+					w[i+to]=std::complex<D>(-w[i].real(),-w[i].imag());
+				}
+		}
+
+		static void DFT(std::complex <D>* A, const int& size)
+		{
+			if(size==1) return;
+			int to=size>>1;
+			std::complex <D> *X = new std::complex <D> [to];
+			std::complex <D> *Y = new std::complex <D> [to];
+			for(int i=0, j=0; i<size; i+=2, j++)
+			{
+				X[j]=A[i];
+				Y[j]=A[i+1];
+			}
+			//delete[] A;
+			DFT(X, to);
+			DFT(Y, to);
+			//std::complex <D> *B = new std::complex <D> [size];
+			int pot=num::nat::FFT::d>>(31-__builtin_clz(size));
+			for(int i=0; i<to; ++i)
+			{
+				std::complex <D> q=w[i*pot]*Y[i];
+				A[i]=X[i]+q;
+				A[i+to]=X[i]-q;
+			}
+			delete[] X;
+			delete[] Y;
+		}
+		static void fft(nat& a, const nat& b)
+		{
+			std::complex <D> *l1, *l2;
+			int d1, d2, t1, t2, FFT_base=4;
+			t1=a.size();
+			d1=t1/FFT_base;
+			if(t1%FFT_base!=0) ++d1;
+			t2=b.size();
+			d2=t2/FFT_base;	
+			if(t2%FFT_base!=0) ++d2;
+			d=__builtin_popcount(d1+d2)==1 ? d1+d2:1<<(32-__builtin_clz(d1+d2));
+
+			l1 = new std::complex <D> [d];
+			l2 = new std::complex <D> [d];
+			w = new std::complex <D> [d];
+
+			for(int i=0; i<d; ++i)
+				l1[i]=l2[i]=std::complex <D> (0.0,0.0);
+			{
+				bool is_rest=false;
+				unsigned int i=0, j=0;
+				lli rest=0;
+				for(; i<a.w.size()-1; ++i, ++j)
+				{
+					lli k=a.w[i];
+					if(is_rest)
+					{
+						is_rest=false;
+						l1[j]=rest+100*div_mod(k, 100);
+						l1[++j]=div_mod(k, FFT_BASE);
+						l1[++j]=div_mod(k, FFT_BASE);
+						l1[++j]=div_mod(k, FFT_BASE);
+						l1[++j]=div_mod(k, FFT_BASE);
+					}
+					else
+					{
+						is_rest=true;
+						l1[j]=div_mod(k, FFT_BASE);
+						l1[++j]=div_mod(k, FFT_BASE);
+						l1[++j]=div_mod(k, FFT_BASE);
+						l1[++j]=div_mod(k, FFT_BASE);
+						rest=k;
+					}
+				}
+				lli k=*--a.w.end();
+				--j;
+				if(is_rest) l1[++j]=rest+100*div_mod(k, 100);
+				while(k>0)
+					l1[++j]=div_mod(k, FFT_BASE);
+			}
+			{
+				bool is_rest=false;
+				unsigned int i=0, j=0;
+				lli rest=0;
+				for(; i<b.w.size()-1; ++i, ++j)
+				{
+					lli k=b.w[i];
+					if(is_rest)
+					{
+						is_rest=false;
+						l2[j]=rest+100*div_mod(k, 100);
+						l2[++j]=div_mod(k, FFT_BASE);
+						l2[++j]=div_mod(k, FFT_BASE);
+						l2[++j]=div_mod(k, FFT_BASE);
+						l2[++j]=div_mod(k, FFT_BASE);
+					}
+					else
+					{
+						is_rest=true;
+						l2[j]=div_mod(k, FFT_BASE);
+						l2[++j]=div_mod(k, FFT_BASE);
+						l2[++j]=div_mod(k, FFT_BASE);
+						l2[++j]=div_mod(k, FFT_BASE);
+						rest=k;
+					}
+				}
+				lli k=*--b.w.end();
+				--j;
+				if(is_rest) l2[++j]=rest+100*div_mod(k, 100);
+				while(k>0)
+					l2[++j]=div_mod(k, FFT_BASE);
+			}
+			omega(d, true);
+			DFT(l1, d);
+			DFT(l2, d);
+			for(int i=0; i<d; ++i)
+				l1[i]*=l2[i];
+			delete[] l2;
+
+			omega(d, false);
+			DFT(l1,d);
+			delete[] w;
+
+			D s=1.0/d;
+			a.w.resize(d*2/9+1);
+			int j=0, idx=0;
+			lli add=0, pow[9]={1LL, 10000LL, 100000000LL, 1000000000000LL, 10000000000000000LL, 100LL, 1000000LL, 10000000000LL, 100000000000000LL}, unpow[9]={1000000000000000000LL, 100000000000000LL, 10000000000LL, 1000000LL, 100LL, 10000000000000000LL, 1000000000000LL, 100000000LL, 10000LL};
+			a.w[0]=0;
+			for(int i=0; i<d; ++i, ++idx)
+			{
+				if(idx==5) 
+				{
+					++j;
+					a.w[j]=add;
+					add=0;
+				}
+				if(idx==9)
+				{
+					++j;
+					a.w[j]=add;
+					idx=add=0;
+				}
+				lli k=round(l1[i].real()*s);
+				a.w[j]+=pow[idx]*div_mod(k,unpow[idx]);
+				while(a.w[j]>=1000000000000000000LL)
+				{
+					++add;
+					a.w[j]-=1000000000000000000LL;
+				}
+				add+=k;
+			}
+			a.kas0();
+			delete[] l1;
+		}
+	};
+
+	int num::nat::FFT::d;
+	std::complex<double> *num::nat::FFT::w;
+
 	num::nat& num::nat::operator*=(const nat& b)
 	{
 		if(b==1) return *this;
-		nat lol=0, _n;
+		FFT::fft(*this, b);
+		/*nat lol=0, _n;
 		std::vector<nat::fmod> t;
 		b.gen_mod(t);
 		for(unsigned int q=0; q<this->w.size(); ++q)
@@ -319,7 +504,7 @@ namespace numeric_lib
 			}
 		}
 		this->swap(lol);
-		this->kas0();
+		this->kas0();*/
 	return *this;
 	}
 
