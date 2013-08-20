@@ -462,7 +462,7 @@ namespace numeric_lib
 	};
 
 	int num::nat::FFT::d;
-	std::complex<double> *num::nat::FFT::w;
+	std::complex<num::nat::FFT::D> *num::nat::FFT::w;
 
 	num::nat& num::nat::operator*=(const nat& b)
 	{
