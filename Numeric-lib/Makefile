@@ -4,7 +4,7 @@ DIR = Numeric-lib
 .PHONY: clean
 
 ../$(DIR).o: num.o num_core.o
-	@echo "\033[00;32mLinking CXX object $(DIR).o\033[00m"
+	@echo "\033[01;31mLinking CXX object $(DIR).o\033[00m"
 	@$(CXX) $^ $(CXXFLAGS) -Wl,-r -nostdlib -o $@
 
 num.o: num.cpp num.hpp num_core.hpp
