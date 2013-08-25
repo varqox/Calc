@@ -445,7 +445,7 @@ namespace numeric_lib
 	{
 		if(*this->m!=1) errors::no_integer_factorial=true;
 		nat mx(1), i(2);
-		std::vector<nat> lst;
+		std::vector<nat> lst(1, nat(1));
 		this->l->swap(mx);
 		while(i<=mx)
 		{
