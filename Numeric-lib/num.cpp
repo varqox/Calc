@@ -21,7 +21,7 @@ namespace errors
 		if(no_integer_power)
 			cout << "In this version ("VERSION") power is only defined for integers!\n";
 		if(no_integer_factorial)
-			cout << "Factorial is only defined for natural numbers!\n";
+			cout << "Factorial is only defined for non-negative integers!\n";
 		division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
 	return !ret;
 	}
@@ -443,7 +443,7 @@ namespace numeric_lib
 
 	num& num::factorial()
 	{
-		if(*this->m!=1) errors::no_integer_factorial=true;
+		if(!this->z || *this->m!=1) errors::no_integer_factorial=true;
 		nat mx(1), i(2);
 		std::vector<nat> lst(1, nat(1));
 		this->l->swap(mx);
