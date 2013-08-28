@@ -52,6 +52,7 @@ bool identyfity(string &s);
 //numeric-lib: errors
 namespace errors
 {
+	extern bool is_any_error;
 	bool are_not_errors();
 }
 

@@ -120,7 +120,7 @@ namespace Calckit
 	return true;
 	}
 
-	int pri(char c)
+	inline int pri(char c)
 	{
 		if(c=='^') return 4;
 		if(c=='*' || c=='/' || c=='%') return 3;
@@ -129,10 +129,10 @@ namespace Calckit
 	return 0;
 	}
 
-	void work(vector<num> &base, vector<bool> &sign, vector<char> &operators, int &parenth_depth, char prior)
+	bool work(vector<num> &base, vector<bool> &sign, vector<char> &operators, int &parenth_depth, char prior)
 	{
 		int bs=base.size()-1;
-		if(prior==4 || bs<1) return;
+		if(prior==4 || bs<1) return true;
 		while(bs>=1 && pri(operators[bs-1+parenth_depth])>prior)
 		{
 			if(sign[bs+parenth_depth])
@@ -158,6 +158,7 @@ namespace Calckit
 					case '%': base[bs-1]%=base[bs];break;
 				}
 			}
+			if(errors::is_any_error) return false;
 			base.pop_back();
 			operators.pop_back();
 			sign.pop_back();
@@ -188,11 +189,13 @@ namespace Calckit
 					case '%': base[bs-1]%=base[bs];break;
 				}
 			}
+			if(errors::is_any_error) return false;
 			base.pop_back();
 			operators.pop_back();
 			sign.pop_back();
 			--bs;
 		}
+	return true;
 	}
 
 	string f_pos_to_str(int begin, int end, const string& _str)
@@ -239,6 +242,7 @@ namespace Calckit
 				}
 				num_beg=i+1;
 				base[base.size()-1].factorial();
+				if(errors::is_any_error) return false;
 			}
 			else if(_str[i]=='-')
 			{
@@ -270,7 +274,7 @@ namespace Calckit
 						base.push_back(num(_str, num_beg, i));
 					sign.push_back(minus);
 					minus=false;
-					work(base, sign, operators, parenth_depth, pri(_str[i]));
+					if(!work(base, sign, operators, parenth_depth, pri(_str[i]))) return false;
 					num_beg=i+1;
 					operators.push_back(_str[i]);
 				}
@@ -292,7 +296,7 @@ namespace Calckit
 						base.push_back(num(_str, num_beg, i));
 					sign.push_back(minus);
 					minus=false;
-					work(base, sign, operators, parenth_depth, pri(_str[i]));
+					if(!work(base, sign, operators, parenth_depth, pri(_str[i]))) return false;
 					num_beg=i+1;
 					operators.push_back(_str[i]);
 				}
@@ -335,14 +339,14 @@ namespace Calckit
 					}
 					minus=0;
 					num_beg=i+1;
-					work(base, sign, operators, parenth_depth, pri(_str[i]));
+					if(!work(base, sign, operators, parenth_depth, pri(_str[i]))) return false;
 					operators.pop_back();
 					if(sign[sign.size()-1]) base[base.size()-1].opp();
 					sign.pop_back();
 					--parenth_depth;
 					if(i<end-1 && _str[i+1]!=')' && _str[i+1]!='!')
 					{
-						work(base, sign, operators, parenth_depth, pri(_str[i+1]));
+						if(!work(base, sign, operators, parenth_depth, pri(_str[i+1]))) return false;
 						operators.push_back(_str[i+1]);
 						++i;
 						++num_beg;
@@ -373,7 +377,7 @@ namespace Calckit
 				sign.push_back(minus);
 			}
 		}
-		work(base, sign, operators, parenth_depth, pri('0'));
+		if(!work(base, sign, operators, parenth_depth, pri('0'))) return false;
 		if(sign[0]) base[0].opp();
 		var_base::add_var("A", base[0]);
 	return true;

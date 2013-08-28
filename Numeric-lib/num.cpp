@@ -7,13 +7,14 @@
 
 namespace errors
 {
-	bool division_by_0=false,
+	bool is_any_error=false,
+	division_by_0=false,
 	no_integer_modulo=false,
 	no_integer_power=false,
 	no_integer_factorial=false;
 	bool are_not_errors()
 	{
-		bool ret=division_by_0|no_integer_modulo|no_integer_power|no_integer_factorial;
+		bool ret=is_any_error;
 		if(division_by_0)
 			cout << "Cannot divide by zero!\n";
 		if(no_integer_modulo)
@@ -22,7 +23,7 @@ namespace errors
 			cout << "In this version ("VERSION") power is only defined for integers!\n";
 		if(no_integer_factorial)
 			cout << "Factorial is only defined for non-negative integers!\n";
-		division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
+		is_any_error=division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
 	return !ret;
 	}
 }
@@ -339,7 +340,11 @@ namespace numeric_lib
 
 	num num::operator/(const num& _n)
 	{
-		if(*_n.l==0) errors::division_by_0=true;
+		if(*_n.l==0)
+		{
+			errors::is_any_error=errors::division_by_0=true;
+			return num();
+		}
 		num k(*this);
 		if(k.z==_n.z) k.z=true;
 		else k.z=false;
@@ -352,7 +357,11 @@ namespace numeric_lib
 
 	num& num::operator/=(const num& _n)
 	{
-		if(*_n.l==0) errors::division_by_0=true;
+		if(*_n.l==0)
+		{
+			errors::is_any_error=errors::division_by_0=true;
+			return *this;
+		}
 		if(this->z==_n.z) this->z=true;
 		else this->z=false;
 		this->l->operator*=(*_n.m);
@@ -364,8 +373,16 @@ namespace numeric_lib
 
 	num num::operator%(const num& _n)
 	{
-		if(*_n.l==0) errors::division_by_0=true;
-		else if(*_n.m!=1 || *this->m!=1) errors::no_integer_modulo=true;
+		if(*_n.l==0)
+		{
+			errors::is_any_error=errors::division_by_0=true;
+			return num();
+		}
+		else if(*_n.m!=1 || *this->m!=1)
+		{
+			errors::is_any_error=errors::no_integer_modulo=true;
+			return num();
+		}
 		num k(*this);
 		k.l->operator%=(*_n.l);
 		if(!k.z && !(k.l->w.size()==1 && k.l->w[0]==0)) k+=(_n<0LL ? -_n:_n);
@@ -374,8 +391,16 @@ namespace numeric_lib
 
 	num& num::operator%=(const num& _n)
 	{
-		if(*_n.l==0) errors::division_by_0=true;
-		else if(*_n.m!=1 || *this->m!=1) errors::no_integer_modulo=true;
+		if(*_n.l==0)
+		{
+			errors::is_any_error=errors::division_by_0=true;
+			return *this;
+		}
+		else if(*_n.m!=1 || *this->m!=1)
+		{
+			errors::is_any_error=errors::no_integer_modulo=true;
+			return *this;
+		}
 		this->l->operator%=(*_n.l);
 		if(!this->z && !(this->l->w.size()==1 && this->l->w[0]==0)) this->operator+=(_n<0LL ? -_n:_n);
 	return *this;
@@ -416,12 +441,12 @@ namespace numeric_lib
 	{
 		if(*_n.m!=1)
 		{
-			errors::no_integer_power=true;
+			errors::is_any_error=errors::no_integer_power=true;
 			return *this;
 		}
 		else if(*this->l==0 && (!_n.z || *_n.l==0))
 		{
-			errors::division_by_0=true;
+			errors::is_any_error=errors::division_by_0=true;
 			return *this;
 		}
 		if(*_n.l==0)
@@ -443,7 +468,11 @@ namespace numeric_lib
 
 	num& num::factorial()
 	{
-		if(!this->z || *this->m!=1) errors::no_integer_factorial=true;
+		if(!this->z || *this->m!=1)
+		{
+			errors::is_any_error=errors::no_integer_factorial=true;
+			return *this;
+		}
 		nat mx(1), i(2);
 		std::vector<nat> lst(1, nat(1));
 		this->l->swap(mx);

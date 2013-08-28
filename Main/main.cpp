@@ -530,9 +530,12 @@ bool identyfity(string &s)
 			}
 	}
 	if(!Calckit::parser(s,(k.size()==0 ? 0:k.size()+1),s.size())) return false;
-	if(!Calckit::core(s,(k.size()==0 ? 0:k.size()+1),s.size())) return false;
-	bool erro=errors::are_not_errors();
-	if(k.size()>0 && erro)
+	if(!Calckit::core(s,(k.size()==0 ? 0:k.size()+1),s.size()))
+	{
+		errors::are_not_errors();
+		return false;
+	}
+	if(k.size()>0)
 	{
 		num var;
 		var_base::read_var("A", var);
@@ -541,9 +544,8 @@ bool identyfity(string &s)
 		cout << k;
 		mcol(_yellow);
 		cout << " = ";
-		return true;
 	}
-return erro;
+return true;
 }
 
 int main(int avg, char **arg)
