@@ -46,12 +46,13 @@ void settings()
 {
 	mcol(_default);
 	cout << "----------------------------------------------\n";
-	cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << "\n";
-	cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << "\n";
-	cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << "\n";
-	cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << "\n";
-	cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << "\n";
+	cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
+	cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
+	cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
+	cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
+	cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
 	cout << "Edyting option: put number (r - return): ";
+	cout.flush();
 	char z=getch();
 	while(z!='r')
 	{
@@ -71,21 +72,22 @@ void settings()
 				else output[z-49]=false;
 			}
 		}
-		cout << "\n----------------------------------------------\n";
-		cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << "\n";
-		cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << "\n";
-		cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << "\n";
-		cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << "\n";
-		cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << "\n";
+		cout << "\n----------------------------------------------" << endl;
+		cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
+		cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
+		cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
+		cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
+		cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
 		cout << "Edyting option: put number (r - return): ";
 		z=getch();
 	}
-	cout << "\n----------------------------------------------\n";
+	cout << "\n----------------------------------------------" << endl;
 	fstream Calc_conf_file;
 	nhide_file();
 	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios::out);
 	if(Calc_conf_file.good()) Calc_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	Calc_conf_file.close();
+	ios_base::sync_with_stdio(!_color);
 	hide_file();
 }
 
@@ -93,7 +95,7 @@ void buffer(string &w)
 {
 	w="";
 	char z=cin.get();
-	while(z!=10)
+	while(z!='\n')
 	{
 		w+=z;
 		z=cin.get();
@@ -116,12 +118,12 @@ inline void nhide_file()
 void settings()
 {
 	mcol(_default);
-	cout << "----------------------------------------------\n";
-	cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << "\n";
-	cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << "\n";
-	cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << "\n";
-	cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << "\n";
-	cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << "\n";
+	cout << "----------------------------------------------" << endl;
+	cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
+	cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
+	cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
+	cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
+	cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
 	cout << "Edyting option: put number (r - return): ";
 	char z=getch();
 	while(z!='r')
@@ -144,15 +146,16 @@ void settings()
 		}
 		cout << "\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F";
 		cout << "----------------------------------------------\n";
-		cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << "\n";
-		cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << "\n";
-		cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << "\n";
-		cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << "\n";
-		cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << "\n";
+		cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
+		cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
+		cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
+		cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
+		cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
 		cout << "Edyting option: put number (r - return): ";
+		cout.flush();
 		z=getch();
 	}
-	cout << "\033[G\033[2K----------------------------------------------\n";
+	cout << "\033[G\033[2K----------------------------------------------" << endl;
 	fstream Calc_conf_file;
 	nhide_file();
 	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::out);
@@ -230,7 +233,7 @@ void buffer(string &w)
 	int poz=0, qy=name_base.size();
 	string k;
 	name_base.push_back(k);
-	char KEY_UP[]={27,91,65,'\0'}, KEY_DOWN[]={27,91,66,'\0'}, KEY_LEFT[]={27,91,68,'\0'}, KEY_RIGHT[]={27,91,67,'\0'}, DELETE[]={27,91,51,126,'\0'}, BACKSPACE[]={127,'\0'};
+	char KEY_UP[]={27, '[', 'A', '\0'}, KEY_DOWN[]={27, '[', 'B', '\0'}, KEY_RIGHT[]={27, '[', 'C', '\0'}, KEY_LEFT[]={27, '[', 'D', '\0'}, DELETE[]={27, '[', 51, 126, '\0'}, BACKSPACE[]={127, '\0'};
 	int width=getmaxx();
 	char z=getch();
 	while(true)
@@ -239,6 +242,7 @@ void buffer(string &w)
 		k+=z;
 		while(kbhit())
 		{
+			if(z=='\n') break;
 			z=getch();
 			k+=z;
 		}
@@ -263,8 +267,8 @@ void buffer(string &w)
 				for(; r<signed(name_base[qy].size()); ++r)
 					cout << name_base[qy][r];
 				++r;
-				cout << " ";
-				if(r%width==0) cout << "\033[E";
+				cout << ' ';
+				if(r%width==0) cout << "\033[E"; // move cursor 1 line down at begin
 				for(; r>poz; --r)
 				{
 					if(r%width==0)
@@ -278,6 +282,7 @@ void buffer(string &w)
 					else cout << KEY_LEFT;
 				}
 			}
+			cout.flush();
 		}
 		else if(k==DELETE)
 		{
@@ -288,8 +293,8 @@ void buffer(string &w)
 				for(; r<signed(name_base[qy].size()); ++r)
 					cout << name_base[qy][r];
 				++r;
-				cout << " ";
-				if(r%width==0) cout << "\033[E";
+				cout << ' ';
+				if(r%width==0){cout << "\033[E";cout.flush();} // move cursor 1 line down at begin
 				for(; r>poz; --r)
 				{
 					if(r%width==0)
@@ -303,6 +308,7 @@ void buffer(string &w)
 					else cout << KEY_LEFT;
 				}
 			}
+			cout.flush();
 		}
 		else if(k==KEY_UP)
 		{
@@ -311,10 +317,10 @@ void buffer(string &w)
 				--qy;
 				while(poz>0)
 				{
-					cout << " ";
+					cout << ' ';
 					if(poz+1%width==0)
 					{
-						cout << " \033[D";
+						cout << ' ' << KEY_LEFT;
 						cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
@@ -335,8 +341,9 @@ void buffer(string &w)
 				}
 				poz=name_base[qy].size();
 				cout << name_base[qy];
-				if(poz%width==0) cout << " \033[D";
+				if(poz%width==0) cout << ' ' << KEY_LEFT;
 			}
+			cout.flush();
 		}
 		else if(k==KEY_DOWN)
 		{
@@ -345,10 +352,10 @@ void buffer(string &w)
 				++qy;
 				while(poz>0)
 				{
-					cout << " ";
+					cout << ' ';
 					if(poz+1%width==0)
 					{
-						cout << " \033[D";
+						cout << ' ' << KEY_LEFT;
 						cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
@@ -369,8 +376,9 @@ void buffer(string &w)
 				}
 				poz=name_base[qy].size();
 				cout << name_base[qy];
-				if(poz%width==0) cout << " \033[D";
+				if(poz%width==0) cout << ' ' << KEY_LEFT;
 			}
+			cout.flush();
 		}
 		else if(k==KEY_LEFT)
 		{
@@ -387,19 +395,21 @@ void buffer(string &w)
 				else cout << KEY_LEFT;
 				--poz;
 			}
+			cout.flush();
 		}
 		else if(k==KEY_RIGHT)
 		{
 			if(poz<signed(name_base[qy].size()))
 			{
-				if(poz%width-width==-1) cout << "\033[E";
+				if(poz%width-width==-1) cout << "\033[E"; // move cursor 1 line down at begin
 				else cout << KEY_RIGHT;
 				++poz;
 			}
+			cout.flush();
 		}
 		else
 		{
-			if(k[k.size()-1]==10)
+			if(k[k.size()-1]=='\n')
 			{
 				k.erase(k.size()-1, 1);
 				name_base[qy].insert(poz,k);
@@ -409,7 +419,7 @@ void buffer(string &w)
 			name_base[qy].insert(poz,k);
 			for(; r<signed(name_base[qy].size()); ++r)
 				cout << name_base[qy][r];
-			if(r%width==0) cout << " \033[D";
+			if(r%width==0) cout << ' ' << KEY_LEFT;
 			for(; r>signed(k.size())+poz; --r)
 			{
 				if(r%width==0)
@@ -423,14 +433,16 @@ void buffer(string &w)
 				else cout << KEY_LEFT;
 			}
 			poz+=k.size();
+			cout.flush();
 			//cout << k;
 		}
 		z=getch();
 	}
 	while(poz<signed(name_base[qy].size()))
 	{
-		if(poz%width-width==-1) cout << "\033[E";
-		else cout << KEY_RIGHT;
+		cout << name_base[qy][poz];
+		// if(poz%width-width==-1) cout << "\033[E"; // move cursor 1 line down at begin
+		// else cout << KEY_RIGHT;
 		++poz;
 	}
 	cout << endl;
@@ -446,7 +458,7 @@ void buffer(string &w)
 void help()
 {
 	mcol(_default);
-	cout << "----------------------------------------------\nCommand list:\ncol-off - switch off synax highlighting\ncol-on - switch on synax highlighting\nexit - quit\nhelp - this\nsettings - outputing settings\n----------------------------------------------\n";
+	cout << "----------------------------------------------\nCommand list:\ncol-off - switch off synax highlighting\ncol-on - switch on synax highlighting\nexit - quit\nhelp - this\nsettings - outputing settings\n----------------------------------------------" << endl;
 }
 
 void scol()
@@ -456,6 +468,9 @@ void scol()
 	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::out);
 	if(Calc_conf_file.good()) Calc_conf_file << output[0] << output[1] << output[2] << output[3] << _color;
 	Calc_conf_file.close();
+#ifdef WIN32
+	ios_base::sync_with_stdio(!_color);
+#endif
 	hide_file();
 }
 
@@ -525,7 +540,7 @@ bool identyfity(string &s)
 		for(int i=0; i<static_cast<int>(k.size()); ++i)
 			if(var[static_cast<int>(s[i])] || s[i]=='.' || s[i]==',')
 			{
-				cout << "Wrong variable name!\n";
+				cout << "Wrong variable name!" << endl;
 				return false;
 			}
 	}
@@ -539,7 +554,7 @@ bool identyfity(string &s)
 	{
 		num var;
 		var_base::read_var("A", var);
-		var_base::add_var(k, var);
+		var_base::swap_var(k, var);
 		mcol(_blue);
 		cout << k;
 		mcol(_yellow);
@@ -551,6 +566,10 @@ namespace numeric_lib{
 extern int stat[40];}
 int main(int avg, char **arg)
 {
+
+#ifndef WIN32
+	ios_base::sync_with_stdio(false);
+#endif
 	directory=arg[0];
 	{
 		int y=0;
@@ -585,11 +604,14 @@ int main(int avg, char **arg)
 	output[2]=buff[2]-48;
 	output[3]=buff[3]-48;
 	_color=buff[4]-48;
+#ifdef WIN32
+	ios_base::sync_with_stdio(!_color);
+#endif
 	bool arg1[]={true,true};
 	num Answer;
 	for(int i=1; i<avg; ++i)
 	{
-		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Display Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files\n";return 0;}
+		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Display Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files" << endl;return 0;}
 		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){cout << "Calc version "VERSION"\n";return 0;}
 		else if(arg1[0] && arg[i][0]=='-' && arg[i][1]=='c' && arg[i][2]=='\0'){_color=false;arg1[0]=false;}
 		else if(arg1[1] && arg[i][0]=='-' && arg[i][1]=='w' && arg[i][2]=='\0')
@@ -621,7 +643,7 @@ int main(int avg, char **arg)
 					{
 						var_base::read_var("A", Answer);
 						Answer.output(output);
-						cout << "\n";
+						cout << endl;
 					}
 				}
 				znak=cin.get();
@@ -630,10 +652,10 @@ int main(int avg, char **arg)
 				cerr << i << ": " << numeric_lib::stat[i] << endl;
 			return 0;
 		}
-		else{cout << "Calc: unrecognized option `" << arg[i] << "\n";return 0;}
+		else{cout << "Calc: unrecognized option `" << arg[i] << endl;return 0;}
 	}
 	mcol(_blue);
-	cout << "To quit write: exit\n";
+	cout << "To quit write: exit" << endl;
 	mcol(_green);
 	/******* ADD 'A' TO VARIaBLES *******/
 	var_base::_v.resize(2);
@@ -659,7 +681,7 @@ int main(int avg, char **arg)
 				var_base::read_var("A", Answer);
 				mcol(_blue);
 				Answer.output(output);
-				cout << "\n";
+				cout << endl;
 			}
 		}
 		mcol(_green);

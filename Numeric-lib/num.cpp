@@ -16,13 +16,13 @@ namespace errors
 	{
 		bool ret=is_any_error;
 		if(division_by_0)
-			cout << "Cannot divide by zero!\n";
+			cout << "Cannot divide by zero!" << endl;
 		if(no_integer_modulo)
-			cout << "Modulus division is only defined for integers!\n";
+			cout << "Modulus division is only defined for integers!" << endl;
 		if(no_integer_power)
-			cout << "In this version ("VERSION") power is only defined for integers!\n";
+			cout << "In this version ("VERSION") power is only defined for integers!" << endl;
 		if(no_integer_factorial)
-			cout << "Factorial is only defined for non-negative integers!\n";
+			cout << "Factorial is only defined for non-negative integers!" << endl;
 		is_any_error=division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
 	return !ret;
 	}

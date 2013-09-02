@@ -22,7 +22,9 @@ namespace var_base
 	extern vector<ver> _v;
 	extern queue<int> _free;
 	extern bool is_there;
-	void add_var(const string&, num);
+	void swap_var(const string&, num&);
+	inline void add_var(const string& _str, num _n)
+	{swap_var(_str, _n);}
 	bool remove_var(string);
 	bool read_var(const string&, num&);
 }

@@ -11,7 +11,7 @@ namespace var_base
 	queue<int> _free;
 	bool is_there;
 
-	void add_var(const string& s, num w)
+	void swap_var(const string& s, num& w)
 	{
 		ver x;
 		int k=0, sl=s.size();

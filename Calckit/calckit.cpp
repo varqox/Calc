@@ -11,12 +11,12 @@ namespace Calckit
 		bool var=false;
 		if(_str[begin]=='!')
 		{
-			cout << "Wrong argument: '!'!\n";
+			cout << "Wrong argument: '!'!" << endl;
 			return false;
 		}
 		if(begin+1<end && (_str[begin]=='-' || _str[begin]=='+') && (_str[begin+1]=='-' || _str[begin+1]=='+'))
 		{
-			cout << "Wrong argument: '" << _str[begin+1] << "'!\n";
+			cout << "Wrong argument: '" << _str[begin+1] << "'!" << endl;
 			return false;
 		}
 		for(int i=begin; i<=end; ++i)
@@ -35,7 +35,7 @@ namespace Calckit
 				--br;
 				if(br<0 || number==0)
 				{
-					cout << "Wrong parentheses layout!\n";
+					cout << "Wrong parentheses layout!" << endl;
 					return false;
 				}
 				z=0;
@@ -44,7 +44,7 @@ namespace Calckit
 			{
 				if(number==0 || krp>0 || i==end || _str[i+1]<'0' || _str[i+1]>'9' || var)
 				{
-					cout << "Wrong number writing!\n";
+					cout << "Wrong number writing!" << endl;
 					return false;
 				}
 				++krp;
@@ -58,7 +58,7 @@ namespace Calckit
 				}
 				else
 				{
-					cout << "Wrong argument: '" << _str[i] << "'!\n";
+					cout << "Wrong argument: '" << _str[i] << "'!" << endl;
 					return false;
 				}
 				number=0;
@@ -70,7 +70,7 @@ namespace Calckit
 				++z;
 				if(z>1 || number==0 || i==end || _str[i+1]==')')
 				{
-					cout << "Wrong argument: '" << _str[i] << "'!\n";
+					cout << "Wrong argument: '" << _str[i] << "'!" << endl;
 					return false;
 				}
 				number=0;
@@ -86,7 +86,7 @@ namespace Calckit
 				krp=0;
 				if(_str[i-1]=='+' || _str[i-1]=='-' || _str[i-1]=='*' || _str[i-1]=='/' || _str[i-1]=='%' || _str[i-1]=='^' || _str[i-1]=='(')
 				{
-					cout << "Wrong argument: '!'!\n";
+					cout << "Wrong argument: '!'!" << endl;
 					return false;
 				}
 			}
@@ -106,7 +106,7 @@ namespace Calckit
 		}
 		if(br!=0)
 		{
-			cout << "Wrong parentheses layout!\n";
+			cout << "Wrong parentheses layout!" << endl;
 			return false;
 		}
 		if(z>0)
@@ -114,7 +114,7 @@ namespace Calckit
 			char t;
 			if(m>0) t=_str[end-1];
 			else t=_str[end];
-			cout << z << " " << m << "Wrong argument: '" << t << "'!\n";
+			cout << z << " " << m << "Wrong argument: '" << t << "'!" << endl;
 			return false;
 		}
 	return true;
@@ -379,7 +379,7 @@ namespace Calckit
 		}
 		if(!work(base, sign, operators, parenth_depth, pri('0'))) return false;
 		if(sign[0]) base[0].opp();
-		var_base::add_var("A", base[0]);
+		var_base::swap_var("A", base[0]);
 	return true;
 	}
 }
