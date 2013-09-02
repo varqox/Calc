@@ -225,29 +225,6 @@ namespace numeric_lib
 		this->m->operator/=(NWD);
 	}
 
-	num num::operator+(const num& _n)
-	{
-		num k(*this);
-		nat trol;
-		k.spwd(_n,trol);
-		if(k.z==_n.z) k.l->operator+=(trol);
-		else
-		{
-			if(k.l->operator>(trol))
-				k.l->operator-=(trol);
-			else
-			{
-				nat emp(trol);
-				emp-=*k.l;
-				k.l->swap(emp);
-				if(k.l->w.size()==1 && k.l->w[0]==0) k.z=true;
-				else k.z=!k.z;
-			}
-		}
-		k.cut();
-	return k;
-	}
-
 	num& num::operator+=(const num& _n)
 	{
 		nat trol;
@@ -268,29 +245,6 @@ namespace numeric_lib
 		}
 		this->cut();
 	return *this;
-	}
-
-	num num::operator-(const num& _n)
-	{
-		num k(*this);
-		nat trol;
-		k.spwd(_n,trol);
-		if(k.z!=_n.z) k.l->operator+=(trol);
-		else
-		{
-			if(k.l->operator>(trol))
-				k.l->operator-=(trol);
-			else
-			{
-				nat emp(trol);
-				emp-=*k.l;
-				k.l->swap(emp);
-				if(k.l->w.size()==1 && k.l->w[0]==0) k.z=true;
-				else k.z=!k.z;
-			}
-		}
-		k.cut();
-	return k;
 	}
 
 	num& num::operator-=(const num& _n)
@@ -315,18 +269,6 @@ namespace numeric_lib
 	return *this;
 	}
 
-	num num::operator*(const num& _n)
-	{
-		num k(*this);
-		if(k.z==_n.z) k.z=true;
-		else k.z=false;
-		k.l->operator*=(*_n.l);
-		k.m->operator*=(*_n.m);
-		if(*k.l==0) k.z=true;
-		k.cut();
-	return k;
-	}
-
 	num& num::operator*=(const num& _n)
 	{
 		if(this->z==_n.z) this->z=true;
@@ -336,23 +278,6 @@ namespace numeric_lib
 		if(*this->l==0) this->z=true;
 		this->cut();
 	return *this;
-	}
-
-	num num::operator/(const num& _n)
-	{
-		if(*_n.l==0)
-		{
-			errors::is_any_error=errors::division_by_0=true;
-			return num();
-		}
-		num k(*this);
-		if(k.z==_n.z) k.z=true;
-		else k.z=false;
-		k.l->operator*=(*_n.m);
-		k.m->operator*=(*_n.l);
-		if(*k.l==0) k.z=true;
-		k.cut();
-	return k;
 	}
 
 	num& num::operator/=(const num& _n)
@@ -369,24 +294,6 @@ namespace numeric_lib
 		if(*this->l==0) this->z=true;
 		this->cut();
 	return *this;
-	}
-
-	num num::operator%(const num& _n)
-	{
-		if(*_n.l==0)
-		{
-			errors::is_any_error=errors::division_by_0=true;
-			return num();
-		}
-		else if(*_n.m!=1 || *this->m!=1)
-		{
-			errors::is_any_error=errors::no_integer_modulo=true;
-			return num();
-		}
-		num k(*this);
-		k.l->operator%=(*_n.l);
-		if(!k.z && !(k.l->w.size()==1 && k.l->w[0]==0)) k+=(_n<0LL ? -_n:_n);
-	return k;
 	}
 
 	num& num::operator%=(const num& _n)

@@ -609,7 +609,7 @@ namespace numeric_lib
 		a.swap(w);
 		old_kas0(a);
 	}
-
+int stat[40]={};
 	void mod(std::vector<int>& a, std::vector<int>& b)
 	{
 		int al=a.size(), bl=b.size(), iws=al-bl;
@@ -651,8 +651,9 @@ namespace numeric_lib
 			{
 				lli inter;
 				int down;
+				int trolo=0;
 				while(is_grader)
-				{
+				{++trolo;
 					inter=a[bl+iws-1];
 					if(al-iws>bl) inter+=static_cast<lli>(BS2)*a[bl+iws];
 					down=std::max(1LL,inter/(b[bl-1]+1));
@@ -702,6 +703,7 @@ namespace numeric_lib
 						else is_grader=false;
 					}
 				}
+				++stat[trolo];
 			}
 			--iws;
 		}

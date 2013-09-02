@@ -6,6 +6,9 @@ __builtin_ctz - podaje numer najmłodszego zapalonego bitu (skrót od count trai
 __builtin_clz - podaje ilość zer wiodących, co po odjęciu od długości reprezentacji (32 lub 64 bity), daje nam pozycję najstarszego zapalonego bitu (skrót od count leading zeros)
 
 __builtin_popcount - podaje ilość zapalonych bitów liczby
+
+inline unsigned long int CeilToPowerOf2(unsigned long int x)
+{return (x&x-1 ? 1ul<<(sizeof(unsigned long)*8-__builtin_clzl(x)):x);}
 */
 
 #include <vector>

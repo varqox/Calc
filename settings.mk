@@ -1,5 +1,5 @@
-CXX = g++
-ARCH = 32
-CXXFLAGS = -s -O3 -Wall -m$(ARCH) -DNO_EXCEPTIONS
-LDFLAGS = $(CXXFLAGS)
+CXX = clang++ #g++
+ARCH = 64
+CXXFLAGS = -O3 -Wall -m$(ARCH)
+LDFLAGS = -s $(CXXFLAGS)
 RM = rm -f

@@ -38,15 +38,10 @@ namespace numeric_lib
 		num& opp();
 		friend num operator+(const num&);
 		friend num operator-(const num&);
-		num operator+(const num&);
 		num& operator+=(const num&);
-		num operator-(const num&);
 		num& operator-=(const num&);
-		num operator*(const num&);
 		num& operator*=(const num&);
-		num operator/(const num&);
 		num& operator/=(const num&);
-		num operator%(const num&);
 		num& operator%=(const num&);
 		bool operator>(const num&) const;
 		bool operator<(const num&) const;

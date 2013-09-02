@@ -547,7 +547,8 @@ bool identyfity(string &s)
 	}
 return true;
 }
-
+namespace numeric_lib{
+extern int stat[40];}
 int main(int avg, char **arg)
 {
 	directory=arg[0];
@@ -607,7 +608,8 @@ int main(int avg, char **arg)
 					}
 					znak=cin.get();
 				}
-				if(s=="exit"){mcol(_default);return 0;}
+				if(s=="exit"){mcol(_default);for(int i=0; i<40; ++i)
+				cerr << i << ": " << numeric_lib::stat[i] << endl;return 0;}
 				else if(s=="col-on"){_color=true;scol();}
 				else if(s=="col-off"){_color=false;scol();color_default;}
 				else if(s=="help") help();
@@ -624,6 +626,8 @@ int main(int avg, char **arg)
 				}
 				znak=cin.get();
 			}
+			for(int i=0; i<40; ++i)
+				cerr << i << ": " << numeric_lib::stat[i] << endl;
 			return 0;
 		}
 		else{cout << "Calc: unrecognized option `" << arg[i] << "\n";return 0;}
@@ -633,7 +637,7 @@ int main(int avg, char **arg)
 	mcol(_green);
 	/******* ADD 'A' TO VARIaBLES *******/
 	var_base::_v.resize(2);
-	var_base::_v[0].t['A']=true;
+	var_base::_v[0].t[static_cast<int>('A')]=true;
 	var_base::_v[1].is=true;
 	var_base::_v[1].w=0;
 	/******* END *******/
