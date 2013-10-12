@@ -129,7 +129,7 @@ namespace Calckit
 	return 0;
 	}
 
-	bool work(vector<num> &base, vector<bool> &sign, vector<char> &operators, int &parenth_depth, char prior)
+	bool work(vector<num>& base, vector<bool>& sign, vector<char>& operators, int& parenth_depth, char prior)
 	{
 		int bs=base.size()-1;
 		if(prior==4 || bs<1) return true;

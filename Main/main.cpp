@@ -91,7 +91,7 @@ void settings()
 	hide_file();
 }
 
-void buffer(string &w)
+void buffer(string& w)
 {
 	w="";
 	char z=cin.get();
@@ -164,7 +164,7 @@ void settings()
 	hide_file();
 }
 
-int kbhit(void)
+bool kbhit()
 {
 	struct termios term, oterm;
 	int fd=0;
@@ -178,7 +178,7 @@ int kbhit(void)
 	tcsetattr(fd, TCSANOW, &oterm);
 	if(c!=-1)
 	ungetc(c, stdin);
-return ((c!=-1) ? 1:0);
+return (c!=-1 ? true:false);
 }
 
 int getch()
@@ -225,10 +225,9 @@ int getmaxy()
 return y;
 }
 
-vector<string> name_base;
-
-void buffer(string &w)
+void buffer(string& w)
 {
+	static vector<string> name_base;
 	vector<string> v=name_base;
 	int poz=0, qy=name_base.size();
 	string k;
@@ -448,7 +447,7 @@ void buffer(string &w)
 	cout << endl;
 	if(qy<signed(name_base.size())-1) name_base.pop_back();
 	w=name_base[qy];
-	v.push_back(w);
+	if(!w.empty() && (v.empty() || v.back()!=w)) v.push_back(w);
 	name_base.swap(v);
 }
 
@@ -493,7 +492,7 @@ const bool zn[]={0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-void convert(string &w)
+void convert(string& w)
 {
 	string k="";
 	k.swap(w);
@@ -525,7 +524,7 @@ void convert(string &w)
 	}
 }
 
-bool identyfity(string &s)
+bool identyfity(string& s)
 {
 	if(s.size()==0) return false;
 	string k;
@@ -562,8 +561,7 @@ bool identyfity(string &s)
 	}
 return true;
 }
-namespace numeric_lib{
-extern int stat[40];}
+
 int main(int avg, char **arg)
 {
 
@@ -630,8 +628,7 @@ int main(int avg, char **arg)
 					}
 					znak=cin.get();
 				}
-				if(s=="exit"){mcol(_default);for(int i=0; i<40; ++i)
-				cerr << i << ": " << numeric_lib::stat[i] << endl;return 0;}
+				if(s=="exit"){mcol(_default);return 0;}
 				else if(s=="col-on"){_color=true;scol();}
 				else if(s=="col-off"){_color=false;scol();color_default;}
 				else if(s=="help") help();
@@ -648,8 +645,6 @@ int main(int avg, char **arg)
 				}
 				znak=cin.get();
 			}
-			for(int i=0; i<40; ++i)
-				cerr << i << ": " << numeric_lib::stat[i] << endl;
 			return 0;
 		}
 		else{cout << "Calc: unrecognized option `" << arg[i] << endl;return 0;}

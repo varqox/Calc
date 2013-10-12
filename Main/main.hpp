@@ -48,9 +48,9 @@ void mcol(color c);
 void help();
 void scol();
 void settings();
-void buffer(string &w);
-void convert(string &w);
-bool identyfity(string &s);
+void buffer(string&);
+void convert(string&);
+bool identyfity(string&);
 
 //numeric-lib: errors
 namespace errors

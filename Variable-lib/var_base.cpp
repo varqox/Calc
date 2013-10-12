@@ -68,7 +68,7 @@ namespace var_base
 	return true;
 	}
 
-	bool read_var(const string& s, num &w)
+	bool read_var(const string& s, num& w)
 	{
 		int k=0, sl=s.size();
 		for(int i=0; i<sl; ++i)
