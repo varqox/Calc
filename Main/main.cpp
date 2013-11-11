@@ -45,21 +45,21 @@ inline void nhide_file()
 void settings()
 {
 	mcol(_default);
-	cout << "----------------------------------------------\n";
-	cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
-	cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
-	cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
-	cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
-	cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
-	cout << "Edyting option: put number (r - return): ";
-	cout.flush();
+	sim::cout << "----------------------------------------------\n";
+	sim::cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << sim::endl;
+	sim::cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << sim::endl;
+	sim::cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << sim::endl;
+	sim::cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << sim::endl;
+	sim::cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << sim::endl;
+	sim::cout << "Edyting option: put number (r - return): ";
+	sim::cout.flush();
 	char z=getch();
 	while(z!='r')
 	{
-		if(z<49 || z>53){cout << "\nWrong number!";getch();}
+		if(z<49 || z>53){sim::cout << "\nWrong number!";getch();}
 		else
 		{
-			cout << "\nNew value (y - yes, n - no): ";
+			sim::cout << "\nNew value (y - yes, n - no): ";
 			char o=getch();
 			if(o=='y' || o=='Y')
 			{
@@ -72,16 +72,16 @@ void settings()
 				else output[z-49]=false;
 			}
 		}
-		cout << "\n----------------------------------------------" << endl;
-		cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
-		cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
-		cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
-		cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
-		cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
-		cout << "Edyting option: put number (r - return): ";
+		sim::cout << "\n----------------------------------------------" << sim::endl;
+		sim::cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << sim::endl;
+		sim::cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << sim::endl;
+		sim::cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << sim::endl;
+		sim::cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << sim::endl;
+		sim::cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << sim::endl;
+		sim::cout << "Edyting option: put number (r - return): ";
 		z=getch();
 	}
-	cout << "\n----------------------------------------------" << endl;
+	sim::cout << "\n----------------------------------------------" << sim::endl;
 	fstream Calc_conf_file;
 	nhide_file();
 	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios::out);
@@ -118,20 +118,20 @@ inline void nhide_file()
 void settings()
 {
 	mcol(_default);
-	cout << "----------------------------------------------" << endl;
-	cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
-	cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
-	cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
-	cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
-	cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
-	cout << "Edyting option: put number (r - return): ";
+	sim::cout << "----------------------------------------------" << sim::endl;
+	sim::cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << sim::endl;
+	sim::cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << sim::endl;
+	sim::cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << sim::endl;
+	sim::cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << sim::endl;
+	sim::cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << sim::endl;
+	sim::cout << "Edyting option: put number (r - return): ";
 	char z=getch();
 	while(z!='r')
 	{
-		if(z<49 || z>53){cout << "\033[G\033[2KWrong number!";getch();}
+		if(z<49 || z>53){sim::cout << "\033[G\033[2KWrong number!";getch();}
 		else
 		{
-			cout << "\033[G\033[2KNew value (y - yes, n - no): ";
+			sim::cout << "\033[G\033[2KNew value (y - yes, n - no): ";
 			char o=getch();
 			if(o=='y' || o=='Y')
 			{
@@ -144,18 +144,18 @@ void settings()
 				else output[z-49]=false;
 			}
 		}
-		cout << "\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F";
-		cout << "----------------------------------------------\n";
-		cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << endl;
-		cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << endl;
-		cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << endl;
-		cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << endl;
-		cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << endl;
-		cout << "Edyting option: put number (r - return): ";
-		cout.flush();
+		sim::cout << "\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F\033[2K\033[F";
+		sim::cout << "----------------------------------------------\n";
+		sim::cout << "1. Writing: Fraction (improper):  " << (output[0]?'Y':'N') << sim::endl;
+		sim::cout << "2. Writing: Mixed numeral:        " << (output[1]?'Y':'N') << sim::endl;
+		sim::cout << "3. Writing: Repeating decimal:    " << (output[2]?'Y':'N') << sim::endl;
+		sim::cout << "4. Writing: Scientific notation:  " << (output[3]?'Y':'N') << sim::endl;
+		sim::cout << "5. Writing: Synax highlighting:   " << (_color?'Y':'N') << sim::endl;
+		sim::cout << "Edyting option: put number (r - return): ";
+		sim::cout.flush();
 		z=getch();
 	}
-	cout << "\033[G\033[2K----------------------------------------------" << endl;
+	sim::cout << "\033[G\033[2K----------------------------------------------" << sim::endl;
 	fstream Calc_conf_file;
 	nhide_file();
 	Calc_conf_file.open((directory+".Calc.cfg").c_str(), ios_base::out);
@@ -253,35 +253,35 @@ void buffer(string& w)
 				/******* KEY_LEFT *******/
 				if(poz%width==0)
 				{
-					cout << KEY_UP;
+					sim::cout << KEY_UP;
 					for(int i=0; i<width; ++i)
 					{
-						cout << KEY_RIGHT;
+						sim::cout << KEY_RIGHT;
 					}
 				}
-				else cout << KEY_LEFT;
+				else sim::cout << KEY_LEFT;
 				--poz;
 				/******* END *******/
 				int r=poz;
 				for(; r<signed(name_base[qy].size()); ++r)
-					cout << name_base[qy][r];
+					sim::cout << name_base[qy][r];
 				++r;
-				cout << ' ';
-				if(r%width==0) cout << "\033[E"; // move cursor 1 line down at begin
+				sim::cout << ' ';
+				if(r%width==0) sim::cout << "\033[E"; // move cursor 1 line down at begin
 				for(; r>poz; --r)
 				{
 					if(r%width==0)
 					{
-						cout << KEY_UP;
+						sim::cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
-							cout << KEY_RIGHT;
+							sim::cout << KEY_RIGHT;
 						}
 					}
-					else cout << KEY_LEFT;
+					else sim::cout << KEY_LEFT;
 				}
 			}
-			cout.flush();
+			sim::cout.flush();
 		}
 		else if(k==DELETE)
 		{
@@ -290,24 +290,24 @@ void buffer(string& w)
 				name_base[qy].erase(poz,1);
 				int r=poz;
 				for(; r<signed(name_base[qy].size()); ++r)
-					cout << name_base[qy][r];
+					sim::cout << name_base[qy][r];
 				++r;
-				cout << ' ';
-				if(r%width==0){cout << "\033[E";cout.flush();} // move cursor 1 line down at begin
+				sim::cout << ' ';
+				if(r%width==0){sim::cout << "\033[E";sim::cout.flush();} // move cursor 1 line down at begin
 				for(; r>poz; --r)
 				{
 					if(r%width==0)
 					{
-						cout << KEY_UP;
+						sim::cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
-							cout << KEY_RIGHT;
+							sim::cout << KEY_RIGHT;
 						}
 					}
-					else cout << KEY_LEFT;
+					else sim::cout << KEY_LEFT;
 				}
 			}
-			cout.flush();
+			sim::cout.flush();
 		}
 		else if(k==KEY_UP)
 		{
@@ -316,33 +316,33 @@ void buffer(string& w)
 				--qy;
 				while(poz>0)
 				{
-					cout << ' ';
+					sim::cout << ' ';
 					if(poz+1%width==0)
 					{
-						cout << ' ' << KEY_LEFT;
-						cout << KEY_UP;
+						sim::cout << ' ' << KEY_LEFT;
+						sim::cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
-							cout << KEY_RIGHT;
+							sim::cout << KEY_RIGHT;
 						}
 					}
-					else cout << KEY_LEFT;
+					else sim::cout << KEY_LEFT;
 					if(poz%width==0)
 					{
-						cout << KEY_UP;
+						sim::cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
-							cout << KEY_RIGHT;
+							sim::cout << KEY_RIGHT;
 						}
 					}
-					else cout << KEY_LEFT;
+					else sim::cout << KEY_LEFT;
 					--poz;
 				}
 				poz=name_base[qy].size();
-				cout << name_base[qy];
-				if(poz%width==0) cout << ' ' << KEY_LEFT;
+				sim::cout << name_base[qy];
+				if(poz%width==0) sim::cout << ' ' << KEY_LEFT;
 			}
-			cout.flush();
+			sim::cout.flush();
 		}
 		else if(k==KEY_DOWN)
 		{
@@ -351,33 +351,33 @@ void buffer(string& w)
 				++qy;
 				while(poz>0)
 				{
-					cout << ' ';
+					sim::cout << ' ';
 					if(poz+1%width==0)
 					{
-						cout << ' ' << KEY_LEFT;
-						cout << KEY_UP;
+						sim::cout << ' ' << KEY_LEFT;
+						sim::cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
-							cout << KEY_RIGHT;
+							sim::cout << KEY_RIGHT;
 						}
 					}
-					else cout << KEY_LEFT;
+					else sim::cout << KEY_LEFT;
 					if(poz%width==0)
 					{
-						cout << KEY_UP;
+						sim::cout << KEY_UP;
 						for(int i=0; i<width; ++i)
 						{
-							cout << KEY_RIGHT;
+							sim::cout << KEY_RIGHT;
 						}
 					}
-					else cout << KEY_LEFT;
+					else sim::cout << KEY_LEFT;
 					--poz;
 				}
 				poz=name_base[qy].size();
-				cout << name_base[qy];
-				if(poz%width==0) cout << ' ' << KEY_LEFT;
+				sim::cout << name_base[qy];
+				if(poz%width==0) sim::cout << ' ' << KEY_LEFT;
 			}
-			cout.flush();
+			sim::cout.flush();
 		}
 		else if(k==KEY_LEFT)
 		{
@@ -385,26 +385,26 @@ void buffer(string& w)
 			{
 				if(poz%width==0)
 				{
-					cout << KEY_UP;
+					sim::cout << KEY_UP;
 					for(int i=0; i<width; ++i)
 					{
-						cout << KEY_RIGHT;
+						sim::cout << KEY_RIGHT;
 					}
 				}
-				else cout << KEY_LEFT;
+				else sim::cout << KEY_LEFT;
 				--poz;
 			}
-			cout.flush();
+			sim::cout.flush();
 		}
 		else if(k==KEY_RIGHT)
 		{
 			if(poz<signed(name_base[qy].size()))
 			{
-				if(poz%width-width==-1) cout << "\033[E"; // move cursor 1 line down at begin
-				else cout << KEY_RIGHT;
+				if(poz%width-width==-1) sim::cout << "\033[E"; // move cursor 1 line down at begin
+				else sim::cout << KEY_RIGHT;
 				++poz;
 			}
-			cout.flush();
+			sim::cout.flush();
 		}
 		else
 		{
@@ -417,34 +417,34 @@ void buffer(string& w)
 			int r=poz;
 			name_base[qy].insert(poz,k);
 			for(; r<signed(name_base[qy].size()); ++r)
-				cout << name_base[qy][r];
-			if(r%width==0) cout << ' ' << KEY_LEFT;
+				sim::cout << name_base[qy][r];
+			if(r%width==0) sim::cout << ' ' << KEY_LEFT;
 			for(; r>signed(k.size())+poz; --r)
 			{
 				if(r%width==0)
 				{
-					cout << KEY_UP;
+					sim::cout << KEY_UP;
 					for(int i=0; i<width; ++i)
 					{
-						cout << KEY_RIGHT;
+						sim::cout << KEY_RIGHT;
 					}
 				}
-				else cout << KEY_LEFT;
+				else sim::cout << KEY_LEFT;
 			}
 			poz+=k.size();
-			cout.flush();
-			//cout << k;
+			sim::cout.flush();
+			//sim::cout << k;
 		}
 		z=getch();
 	}
 	while(poz<signed(name_base[qy].size()))
 	{
-		cout << name_base[qy][poz];
-		// if(poz%width-width==-1) cout << "\033[E"; // move cursor 1 line down at begin
-		// else cout << KEY_RIGHT;
+		sim::cout << name_base[qy][poz];
+		// if(poz%width-width==-1) sim::cout << "\033[E"; // move cursor 1 line down at begin
+		// else sim::cout << KEY_RIGHT;
 		++poz;
 	}
-	cout << endl;
+	sim::cout << sim::endl;
 	if(qy<signed(name_base.size())-1) name_base.pop_back();
 	w=name_base[qy];
 	if(!w.empty() && (v.empty() || v.back()!=w)) v.push_back(w);
@@ -457,7 +457,7 @@ void buffer(string& w)
 void help()
 {
 	mcol(_default);
-	cout << "----------------------------------------------\nCommand list:\ncol-off - switch off synax highlighting\ncol-on - switch on synax highlighting\nexit - quit\nhelp - this\nsettings - outputing settings\n----------------------------------------------" << endl;
+	sim::cout << "----------------------------------------------\nCommand list:\ncol-off - switch off synax highlighting\ncol-on - switch on synax highlighting\nexit - quit\nhelp - this\nsettings - outputing settings\n----------------------------------------------" << sim::endl;
 }
 
 void scol()
@@ -539,7 +539,7 @@ bool identyfity(string& s)
 		for(int i=0; i<static_cast<int>(k.size()); ++i)
 			if(var[static_cast<int>(s[i])] || s[i]=='.' || s[i]==',')
 			{
-				cout << "Wrong variable name!" << endl;
+				sim::cout << "Wrong variable name!" << sim::endl;
 				return false;
 			}
 	}
@@ -555,16 +555,16 @@ bool identyfity(string& s)
 		var_base::read_var("A", var);
 		var_base::swap_var(k, var);
 		mcol(_blue);
-		cout << k;
+		sim::cout << k;
 		mcol(_yellow);
-		cout << " = ";
+		sim::cout << " = ";
 	}
 return true;
 }
 
 int main(int avg, char **arg)
 {
-
+	sim::cout.active_buffering(true);
 #ifndef WIN32
 	ios_base::sync_with_stdio(false);
 #endif
@@ -609,8 +609,8 @@ int main(int avg, char **arg)
 	num Answer;
 	for(int i=1; i<avg; ++i)
 	{
-		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Display Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files" << endl;return 0;}
-		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){cout << "Calc version " VERSION "\n";return 0;}
+		if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='h' && arg[i][3]=='e' && arg[i][4]=='l' && arg[i][5]=='p'){sim::cout << "Usage: Calc [options]\nOptions:\n  --help     Display this information\n  --version  Display Calc version\n  -c         Run without synax highlighting\n  -w         Run in mode: using `-c' and don't display start information, it's make to works with files" << sim::endl;return 0;}
+		else if(arg[i][0]=='-' && arg[i][1]=='-' && arg[i][2]=='v' && arg[i][3]=='e' && arg[i][4]=='r' && arg[i][5]=='s' && arg[i][6]=='i' && arg[i][7]=='o' && arg[i][8]=='n'){sim::cout << "Calc version " VERSION "\n";return 0;}
 		else if(arg1[0] && arg[i][0]=='-' && arg[i][1]=='c' && arg[i][2]=='\0'){_color=false;arg1[0]=false;}
 		else if(arg1[1] && arg[i][0]=='-' && arg[i][1]=='w' && arg[i][2]=='\0')
 		{
@@ -640,17 +640,17 @@ int main(int avg, char **arg)
 					{
 						var_base::read_var("A", Answer);
 						Answer.output(output);
-						cout << endl;
+						sim::cout << sim::endl;
 					}
 				}
 				znak=cin.get();
 			}
 			return 0;
 		}
-		else{cout << "Calc: unrecognized option `" << arg[i] << endl;return 0;}
+		else{sim::cout << "Calc: unrecognized option `" << arg[i] << sim::endl;return 0;}
 	}
 	mcol(_blue);
-	cout << "To quit write: exit" << endl;
+	sim::cout << "To quit write: exit" << sim::endl;
 	mcol(_green);
 	/******* ADD 'A' TO VARIaBLES *******/
 	var_base::_v.resize(2);
@@ -676,7 +676,7 @@ int main(int avg, char **arg)
 				var_base::read_var("A", Answer);
 				mcol(_blue);
 				Answer.output(output);
-				cout << endl;
+				sim::cout << sim::endl;
 			}
 		}
 		mcol(_green);

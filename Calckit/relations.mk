@@ -1,1 +1,1 @@
-Calckit-rel = Main/main.hpp Variable-lib/var_base.hpp Numeric-lib/num.hpp
+Calckit-rel = Main/main.hpp Main/stream.hpp Variable-lib/var_base.hpp Numeric-lib/num.hpp

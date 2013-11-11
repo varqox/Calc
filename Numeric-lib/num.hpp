@@ -4,6 +4,7 @@
 #include <bits/localefwd.h>
 #include <string>
 #include <vector>
+#include "../Main/stream.hpp"
 
 namespace numeric_lib
 {
@@ -52,7 +53,7 @@ namespace numeric_lib
 		num& pow(const num&);
 		num& factorial();
 		void output(const bool*);
-		friend std::ostream& operator<<(std::ostream&, const nat*);
+		friend sim::ostream& operator<<(sim::ostream&, const nat*);
 	};
 
 	num pow(const num&, const num&);

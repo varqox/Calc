@@ -11,12 +11,12 @@ namespace Calckit
 		bool var=false;
 		if(_str[begin]=='!')
 		{
-			cout << "Wrong argument: '!'!" << endl;
+			sim::cout << "Wrong argument: '!'!" << sim::endl;
 			return false;
 		}
 		if(begin+1<end && (_str[begin]=='-' || _str[begin]=='+') && (_str[begin+1]=='-' || _str[begin+1]=='+'))
 		{
-			cout << "Wrong argument: '" << _str[begin+1] << "'!" << endl;
+			sim::cout << "Wrong argument: '" << _str[begin+1] << "'!" << sim::endl;
 			return false;
 		}
 		for(int i=begin; i<=end; ++i)
@@ -35,7 +35,7 @@ namespace Calckit
 				--br;
 				if(br<0 || number==0)
 				{
-					cout << "Wrong parentheses layout!" << endl;
+					sim::cout << "Wrong parentheses layout!" << sim::endl;
 					return false;
 				}
 				z=0;
@@ -44,7 +44,7 @@ namespace Calckit
 			{
 				if(number==0 || krp>0 || i==end || _str[i+1]<'0' || _str[i+1]>'9' || var)
 				{
-					cout << "Wrong number writing!" << endl;
+					sim::cout << "Wrong number writing!" << sim::endl;
 					return false;
 				}
 				++krp;
@@ -58,7 +58,7 @@ namespace Calckit
 				}
 				else
 				{
-					cout << "Wrong argument: '" << _str[i] << "'!" << endl;
+					sim::cout << "Wrong argument: '" << _str[i] << "'!" << sim::endl;
 					return false;
 				}
 				number=0;
@@ -70,7 +70,7 @@ namespace Calckit
 				++z;
 				if(z>1 || number==0 || i==end || _str[i+1]==')')
 				{
-					cout << "Wrong argument: '" << _str[i] << "'!" << endl;
+					sim::cout << "Wrong argument: '" << _str[i] << "'!" << sim::endl;
 					return false;
 				}
 				number=0;
@@ -86,7 +86,7 @@ namespace Calckit
 				krp=0;
 				if(_str[i-1]=='+' || _str[i-1]=='-' || _str[i-1]=='*' || _str[i-1]=='/' || _str[i-1]=='%' || _str[i-1]=='^' || _str[i-1]=='(')
 				{
-					cout << "Wrong argument: '!'!" << endl;
+					sim::cout << "Wrong argument: '!'!" << sim::endl;
 					return false;
 				}
 			}
@@ -106,7 +106,7 @@ namespace Calckit
 		}
 		if(br!=0)
 		{
-			cout << "Wrong parentheses layout!" << endl;
+			sim::cout << "Wrong parentheses layout!" << sim::endl;
 			return false;
 		}
 		if(z>0)
@@ -114,7 +114,7 @@ namespace Calckit
 			char t;
 			if(m>0) t=_str[end-1];
 			else t=_str[end];
-			cout << z << " " << m << "Wrong argument: '" << t << "'!" << endl;
+			sim::cout << z << " " << m << "Wrong argument: '" << t << "'!" << sim::endl;
 			return false;
 		}
 	return true;
@@ -229,7 +229,7 @@ namespace Calckit
 						}
 						else
 						{
-							cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << endl;
+							sim::cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << sim::endl;
 							return false;
 						}
 					}
@@ -266,7 +266,7 @@ namespace Calckit
 						if(var_base::read_var(f_pos_to_str(num_beg, i, _str), emp)) base.push_back(emp);
 						else
 						{
-							cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << endl;
+							sim::cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << sim::endl;
 							return false;
 						}
 					}
@@ -288,7 +288,7 @@ namespace Calckit
 						if(var_base::read_var(f_pos_to_str(num_beg, i, _str), emp)) base.push_back(emp);
 						else
 						{
-							cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << endl;
+							sim::cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << sim::endl;
 							return false;
 						}
 					}
@@ -328,7 +328,7 @@ namespace Calckit
 						}
 						else
 						{
-							cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << endl;
+							sim::cout << "Unknown variable: " << f_pos_to_str(num_beg, i, _str) << sim::endl;
 							return false;
 						}
 					}
@@ -367,7 +367,7 @@ namespace Calckit
 				}
 				else
 				{
-					cout << "Unknown variable: " << f_pos_to_str(num_beg, end, _str) << endl;
+					sim::cout << "Unknown variable: " << f_pos_to_str(num_beg, end, _str) << sim::endl;
 					return false;
 				}
 			}

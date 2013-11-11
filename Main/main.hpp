@@ -13,6 +13,7 @@ inline unsigned long int CeilToPowerOf2(unsigned long int x)
 
 #include <vector>
 #include <iostream>
+#include "stream.hpp"
 
 #define VERSION "2.7.0"
 enum color{_yellow, _blue, _red, _green, _default};
@@ -31,11 +32,11 @@ using namespace std;
 
 #else
 
-#define color_yellow cout << "\033[01;33m"
-#define color_blue cout << "\033[01;34m"
-#define color_red cout << "\033[01;31m"
-#define color_green cout << "\033[01;32m"
-#define color_default cout << "\033[00m"
+#define color_yellow sim::cout << "\033[01;33m"
+#define color_blue sim::cout << "\033[01;34m"
+#define color_red sim::cout << "\033[01;31m"
+#define color_green sim::cout << "\033[01;32m"
+#define color_default sim::cout << "\033[00m"
 
 //main.cpp
 int getch();

@@ -1,6 +1,6 @@
 #include "num.hpp"
 #include "num_core.hpp"
-#include <iostream>
+// #include <iostream>
 #include <stack>
 //for FFT
 #include <cmath>
@@ -8,7 +8,7 @@
 
 namespace numeric_lib
 {
-	std::ostream& operator<<(std::ostream& os, const num::nat* _n)
+	sim::ostream& operator<<(sim::ostream& os, const num::nat* _n)
 	{
 		int nl=_n->w.size();
 		os << _n->w[--nl];

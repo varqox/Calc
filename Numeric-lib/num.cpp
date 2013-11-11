@@ -16,13 +16,13 @@ namespace errors
 	{
 		bool ret=is_any_error;
 		if(division_by_0)
-			cout << "Cannot divide by zero!" << endl;
+			sim::cout << "Cannot divide by zero!" << sim::endl;
 		if(no_integer_modulo)
-			cout << "Modulus division is only defined for integers!" << endl;
+			sim::cout << "Modulus division is only defined for integers!" << sim::endl;
 		if(no_integer_power)
-			cout << "In this version (" VERSION ") power is only defined for integers!" << endl;
+			sim::cout << "In this version (" VERSION ") power is only defined for integers!" << sim::endl;
 		if(no_integer_factorial)
-			cout << "Factorial is only defined for non-negative integers!" << endl;
+			sim::cout << "Factorial is only defined for non-negative integers!" << sim::endl;
 		is_any_error=division_by_0=no_integer_modulo=no_integer_power=no_integer_factorial=false;
 	return !ret;
 	}
@@ -412,16 +412,16 @@ namespace numeric_lib
 			if(!this->z)
 			{
 				mcol(_yellow);
-				cout << "-";
+				sim::cout << "-";
 				mcol(_blue);
 			}
-			cout << this->l;
+			sim::cout << this->l;
 			if(*this->m!=1)
 			{
 				mcol(_red);
-				cout << "/";
+				sim::cout << "/";
 				mcol(_blue);
-				cout << this->m;
+				sim::cout << this->m;
 			}
 		}
 		if(output[1])
@@ -434,22 +434,22 @@ namespace numeric_lib
 				if(output[0] && *this->l!=0)
 				{
 					mcol(_yellow);
-					cout << " = ";
-					if(!this->z) cout << "-(";
+					sim::cout << " = ";
+					if(!this->z) sim::cout << "-(";
 					mcol(_blue);
-					cout << &g;
+					sim::cout << &g;
 					mcol(_yellow);
-					cout << " + ";
+					sim::cout << " + ";
 					mcol(_blue);
-					cout << this->l;
+					sim::cout << this->l;
 					mcol(_red);
-					cout << "/";
+					sim::cout << "/";
 					mcol(_blue);
-					cout << this->m;
+					sim::cout << this->m;
 					if(!this->z)
 					{
 						mcol(_yellow);
-						cout << ")";
+						sim::cout << ")";
 						mcol(_blue);
 					}
 				}
@@ -458,27 +458,27 @@ namespace numeric_lib
 					mcol(_yellow);
 					if(*this->l==0)
 					{
-						if(!this->z) cout << "-";
+						if(!this->z) sim::cout << "-";
 						mcol(_blue);
-						cout << &g;
+						sim::cout << &g;
 					}
 					else
 					{
-						if(!this->z) cout << "-(";
+						if(!this->z) sim::cout << "-(";
 						mcol(_blue);
-						cout << &g;
+						sim::cout << &g;
 						mcol(_yellow);
-						cout << " + ";
+						sim::cout << " + ";
 						mcol(_blue);
-						cout << this->l;
+						sim::cout << this->l;
 						mcol(_red);
-						cout << "/";
+						sim::cout << "/";
 						mcol(_blue);
-						cout << this->m;
+						sim::cout << this->m;
 						if(!this->z)
 						{
 							mcol(_yellow);
-							cout << ")";
+							sim::cout << ")";
 							mcol(_blue);
 						}
 					}
@@ -490,16 +490,16 @@ namespace numeric_lib
 				if(!this->z)
 				{
 					mcol(_yellow);
-					cout << "-";
+					sim::cout << "-";
 					mcol(_blue);
 				}
-				cout << this->l;
+				sim::cout << this->l;
 				if(*this->m!=1)
 				{
 					mcol(_red);
-					cout << "/";
+					sim::cout << "/";
 					mcol(_blue);
-					cout << this->m;
+					sim::cout << this->m;
 				}
 				g=*this->l;
 				g/=*this->m;
@@ -531,17 +531,17 @@ namespace numeric_lib
 			if((output[0] || output[1]) && *this->l!=0)
 			{
 				mcol(_yellow);
-				cout << " = ";
-				if(!this->z) cout << "-";
+				sim::cout << " = ";
+				if(!this->z) sim::cout << "-";
 				mcol(_blue);
-				cout << &g;
+				sim::cout << &g;
 			}
 			else if(!output[0] && !output[1])
 			{
 				mcol(_yellow);
-				if(!this->z) cout << "-";
+				if(!this->z) sim::cout << "-";
 				mcol(_blue);
-				cout << &g;
+				sim::cout << &g;
 			}
 			if(*this->l!=0)
 			{
@@ -574,9 +574,9 @@ namespace numeric_lib
 				if(!s.empty())
 				{
 					mcol(_red);
-					cout << ".";
+					sim::cout << ".";
 					mcol(_blue);
-					cout << s;
+					sim::cout << s;
 				}
 			}
 		}
@@ -585,17 +585,17 @@ namespace numeric_lib
 			if(output[0] || output[1] || output[2])
 			{
 				mcol(_yellow);
-				cout << " = ";
+				sim::cout << " = ";
 				mcol(_blue);
 			}
 			if(wyk.w.size()==0 || (wyk==0))
-				cout << "0";
+				sim::cout << "0";
 			else
 			{
 				if(!this->z)
 				{
 					mcol(_yellow);
-					cout << "-";
+					sim::cout << "-";
 					mcol(_blue);
 				}
 				int lg=wyk.w.size()-this->m->w.size()-3;
@@ -616,24 +616,24 @@ namespace numeric_lib
 				s.erase(11,s.size()-11);
 				for(int i=s.size()-1; i>0 && s[i]=='0'; --i)
 					s.erase(i, 1);
-				cout << s[0];
+				sim::cout << s[0];
 				if(s.size()>1)
 				{
 					mcol(_red);
-					cout << ".";
+					sim::cout << ".";
 					mcol(_blue);
 				}
 				for(unsigned int i=1; i<s.size(); ++i)
-					cout << s[i];
+					sim::cout << s[i];
 				mcol(_yellow);
-				cout << "*";
+				sim::cout << "*";
 				mcol(_blue);
-				cout << "10";
+				sim::cout << "10";
 				mcol(_red);
-				cout << "^";
-				if(lg<0){cout << "-";lg=-lg;}
+				sim::cout << "^";
+				if(lg<0){sim::cout << "-";lg=-lg;}
 				mcol(_blue);
-				cout << lg;
+				sim::cout << lg;
 			}
 		}
 	}
