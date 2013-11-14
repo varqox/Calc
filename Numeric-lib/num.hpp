@@ -1,7 +1,7 @@
 #ifndef __Num_hpp
 #define __Num_hpp
 
-#include <bits/localefwd.h>
+#include <iostream>
 #include <string>
 #include <vector>
 #include "../Main/stream.hpp"
