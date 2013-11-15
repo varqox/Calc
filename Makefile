@@ -9,10 +9,10 @@ Release-linux-x32:
 	make -B -C build-Release/ CC=clang CXX=clang++ LINK=clang++ ARCHITECTURE=32
 	mv build-Release/Calc Calc
 Release-win-x64:
-	make -B -C build-Release/ CC=wine\ ../../MinGW64/bin/gcc.exe CXX=wine\ ../../MinGW64/bin/g++.exe LINK=wine\ ../../MinGW64/bin/g++.exe ARCHITECTURE=64
+	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCHITECTURE=64
 	mv build-Release/Calc.exe Calc.exe
 Release-win-x32:
-	make -B -C build-Release/ CC=wine\ ../../MinGW64/bin/gcc.exe CXX=wine\ ../../MinGW64/bin/g++.exe LINK=wine\ ../../MinGW64/bin/g++.exe ARCHITECTURE=32
+	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCHITECTURE=32
 	mv build-Release/Calc.exe Calc.exe
 
 install:
