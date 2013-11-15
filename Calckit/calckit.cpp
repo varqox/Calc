@@ -6,6 +6,7 @@ namespace Calckit
 {
 	bool parser(const string& _str, int begin, int end)
 	{
+<<<<<<< HEAD
 		--end;
 		int br=0, z=0, number=0, krp=0, m=0;
 		bool var=false;
@@ -19,6 +20,11 @@ namespace Calckit
 			sim::cout << "Wrong argument: '" << _str[begin+1] << "'!" << sim::endl;
 			return false;
 		}
+=======
+        if(begin>--end) return false;
+        int br=0, z=1, number=0, krp=0, m=0;
+        bool var=false;
+>>>>>>> master
 		for(int i=begin; i<=end; ++i)
 		{
 			if(_str[i]=='(')
@@ -28,7 +34,7 @@ namespace Calckit
 				var=false;
 				m=0;
 				krp=0;
-				z=0;
+                z=1;
 			}
 			else if(_str[i]==')')
 			{
@@ -80,15 +86,15 @@ namespace Calckit
 			}
 			else if(_str[i]=='!')
 			{
-				z=0;
-				m=0;
-				number=1;
-				krp=0;
-				if(_str[i-1]=='+' || _str[i-1]=='-' || _str[i-1]=='*' || _str[i-1]=='/' || _str[i-1]=='%' || _str[i-1]=='^' || _str[i-1]=='(')
+                if(z>0)
 				{
 					sim::cout << "Wrong argument: '!'!" << sim::endl;
 					return false;
 				}
+                z=0;
+                m=0;
+                number=1;
+                krp=0;
 			}
 			else if(_str[i]>='0' && _str[i]<='9')
 			{
@@ -112,9 +118,16 @@ namespace Calckit
 		if(z>0)
 		{
 			char t;
+<<<<<<< HEAD
 			if(m>0) t=_str[end-1];
 			else t=_str[end];
 			sim::cout << z << " " << m << "Wrong argument: '" << t << "'!" << sim::endl;
+=======
+            // if m>0, then somewhere (this line - 61) i==end and error is catching
+            // if(m>0) t=_str[end-1];
+            t=_str[end];
+			cout << z << " " << m << "Wrong argument: '" << t << "'!" << endl;
+>>>>>>> master
 			return false;
 		}
 	return true;
@@ -325,6 +338,7 @@ namespace Calckit
 						{
 							base.push_back(emp);
 							sign.push_back(minus);
+                            var=false;
 						}
 						else
 						{
@@ -337,11 +351,11 @@ namespace Calckit
 						base.push_back(num(_str, num_beg, i));
 						sign.push_back(minus);
 					}
-					minus=0;
+                    minus=false;
 					num_beg=i+1;
 					if(!work(base, sign, operators, parenth_depth, pri(_str[i]))) return false;
 					operators.pop_back();
-					if(sign[sign.size()-1]) base[base.size()-1].opp();
+                    if(sign.back()) base.back().opp();
 					sign.pop_back();
 					--parenth_depth;
 					if(i<end-1 && _str[i+1]!=')' && _str[i+1]!='!')
@@ -355,7 +369,7 @@ namespace Calckit
 			}
 			else if(_str[i]>47 && _str[i]<58) var=false;
 			else var=true;
-		}
+        }
 		if(num_beg<end)
 		{
 			if(var)
