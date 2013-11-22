@@ -17,8 +17,11 @@ Calc: $(ROOT)Main/all.o $(ROOT)Calckit/all.o $(ROOT)Numeric-lib/all.o $(ROOT)Var
 	$(LINK) $(LFLAGS) $^ -o $@
 
 # Main
-$(ROOT)Main/all.o: $(ROOT)Main/main.o
+$(ROOT)Main/all.o: $(ROOT)Main/main.o $(ROOT)Main/stream.o
 	$(LINK) $(LFLAGS) -Wl,-r -nostdlib $^ -o $@
+
+$(ROOT)Main/stream.o: $(ROOT)Main/stream.cpp $(ROOT)Main/stream.hpp 
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 $(ROOT)Main/main.o: $(ROOT)Main/main.cpp $(ROOT)Main/main.hpp $(ROOT)Variable-lib/var_base.hpp $(ROOT)Numeric-lib/num.hpp $(ROOT)Calckit/calckit.hpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@

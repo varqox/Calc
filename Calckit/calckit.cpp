@@ -6,25 +6,9 @@ namespace Calckit
 {
 	bool parser(const string& _str, int begin, int end)
 	{
-<<<<<<< HEAD
-		--end;
-		int br=0, z=0, number=0, krp=0, m=0;
-		bool var=false;
-		if(_str[begin]=='!')
-		{
-			sim::cout << "Wrong argument: '!'!" << sim::endl;
-			return false;
-		}
-		if(begin+1<end && (_str[begin]=='-' || _str[begin]=='+') && (_str[begin+1]=='-' || _str[begin+1]=='+'))
-		{
-			sim::cout << "Wrong argument: '" << _str[begin+1] << "'!" << sim::endl;
-			return false;
-		}
-=======
         if(begin>--end) return false;
         int br=0, z=1, number=0, krp=0, m=0;
         bool var=false;
->>>>>>> master
 		for(int i=begin; i<=end; ++i)
 		{
 			if(_str[i]=='(')
@@ -118,16 +102,10 @@ namespace Calckit
 		if(z>0)
 		{
 			char t;
-<<<<<<< HEAD
-			if(m>0) t=_str[end-1];
-			else t=_str[end];
-			sim::cout << z << " " << m << "Wrong argument: '" << t << "'!" << sim::endl;
-=======
             // if m>0, then somewhere (this line - 61) i==end and error is catching
             // if(m>0) t=_str[end-1];
             t=_str[end];
-			cout << z << " " << m << "Wrong argument: '" << t << "'!" << endl;
->>>>>>> master
+			sim::cout << z << " " << m << "Wrong argument: '" << t << "'!" << sim::endl;
 			return false;
 		}
 	return true;
