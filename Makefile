@@ -19,7 +19,7 @@ install:
 	mkdir -p /opt/Calc
 	cp Calc /opt/Calc
 	printf "#!/bin/sh\n/opt/Calc/./Calc \$$*" > /usr/bin/Calc
-	chmod 777 /opt/Calc
+	chmod -R 755 /opt/Calc
 	chmod 755 /usr/bin/Calc
 
 uninstall:
