@@ -12,7 +12,7 @@ export CXX = g++
 export LINK = g++
 endif
 
-export ARCHITECTURE = 64
+export ARCHITECTURE = # default
 export CFLAGS = -Wall -O3 -c
 export CXXFLAGS = -Wall -O3 -c
 export LFLAGS = -Wall -s -O3
