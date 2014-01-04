@@ -1,12 +1,23 @@
-ARCHITECTURE = 64
-CC = clang
-CXX = clang++
-LINK = clang++
-CFLAGS = -Wall -g -m$(ARCHITECTURE)
-CXXFLAGS = -Wall -g -m$(ARCHITECTURE)
-LFLAGS = -m$(ARCHITECTURE)
-RM = rm -f
-CP = cp -f
+# Compile commands
+ifeq ($(shell clang > /dev/null 2> /dev/null; echo $$?), $(shell echo 1))
+export CC = clang
+else
+export CC = gcc
+endif
+ifeq ($(shell clang++ > /dev/null 2> /dev/null; echo $$?), $(shell echo 1))
+export CXX = clang++
+export LINK = clang++
+else
+export CXX = g++
+export LINK = g++
+endif
+
+export ARCHITECTURE = 64
+export CFLAGS = -Wall -g -c
+export CXXFLAGS = -Wall -g -c
+export LFLAGS = -Wall -g
+export RM = rm -f
+export CP = cp -f
 ROOT = ../
 
 .PHONY: all clean
