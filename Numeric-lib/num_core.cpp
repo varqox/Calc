@@ -23,37 +23,37 @@ namespace numeric_lib
 
 	lli num::nat::size() const
 	{
-		lli w=(this->w.size()-1)*LEN, end=this->w[this->w.size()-1];
+		lli out=(this->w.size()-1)*LEN, end=this->w[this->w.size()-1];
 		if(end<1000000000LL)
 		{
 			if(end<10000LL)
 			{
 				if(end<100LL)
 				{
-					if(end<10LL) ++w;
-					else w+=2;
+					if(end<10LL) ++out;
+					else out+=2;
 				}
 				else
 				{
-					if(end<1000LL) w+=3;
-					else w+=4;
+					if(end<1000LL) out+=3;
+					else out+=4;
 				}
 			}
 			else
 			{
 				if(end<1000000LL)
 				{
-					if(end<100000LL) w+=5;
-					else w+=6;
+					if(end<100000LL) out+=5;
+					else out+=6;
 				}
 				else
 				{
 					if(end<100000000LL)
 					{
-						if(end<10000000LL) w+=7;
-						else w+=8;
+						if(end<10000000LL) out+=7;
+						else out+=8;
 					}
-					else w+=9;
+					else out+=9;
 				}
 			}
 		}
@@ -63,34 +63,34 @@ namespace numeric_lib
 			{
 				if(end<100000000000LL)
 				{
-					if(end<10000000000LL) w+=10;
-					else w+=11;
+					if(end<10000000000LL) out+=10;
+					else out+=11;
 				}
 				else
 				{
-					if(end<1000000000000LL) w+=12;
-					else w+=13;
+					if(end<1000000000000LL) out+=12;
+					else out+=13;
 				}
 			}
 			else
 			{
 				if(end<1000000000000000LL)
 				{
-					if(end<100000000000000LL) w+=14;
-					else w+=15;
+					if(end<100000000000000LL) out+=14;
+					else out+=15;
 				}
 				else
 				{
 					if(end<100000000000000000LL)
 					{
-						if(end<10000000000000000LL) w+=16;
-						else w+=17;
+						if(end<10000000000000000LL) out+=16;
+						else out+=17;
 					}
-					else w+=18;
+					else out+=18;
 				}
 			}
 		}
-	return w;
+	return out;
 	}
 
 	void num::nat::kas0()

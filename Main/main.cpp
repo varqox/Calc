@@ -551,9 +551,9 @@ bool identyfity(string& s)
 	}
 	if(k.size()>0)
 	{
-		num var;
-		var_base::read_var("A", var);
-		var_base::swap_var(k, var);
+		num variable;
+		var_base::read_var("A", variable);
+		var_base::swap_var(k, variable);
 		mcol(_blue);
 		cout << k;
 		mcol(_yellow);
