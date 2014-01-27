@@ -3,10 +3,10 @@
 all: Release-linux-x64
 
 Release-linux-x64:
-	make -B -C build-Release/ CC=clang CXX=clang++ LINK=clang++ ARCHITECTURE=64
+	make -B -C build-Release/ ARCHITECTURE=64
 	mv build-Release/Calc Calc
 Release-linux-x32:
-	make -B -C build-Release/ CC=clang CXX=clang++ LINK=clang++ ARCHITECTURE=32
+	make -B -C build-Release/ ARCHITECTURE=32
 	mv build-Release/Calc Calc
 Release-win-x64:
 	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCHITECTURE=64
