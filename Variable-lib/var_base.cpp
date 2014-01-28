@@ -2,7 +2,7 @@
 
 namespace var_base
 {
-	ver::ver(): is(false)
+	ver::ver(): w(), is(false)
 	{
 		for(short int i=0; i<256; ++i)
 			t[i]=0;

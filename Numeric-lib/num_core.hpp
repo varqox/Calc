@@ -13,7 +13,7 @@ namespace numeric_lib
 		struct fmod
 		{
 			lli pom1, pom2;
-			fmod(){}
+			fmod(): pom1(), pom2(){}
 			~fmod(){}
 		};
 		std::vector<lli> w;
@@ -23,7 +23,7 @@ namespace numeric_lib
 		nat(const nat& _n): w(_n.w){}
 		lli size() const;
 		void kas0();
-		void swap(nat& _n){this->w.swap(_n.w);}
+		void swap(nat& _n){w.swap(_n.w);}
 		nat& operator++();
 		nat& operator--();
 		nat& operator+=(const nat&);
