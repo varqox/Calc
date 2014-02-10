@@ -1,6 +1,6 @@
 Calc
 ====
 
-Calculator that using unlimited numbers
+Calculator that uses unlimited numbers
 
 Version: 2.7.1
