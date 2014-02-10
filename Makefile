@@ -1,18 +1,22 @@
 .PHONY: all install uninstall clean clean-all
 
-all: Release-linux-x64
+all: unknown
+
+unknown:
+	make -B -C build-Release/
+	mv build-Release/Calc Calc
 
 Release-linux-x64:
-	make -B -C build-Release/ ARCHITECTURE=64
+	make -B -C build-Release/ ARCH_FLAG=-m64
 	mv build-Release/Calc Calc
 Release-linux-x32:
-	make -B -C build-Release/ ARCHITECTURE=32
+	make -B -C build-Release/ ARCH_FLAG=-m32
 	mv build-Release/Calc Calc
 Release-win-x64:
-	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCHITECTURE=64
+	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCH_FLAG=-m64
 	mv build-Release/Calc.exe Calc.exe
 Release-win-x32:
-	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCHITECTURE=32
+	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCH_FLAG=-m32
 	mv build-Release/Calc.exe Calc.exe
 
 install:
