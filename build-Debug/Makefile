@@ -13,9 +13,9 @@ export LINK = g++
 endif
 
 export ARCHITECTURE = # default
-export CFLAGS = -Wall -g -c
-export CXXFLAGS = -Wall -g -c
-export LFLAGS = -Wall -g
+export CFLAGS = -Wall -Wextra -Wabi -Weffc++ -Wshadow -Wfloat-equal -Wno-unused-result -g -c
+export CXXFLAGS = -Wall -Wextra -Wabi -Weffc++ -Wshadow -Wfloat-equal -Wno-unused-result -g -c
+export LFLAGS = -Wall -Wextra -Wabi -Weffc++ -Wshadow -Wfloat-equal -Wno-unused-result -g
 export RM = rm -f
 export CP = cp -f
 ROOT = ../

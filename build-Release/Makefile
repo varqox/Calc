@@ -13,9 +13,9 @@ export LINK = g++
 endif
 
 export ARCH_FLAG = # default
-export CFLAGS = -Wall -W -Wabi -Weffc++ -Wformat -Wshadow -Wsequence-point -Wuninitialized -Wfloat-equal -Wno-unused-result -O3 -c $(ARCH_FLAG)
-export CXXFLAGS = -Wall -W -Wabi -Weffc++ -Wformat -Wshadow -Wsequence-point -Wuninitialized -Wfloat-equal -Wno-unused-result -O3 -c $(ARCH_FLAG)
-export LFLAGS = -Wall -W -Wabi -Weffc++ -Wformat -Wshadow -Wsequence-point -Wuninitialized -Wfloat-equal -Wno-unused-result -s -O3 $(ARCH_FLAG)
+export CFLAGS = -Wall -Wextra -Wabi -Weffc++ -Wshadow -Wfloat-equal -Wno-unused-result -O3 -c $(ARCH_FLAG)
+export CXXFLAGS = -Wall -Wextra -Wabi -Weffc++ -Wshadow -Wfloat-equal -Wno-unused-result -O3 -c $(ARCH_FLAG)
+export LFLAGS = -Wall -Wextra -Wabi -Weffc++ -Wshadow -Wfloat-equal -Wno-unused-result -s -O3 $(ARCH_FLAG)
 export RM = rm -f
 export CP = cp -f
 ROOT = ../
