@@ -562,7 +562,7 @@ bool identyfity(string& s)
 return true;
 }
 
-int main(int avg, char **arg)
+int main(int avg, char const **arg)
 {
 
 #ifndef WIN32
