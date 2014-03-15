@@ -1,4 +1,4 @@
-.PHONY: all install uninstall clean clean-all
+.PHONY: all unknown Release-linux-x64 Release-linux-x32 Release-win-x64 Release-win-x32 install uninstall clean clean-all debug
 
 all: unknown
 
@@ -18,6 +18,10 @@ Release-win-x64:
 Release-win-x32:
 	make -B -C build-Release/ CC=wine\ ../../TDM-GCC/bin/gcc.exe CXX=wine\ ../../TDM-GCC/bin/g++.exe LINK=wine\ ../../TDM-GCC/bin/g++.exe ARCH_FLAG=-m32
 	mv build-Release/Calc.exe Calc.exe
+
+debug:
+	make -B -C build-Debug/
+	mv build-Debug/Calc Calc
 
 install:
 	mkdir -p /opt/Calc
