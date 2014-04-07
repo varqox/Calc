@@ -4,6 +4,7 @@
 namespace numeric_lib
 {
 	typedef long long int lli;
+	typedef unsigned uint;
 	const lli BASE=1000000000000000000LL, BS2=1000000000;
 	const char LEN=18;
 

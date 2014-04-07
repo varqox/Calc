@@ -14,7 +14,7 @@ inline unsigned long int CeilToPowerOf2(unsigned long int x)
 #include <vector>
 #include <iostream>
 
-#define VERSION "2.7.0"
+#define VERSION "2.7.2"
 enum color{_yellow, _blue, _red, _green, _default};
 
 using namespace std;

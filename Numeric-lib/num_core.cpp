@@ -288,71 +288,79 @@ namespace numeric_lib
 	public:
 		static inline lli div_mod(lli& a, const lli& m)
 		{lli tmp=a;a/=m;return tmp-m*a;}
-		static const int FFT_BASE=10000;
+
 		typedef double D;
-		static std::complex<D> *w;
-		static int d;
-		 
-		static void omega(const int& n, bool t)
+
+		static void omega(std::complex<D>* w, const int& n, bool t)
 		{
 			int to=n>>1;
-			if(t) 
+			double constant = 2*M_PI/n;
+			if(t)
 				for(int i=0; i<to; ++i)
-				{ 
-					w[i]=std::complex<D>(cos(2*M_PI*i/n),sin(2*M_PI*i/n));
+				{
+					w[i]=std::complex<D>(cos(constant*i),sin(constant*i));
 					w[i+to]=std::complex<D>(-w[i].real(),-w[i].imag());
 				}
 			else
 				for(int i=0; i<to; ++i)
-				{ 
-					w[i]=std::complex<D>(cos(2*M_PI*i/n),sin(-2*M_PI*i/n));
+				{
+					w[i]=std::complex<D>(cos(constant*i),sin(-constant*i));
 					w[i+to]=std::complex<D>(-w[i].real(),-w[i].imag());
 				}
 		}
 
-		static void DFT(std::complex <D>* A, const int& size)
+		static uint rev(uint x, uint l)
 		{
-			if(size==1) return;
-			int to=size>>1;
-			std::complex <D> *X = new std::complex <D> [to];
-			std::complex <D> *Y = new std::complex <D> [to];
-			for(int i=0, j=0; i<size; i+=2, j++)
+			uint left = 1 << (l-1), right = 1, res = 0;
+			do
 			{
-				X[j]=A[i];
-				Y[j]=A[i+1];
+				if(x & left)
+					res |= right;
+				left >>= 1;
+				right <<= 1;
 			}
-			//delete[] A;
-			DFT(X, to);
-			DFT(Y, to);
-			//std::complex <D> *B = new std::complex <D> [size];
-			int pot=num::nat::FFT::d>>(31-__builtin_clz(size));
-			for(int i=0; i<to; ++i)
-			{
-				std::complex <D> q=w[i*pot]*Y[i];
-				A[i]=X[i]+q;
-				A[i+to]=X[i]-q;
-			}
-			delete[] X;
-			delete[] Y;
+			while(left);
+			return res;
 		}
+
+		static void DFT(std::complex<D>* A, std::complex<D>* w, const uint& size)
+		{
+			uint l = sizeof(size)*8 - 1 - __builtin_clz(size); // lg n
+			for(uint i = 0, x; i < size; ++i)
+			{
+				x = rev(i, l);
+				if(x > i)
+					std::swap(A[i], A[x]);
+			}
+			for(uint m = 2, www = size >> 1; m <= size; m <<= 1, www >>= 1)
+				for(uint k = 0; k < size; k += m)
+					for(uint j = 0, m2 = m >> 1; j < m2; ++j)
+					{
+						std::complex<D> t = w[j * www] * A[k + j + m2], u = A[k + j];
+						A[k + j] = u + t;
+						A[k + j + m2] = u - t;
+					}
+		}
+
 		static void fft(nat& a, const nat& b)
 		{
-			std::complex <D> *l1, *l2;
+			std::complex<D> *l1, *l2, *w;
+			static const int FFT_BASE=10000;
 			int d1, d2, t1, t2, FFT_base=4;
 			t1=a.size();
 			d1=t1/FFT_base;
 			if(t1%FFT_base!=0) ++d1;
 			t2=b.size();
-			d2=t2/FFT_base;	
+			d2=t2/FFT_base;
 			if(t2%FFT_base!=0) ++d2;
-			d=__builtin_popcount(d1+d2)==1 ? d1+d2:1<<(32-__builtin_clz(d1+d2));
+			uint d= (d1+d2) & (d1+d2-1) ? 1<<(32-__builtin_clz(d1+d2)) : (d1+d2);
 
-			l1 = new std::complex <D> [d];
-			l2 = new std::complex <D> [d];
-			w = new std::complex <D> [d];
+			l1 = new std::complex<D> [d];
+			l2 = new std::complex<D> [d];
+			w = new std::complex<D> [d];
 
-			for(int i=0; i<d; ++i)
-				l1[i]=l2[i]=std::complex <D> (0.0,0.0);
+			for(uint i=0; i<d; ++i)
+				l1[i]=l2[i]=std::complex<D> (0.0,0.0);
 			{
 				bool is_rest=false;
 				unsigned int i=0, j=0;
@@ -417,15 +425,15 @@ namespace numeric_lib
 				while(k>0)
 					l2[++j]=div_mod(k, FFT_BASE);
 			}
-			omega(d, true);
-			DFT(l1, d);
-			DFT(l2, d);
-			for(int i=0; i<d; ++i)
+			omega(w, d, true);
+			DFT(l1, w, d);
+			DFT(l2, w, d);
+			for(uint i=0; i<d; ++i)
 				l1[i]*=l2[i];
 			delete[] l2;
 
-			omega(d, false);
-			DFT(l1,d);
+			omega(w, d, false);
+			DFT(l1, w, d);
 			delete[] w;
 
 			D s=1.0/d;
@@ -434,9 +442,9 @@ namespace numeric_lib
 			const lli pow[9]={1LL, 10000LL, 100000000LL, 1000000000000LL, 10000000000000000LL, 100LL, 1000000LL, 10000000000LL, 100000000000000LL}, unpow[9]={1000000000000000000LL, 100000000000000LL, 10000000000LL, 1000000LL, 100LL, 10000000000000000LL, 1000000000000LL, 100000000LL, 10000LL};
 			lli add=0;
 			a.w[0]=0;
-			for(int i=0; i<d; ++i, ++idx)
+			for(uint i=0; i<d; ++i, ++idx)
 			{
-				if(idx==5) 
+				if(idx==5)
 				{
 					++j;
 					a.w[j]=add;
@@ -461,9 +469,6 @@ namespace numeric_lib
 			delete[] l1;
 		}
 	};
-
-	int num::nat::FFT::d;
-	std::complex<num::nat::FFT::D> *num::nat::FFT::w;
 
 	num::nat& num::nat::operator*=(const nat& b)
 	{

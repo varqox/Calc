@@ -5,7 +5,11 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	if(argc!=3) return 1;
+	if(argc!=3)
+	{
+		printf("Usage: jjj <file1> <file2>\n");
+		return 1;
+	}
 	fstream file1(argv[1], ios_base::in), file2(argv[2], ios_base::in);
 	if(!file1.good()) cout << "Cannot open file: " << argv[1] << endl;
 	else if(!file2.good()) cout << "Cannot open file: " << argv[2] << endl;
