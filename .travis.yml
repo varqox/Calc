@@ -1,11 +1,10 @@
 language: cpp
-compiler:
-  - gcc
-  - clang
+
 script: make
-branches:
-  only:
-    - master
+
 os:
   - linux
   - osx
+
+matrix:
+  fast_finish: true
